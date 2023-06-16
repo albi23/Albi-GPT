@@ -1,0 +1,66 @@
+// Define the color variables
+$background-color: #000022;
+
+/* You can add global styles to this file, and also import other style files */
+html, body {
+  background: $background-color;
+  height: max-content;
+
+}
+
+//// Define the color variables
+//$scrollbar-bg-color: rgb(28, 175, 39);
+//$scrollbar-thumb-color: #888;
+//$scrollbar-track-color: #8a1818;
+//$scrollbar-dot-color: #253a7e;
+//
+//// Define the scrollbar styles
+//$scrollbar-width: 12px;
+//$scrollbar-thumb-width: 8px;
+
+// Create the scrollbar styles
+
+div.content-base {
+  /* Firefox */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #397524 #DFE9EB;
+  }
+
+  //& Chrome, Edge and Safari &/
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
+  &::-webkit-scrollbar-track {
+    border-radius: 2px;
+    width: 4px;
+    background-color: rgba(255,255,255,0.1);
+    //border: 2px dotted #FFFFFF;
+  }
+
+  &::-webkit-scrollbar-track:hover {
+    background-color: #B8C0C2;
+  }
+
+  &::-webkit-scrollbar-track:active {
+    background-color: #B8C0C2;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 100px;
+    background: rgba(255,255,255,0.85);
+    border: 6px solid rgba(0, 0, 0, 0.2);
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: #62A34B;
+  }
+
+  &::-webkit-scrollbar-thumb:active {
+    background-color: #62A34B;
+  }
+
+
+}
+
+
