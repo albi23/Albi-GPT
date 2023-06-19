@@ -19,12 +19,12 @@
         </span>
   </button>
 </div>
-<div class="terminal" [id]="'q-'+dialogElem.id">
+<div class="terminal">
   <div id="wave" *ngIf="questionInProgress()">
     <span class="dot"></span>
     <span class="dot"></span>
     <span class="dot"></span>
   </div>
-  <pre [id]="'a-'+dialogElem.id" #terminal></pre>
+  <pre #terminal></pre>
   <ng-template adHost></ng-template>
 </div>

@@ -5,6 +5,6 @@ export class DialogElem {
   question:  string = '';
   answer:  string = '';
   delay?: number =  0/*ms*/
-  specialContent?: Type<Renderable>;
+  dynamicComponent?: Type<Renderable>;
   id: number = 0
 }

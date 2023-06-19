@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, signal, WritableSignal} from '@angular/core';
+import {AfterViewInit, ChangeDetectionStrategy, Component, signal, WritableSignal} from '@angular/core';
 import {DialogElem} from "./model/dialog-elem";
 import {MapComponent} from "./svg-components/map/map.component";
 
@@ -8,9 +8,9 @@ import {MapComponent} from "./svg-components/map/map.component";
   styleUrls: ['./app.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AppComponent {
+export class AppComponent implements AfterViewInit {
   conversation: WritableSignal<DialogElem[]> = signal<DialogElem[]>([])
-  id: number = 0
+  id = 0
   source: DialogElem[] = [
     {
       question: 'Who are you?',
@@ -25,21 +25,33 @@ export class AppComponent {
       answer: 'In Europe.',
       specialContent: MapComponent
     },
+    {
+      question: 'Where are you from?',
+      answer: 'From the motherland of the best programmers - Poland!',
+    },
+    {
+      question: 'Where are you from?',
+      answer: 'From the motherland of the best programmers - Poland!',
+    },
+    {
+      question: 'Where are you from?',
+      answer: 'From the motherland of the best programmers - Poland!',
+    },
   ].map((x) => {
     return {
       id: ++this.id, ...x
     }
   })
 
-  constructor() {
+  ngAfterViewInit(): void {
     this.nextQuestion()
   }
 
 
   nextQuestion(): void {
-    if (this.conversation.length > 1) {
-      return
-    }
+    // if (this.conversation.length > 1) {
+    //   return
+    // }
     this.conversation.mutate((curr: DialogElem[]) => {
       const item = this.source.shift();
       if (item) {

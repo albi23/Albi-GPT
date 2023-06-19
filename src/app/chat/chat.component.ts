@@ -3,7 +3,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   ElementRef,
-  EventEmitter, inject,
+  EventEmitter,
   Input,
   Output,
   signal,
@@ -13,9 +13,9 @@ import {
 import {delay, interval, map, mergeMap, Observable, of, take, takeWhile, tap} from "rxjs";
 import {DialogElem} from "../model/dialog-elem";
 import {FormsModule} from "@angular/forms";
-import {CommonModule, DOCUMENT} from "@angular/common";
+import {CommonModule} from "@angular/common";
 import {SafePipe} from "../pipes/safe.pipe";
-import {AdDirective} from "../directives/ad.directive";
+import {DynamicComponentDirective} from "../directives/dynamic-component.directive";
 import {Renderable} from "../model/renderable";
 
 @Component({
@@ -28,7 +28,7 @@ import {Renderable} from "../model/renderable";
     FormsModule,
     CommonModule,
     SafePipe,
-    AdDirective
+    DynamicComponentDirective
   ]
 })
 export class ChatComponent implements AfterViewInit {
@@ -36,14 +36,13 @@ export class ChatComponent implements AfterViewInit {
   @ViewChild("terminal", {read: ElementRef}) terminalPre!: ElementRef<HTMLPreElement>
   @ViewChild("questionBox", {read: ElementRef}) questionBox!: ElementRef<HTMLTextAreaElement>
   @ViewChild("btn", {read: ElementRef}) button!: ElementRef<HTMLButtonElement>
-  @ViewChild(AdDirective, {static: true}) adHost!: AdDirective;
+  @ViewChild(DynamicComponentDirective, {static: true}) dynamicRef!: DynamicComponentDirective;
 
   @Input() dialogElem!: DialogElem;
   @Output() answeredEvt = new EventEmitter<boolean>();
 
   readonly questionInProgress: WritableSignal<boolean> = signal<boolean>(false);
   private readonly ANSWER_DELAY: number = 600;
-  document: Document = inject(DOCUMENT)
 
   ngAfterViewInit(): void {
     this.focusElem(this.questionBox.nativeElement);
@@ -68,10 +67,9 @@ export class ChatComponent implements AfterViewInit {
       .subscribe({
           next: (l: string) => this.terminalPre.nativeElement.innerText += l,
           complete: (): void => {
-            if (this.dialogElem.specialContent) {
-              this.adHost.viewContainerRef.createComponent<Renderable>(this.dialogElem.specialContent);
+            if (this.dialogElem.dynamicComponent) {
+              this.dynamicRef.viewContainerRef.createComponent<Renderable>(this.dialogElem.dynamicComponent);
             }
-            this.document.querySelector('#q-'+this.dialogElem.id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
             this.answeredEvt.emit(true)
           }
         }
@@ -85,7 +83,7 @@ export class ChatComponent implements AfterViewInit {
   }
 
   private contentFiller(text: string,
-                        delayMs: number = 0): Observable<string> {
+                        delayMs = 0): Observable<string> {
     const letters: string[] = [...text]
     return of(null)
       .pipe(
@@ -96,7 +94,6 @@ export class ChatComponent implements AfterViewInit {
         map(_ => letters.shift() as string),
         takeWhile(letter => !!letter)
       )
-
   }
 
 }

@@ -1,19 +1,20 @@
 <div class="fancy-animations"></div>
 <section id="gpt-section">
   <div class="content" role="main">
-
     <h1 class="main-header">ALBI GPT</h1>
-    <div class="content-base">
-      <div class="chat" *ngFor="let dialogElem of conversation()">
-        <app-chat
-          [dialogElem]="dialogElem"
-          (answeredEvt)="nextQuestion()"
-        ></app-chat>
+    <div class="wrapper">
+      <div id="border-gradient"></div>
+      <div class="content-base">
+        <div class="chat" *ngFor="let dialogElem of conversation()">
+          <app-chat
+            [dialogElem]="dialogElem"
+            (answeredEvt)="nextQuestion()"
+          ></app-chat>
+        </div>
       </div>
-
     </div>
     <footer>
-      Love Angular?&nbsp;
+      Love Angular?
     </footer>
 
   </div>

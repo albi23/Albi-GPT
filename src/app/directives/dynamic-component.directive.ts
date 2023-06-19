@@ -4,7 +4,7 @@ import {Directive, ViewContainerRef} from '@angular/core';
   selector: '[adHost]',
   standalone: true
 })
-export class AdDirective {
+export class DynamicComponentDirective {
 
   constructor(public viewContainerRef: ViewContainerRef) {
   }

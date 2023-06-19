@@ -1,25 +1,14 @@
 // Define the color variables
 $background-color: #000022;
+$scrollbar-track-color: rgba(255, 255, 255, 0.3);
 
-/* You can add global styles to this file, and also import other style files */
 html, body {
   background: $background-color;
   height: max-content;
 
 }
 
-//// Define the color variables
-//$scrollbar-bg-color: rgb(28, 175, 39);
-//$scrollbar-thumb-color: #888;
-//$scrollbar-track-color: #8a1818;
-//$scrollbar-dot-color: #253a7e;
-//
-//// Define the scrollbar styles
-//$scrollbar-width: 12px;
-//$scrollbar-thumb-width: 8px;
-
-// Create the scrollbar styles
-
+// Custom scroll bar
 div.content-base {
   /* Firefox */
   * {
@@ -31,35 +20,35 @@ div.content-base {
   &::-webkit-scrollbar {
     width: 10px;
   }
+
   &::-webkit-scrollbar-track {
-    border-radius: 2px;
     width: 4px;
-    background-color: rgba(255,255,255,0.1);
-    //border: 2px dotted #FFFFFF;
+    border-radius: 2px;
+    background-color: $scrollbar-track-color;
+
+    &:hover {
+      background-color: $scrollbar-track-color;
+    }
+
+    &:active {
+      background-color: $scrollbar-track-color;
+    }
   }
 
-  &::-webkit-scrollbar-track:hover {
-    background-color: #B8C0C2;
-  }
-
-  &::-webkit-scrollbar-track:active {
-    background-color: #B8C0C2;
-  }
 
   &::-webkit-scrollbar-thumb {
     border-radius: 100px;
-    background: rgba(255,255,255,0.85);
+    background: rgba(255, 255, 255, 0.85);
     border: 6px solid rgba(0, 0, 0, 0.2);
-  }
 
-  &::-webkit-scrollbar-thumb:hover {
-    background-color: #62A34B;
-  }
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.9);
+    }
 
-  &::-webkit-scrollbar-thumb:active {
-    background-color: #62A34B;
+    &:active {
+      background-color: rgba(255, 255, 255, 0.9);
+    }
   }
-
 
 }
 
