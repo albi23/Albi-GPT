@@ -11,15 +11,15 @@ import {
   WritableSignal
 } from '@angular/core';
 import {delay, interval, map, mergeMap, Observable, of, take, takeWhile, tap} from "rxjs";
-import {DialogElem} from "../model/dialog-elem";
+import {DialogElem} from "../../model/dialog-elem";
 import {FormsModule} from "@angular/forms";
 import {CommonModule} from "@angular/common";
-import {SafePipe} from "../pipes/safe.pipe";
-import {DynamicComponentDirective} from "../directives/dynamic-component.directive";
-import {Renderable} from "../model/renderable";
+import {SafePipe} from "../../pipes/safe.pipe";
+import {DynamicComponentDirective} from "../../directives/dynamic-component.directive";
+import {Renderable} from "../../model/renderable";
 
 @Component({
-  selector: 'app-chat',
+  selector: 'albi-chat',
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.scss'],
   standalone: true,
@@ -38,7 +38,7 @@ export class ChatComponent implements AfterViewInit {
   @ViewChild("btn", {read: ElementRef}) button!: ElementRef<HTMLButtonElement>
   @ViewChild(DynamicComponentDirective, {static: true}) dynamicRef!: DynamicComponentDirective;
 
-  @Input() dialogElem!: DialogElem;
+  @Input({required: true}) dialogElem!: DialogElem;
   @Output() answeredEvt = new EventEmitter<boolean>();
 
   readonly questionInProgress: WritableSignal<boolean> = signal<boolean>(false);
@@ -48,7 +48,7 @@ export class ChatComponent implements AfterViewInit {
     this.focusElem(this.questionBox.nativeElement);
 
     this.contentFiller(this.dialogElem.question,
-      this.dialogElem?.delay || 0
+      this.dialogElem?.questionDelay || 0
     ).subscribe(
       {
         next: (letter: string) => this.questionBox.nativeElement.value += letter,
@@ -70,7 +70,8 @@ export class ChatComponent implements AfterViewInit {
             if (this.dialogElem.dynamicComponent) {
               this.dynamicRef.viewContainerRef.createComponent<Renderable>(this.dialogElem.dynamicComponent);
             }
-            this.answeredEvt.emit(true)
+            console.log(this.dialogElem.renderDoneDelay);
+            this.nextQuestion(this.dialogElem.renderDoneDelay || 0)
           }
         }
       );
@@ -94,6 +95,19 @@ export class ChatComponent implements AfterViewInit {
         map(_ => letters.shift() as string),
         takeWhile(letter => !!letter)
       )
+  }
+
+  private nextQuestion(delayMs = 0): void {
+    if (delayMs !== 0){
+      this.focusElem(this.terminalPre.nativeElement);
+    }
+    of(null)
+      .pipe(
+        delay(delayMs),
+        take(1)
+      ).subscribe(_ => {
+      this.answeredEvt.emit(true)
+    })
   }
 
 }

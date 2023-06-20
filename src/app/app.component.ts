@@ -1,19 +1,19 @@
 import {AfterViewInit, ChangeDetectionStrategy, Component, signal, WritableSignal} from '@angular/core';
 import {DialogElem} from "./model/dialog-elem";
-import {MapComponent} from "./svg-components/map/map.component";
+import {SkillsComponent} from "./components/skills/skills.component";
+import {MapComponent} from "./components/map/map.component";
 
 @Component({
-  selector: 'app-root',
+  selector: 'albi-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent implements AfterViewInit {
   conversation: WritableSignal<DialogElem[]> = signal<DialogElem[]>([])
-  id = 0
   source: DialogElem[] = [
     {
-      question: 'Who are you?',
+      question: 'What is your name?',
       answer: 'Hi, my name is Albert!',
     },
     {
@@ -22,26 +22,22 @@ export class AppComponent implements AfterViewInit {
     },
     {
       question: 'Where the Poland is located?',
-      answer: 'In Europe.',
-      specialContent: MapComponent
+      answer: 'In central Europe.',
+      dynamicComponent: MapComponent,
+      renderDoneDelay: 2000
     },
     {
-      question: 'Where are you from?',
-      answer: 'From the motherland of the best programmers - Poland!',
+      question: 'Who are you?',
+      answer: 'I am a full-stack developer. I creating software mainly using the Angular framework when it comes to UI.\n' +
+        'By contrast, when it comes to creating business logic on the backend I use Java for this purpose.',
     },
     {
-      question: 'Where are you from?',
-      answer: 'From the motherland of the best programmers - Poland!',
-    },
-    {
-      question: 'Where are you from?',
-      answer: 'From the motherland of the best programmers - Poland!',
-    },
-  ].map((x) => {
-    return {
-      id: ++this.id, ...x
+      question: 'What technologies are you using in your front-end applications?  ',
+      answer: 'Here you have a few of them:',
+      dynamicComponent: SkillsComponent,
+      renderDoneDelay: 8000
     }
-  })
+  ];
 
   ngAfterViewInit(): void {
     this.nextQuestion()
@@ -49,9 +45,6 @@ export class AppComponent implements AfterViewInit {
 
 
   nextQuestion(): void {
-    // if (this.conversation.length > 1) {
-    //   return
-    // }
     this.conversation.mutate((curr: DialogElem[]) => {
       const item = this.source.shift();
       if (item) {

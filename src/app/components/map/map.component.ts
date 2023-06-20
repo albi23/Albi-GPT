@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import {Renderable} from "../../model/renderable";
 
 @Component({
-  selector: 'app-map',
+  selector: 'albi-map',
   templateUrl: './map.component.svg',
   standalone: true
 })

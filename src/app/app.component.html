@@ -6,10 +6,10 @@
       <div id="border-gradient"></div>
       <div class="content-base">
         <div class="chat" *ngFor="let dialogElem of conversation()">
-          <app-chat
+          <albi-chat
             [dialogElem]="dialogElem"
             (answeredEvt)="nextQuestion()"
-          ></app-chat>
+          ></albi-chat>
         </div>
       </div>
     </div>

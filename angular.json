@@ -3,21 +3,32 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "angular-16": {
+    "albi-gpt": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
-          "style": "scss"
+          "style": "scss",
+          "changeDetection": "OnPush",
+          "standalone": true,
+          "skipTests": true
+        },
+        "@schematics/angular:directive": {
+          "standalone": true,
+          "skipTests": true
+        },
+        "@schematics/angular:pipe": {
+          "standalone": true,
+          "skipTests": true
         }
       },
       "root": "",
       "sourceRoot": "src",
-      "prefix": "app",
+      "prefix": "albi",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/angular-16",
+            "outputPath": "dist/albi-gpt",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -65,10 +76,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "angular-16:build:production"
+              "browserTarget": "albi-gpt:build:production"
             },
             "development": {
-              "browserTarget": "angular-16:build:development"
+              "browserTarget": "albi-gpt:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -76,7 +87,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "angular-16:build"
+            "browserTarget": "albi-gpt:build"
           }
         },
         "test": {
