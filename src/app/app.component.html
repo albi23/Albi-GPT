@@ -4,7 +4,7 @@
     <h1 class="main-header">ALBI GPT</h1>
     <div class="wrapper">
       <div id="border-gradient"></div>
-      <div class="content-base">
+      <div id="scrollable-root" class="content-base">
         <div class="chat" *ngFor="let dialogElem of conversation()">
           <albi-chat
             [dialogElem]="dialogElem"
@@ -14,7 +14,7 @@
       </div>
     </div>
     <footer>
-      Love Angular?
+      Angular 16 test preview :)
     </footer>
 
   </div>

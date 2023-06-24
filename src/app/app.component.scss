@@ -49,7 +49,8 @@ p {
   }
 
 }
-#border-gradient{
+
+#border-gradient {
   position: absolute;
   width: 110%;
   height: 110%;
@@ -102,7 +103,7 @@ section#gpt-section {
   background: rgba(255, 255, 255, .07);
   left: -20vmin;
   top: -20vmin;
-  animation: morph 15s linear infinite alternate, spin 20s linear infinite;
+  animation: morph 15s linear infinite alternate, spin 20s linear infinite, extension 10s linear infinite;
   z-index: 1;
   will-change: border-radius, transform;
   transform-origin: 55% 55%;
@@ -117,7 +118,7 @@ section#gpt-section {
   right: -10vmin;
   top: auto;
   bottom: 0;
-  animation: morph 10s linear infinite alternate, spin 26s linear infinite reverse;
+  animation: morph 10s linear infinite alternate, spin 26s linear infinite reverse, extension 10s linear infinite alternate;
   transform-origin: 20% 20%;
   overflow: hidden;
 }
@@ -144,6 +145,43 @@ section#gpt-section {
 
   to {
     border-radius: 40% 60%
+  }
+}
+
+
+$outline-color: rgba(0, 204, 255, 0.3);
+
+@keyframes extension {
+
+  0% {
+    outline: 0 solid $outline-color;
+  }
+  10% {
+    outline: 0.025rem solid $outline-color;
+  }
+  20% {
+    outline: 0.05rem solid $outline-color;
+  }
+  30% {
+    outline: 0.075rem solid $outline-color;
+  }
+  40% {
+    outline: 0.1rem solid $outline-color;
+  }
+  50% {
+    outline: 0.125rem solid $outline-color;
+  }
+  60% {
+    outline: 0.15rem solid $outline-color;
+  }
+  70% {
+    outline: 0.175rem solid $outline-color;
+  }
+  80% {
+    outline: 0.2rem solid $outline-color;
+  }
+  90% {
+    outline: 0.225rem solid $outline-color;
   }
 }
 

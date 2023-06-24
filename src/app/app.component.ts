@@ -36,6 +36,10 @@ export class AppComponent implements AfterViewInit {
       answer: 'Here you have a few of them:',
       dynamicComponent: SkillsComponent,
       renderDoneDelay: 8000
+    },
+    {
+      question: 'If you are good enough then you can at least write snake game...',
+      answer: '\\\\TODO',
     }
   ];
 

@@ -17,6 +17,7 @@ import {CommonModule} from "@angular/common";
 import {SafePipe} from "../../pipes/safe.pipe";
 import {DynamicComponentDirective} from "../../directives/dynamic-component.directive";
 import {Renderable} from "../../model/renderable";
+import {Optional} from "../utils/optional";
 
 @Component({
   selector: 'albi-chat',
@@ -43,6 +44,7 @@ export class ChatComponent implements AfterViewInit {
 
   readonly questionInProgress: WritableSignal<boolean> = signal<boolean>(false);
   private readonly ANSWER_DELAY: number = 600;
+  private readonly letterGeneratingSpeed: number = 70;
 
   ngAfterViewInit(): void {
     this.focusElem(this.questionBox.nativeElement);
@@ -67,11 +69,15 @@ export class ChatComponent implements AfterViewInit {
       .subscribe({
           next: (l: string) => this.terminalPre.nativeElement.innerText += l,
           complete: (): void => {
-            if (this.dialogElem.dynamicComponent) {
-              this.dynamicRef.viewContainerRef.createComponent<Renderable>(this.dialogElem.dynamicComponent);
-            }
-            console.log(this.dialogElem.renderDoneDelay);
-            this.nextQuestion(this.dialogElem.renderDoneDelay || 0)
+            Optional.of(this.dialogElem.dynamicComponent)
+              .ifPresentOrElse((dynamicComponent) =>{
+                const componentRef = this.dynamicRef.viewContainerRef.createComponent<Renderable>(dynamicComponent);
+                componentRef.instance.renderDone(this.answeredEvt);
+              },
+                () => {
+                  this.focusElem(this.questionBox.nativeElement);
+                  this.answeredEvt.emit(true)
+                })
           }
         }
       );
@@ -83,6 +89,7 @@ export class ChatComponent implements AfterViewInit {
     }, 0);
   }
 
+
   private contentFiller(text: string,
                         delayMs = 0): Observable<string> {
     const letters: string[] = [...text]
@@ -91,23 +98,11 @@ export class ChatComponent implements AfterViewInit {
         delay(delayMs),
         tap(_ => this.questionInProgress.set(false)),
         take(1),
-        mergeMap(_ => interval(70)),
+        mergeMap(_ => interval(this.letterGeneratingSpeed)),
         map(_ => letters.shift() as string),
         takeWhile(letter => !!letter)
       )
   }
 
-  private nextQuestion(delayMs = 0): void {
-    if (delayMs !== 0){
-      this.focusElem(this.terminalPre.nativeElement);
-    }
-    of(null)
-      .pipe(
-        delay(delayMs),
-        take(1)
-      ).subscribe(_ => {
-      this.answeredEvt.emit(true)
-    })
-  }
 
 }
