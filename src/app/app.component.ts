@@ -1,7 +1,8 @@
 import {AfterViewInit, ChangeDetectionStrategy, Component, signal, WritableSignal} from '@angular/core';
-import {DialogElem} from "./model/dialog-elem";
-import {SkillsComponent} from "./components/skills/skills.component";
-import {MapComponent} from "./components/map/map.component";
+import {DialogElem} from './model/dialog-elem';
+import {SkillsComponent} from './components/skills/skills.component';
+import {MapComponent} from './components/map/map.component';
+import {SnakeGameComponent} from './components/snake-game/snake-game.component';
 
 @Component({
   selector: 'albi-root',
@@ -10,7 +11,7 @@ import {MapComponent} from "./components/map/map.component";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent implements AfterViewInit {
-  conversation: WritableSignal<DialogElem[]> = signal<DialogElem[]>([])
+  conversation: WritableSignal<DialogElem[]> = signal<DialogElem[]>([]);
   source: DialogElem[] = [
     {
       question: 'What is your name?',
@@ -39,12 +40,13 @@ export class AppComponent implements AfterViewInit {
     },
     {
       question: 'If you are good enough then you can at least write snake game...',
-      answer: '\\\\TODO',
+      dynamicComponent: SnakeGameComponent,
+      answer: 'Here you go',
     }
   ];
 
   ngAfterViewInit(): void {
-    this.nextQuestion()
+    this.nextQuestion();
   }
 
 
@@ -52,9 +54,9 @@ export class AppComponent implements AfterViewInit {
     this.conversation.mutate((curr: DialogElem[]) => {
       const item = this.source.shift();
       if (item) {
-        curr.push(item)
+        curr.push(item);
       }
-    })
+    });
 
   }
 

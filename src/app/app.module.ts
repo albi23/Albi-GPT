@@ -4,22 +4,23 @@ import {BrowserModule} from '@angular/platform-browser';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {ChatComponent} from './components/chat/chat.component';
-import {NgOptimizedImage} from "@angular/common";
+import {NgForTrackByFieldDirective} from './directives/ng-for-track-by-field.directive';
+import {NgOptimizedImage} from '@angular/common';
 
 @NgModule({
-    declarations: [
-        AppComponent,
-    ],
+  declarations: [
+    AppComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ChatComponent,
-    NgOptimizedImage
+    NgOptimizedImage,
+    NgForTrackByFieldDirective
   ],
-    providers: [],
-    exports: [
-
-    ],
-    bootstrap: [AppComponent]
+  providers: [],
+  exports: [],
+  bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

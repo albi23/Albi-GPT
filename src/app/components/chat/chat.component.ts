@@ -10,14 +10,14 @@ import {
   ViewChild,
   WritableSignal
 } from '@angular/core';
-import {delay, interval, map, mergeMap, Observable, of, take, takeWhile, tap} from "rxjs";
-import {DialogElem} from "../../model/dialog-elem";
-import {FormsModule} from "@angular/forms";
-import {CommonModule} from "@angular/common";
-import {SafePipe} from "../../pipes/safe.pipe";
-import {DynamicComponentDirective} from "../../directives/dynamic-component.directive";
-import {Renderable} from "../../model/renderable";
-import {Optional} from "../utils/optional";
+import {delay, interval, map, mergeMap, Observable, of, take, takeWhile, tap} from 'rxjs';
+import {DialogElem} from '../../model/dialog-elem';
+import {FormsModule} from '@angular/forms';
+import {CommonModule} from '@angular/common';
+import {SafePipe} from '../../pipes/safe.pipe';
+import {DynamicComponentDirective} from '../../directives/dynamic-component.directive';
+import {Renderable} from '../../model/renderable';
+import {Optional} from '../utils/optional';
 
 @Component({
   selector: 'albi-chat',
@@ -34,9 +34,9 @@ import {Optional} from "../utils/optional";
 })
 export class ChatComponent implements AfterViewInit {
 
-  @ViewChild("terminal", {read: ElementRef}) terminalPre!: ElementRef<HTMLPreElement>
-  @ViewChild("questionBox", {read: ElementRef}) questionBox!: ElementRef<HTMLTextAreaElement>
-  @ViewChild("btn", {read: ElementRef}) button!: ElementRef<HTMLButtonElement>
+  @ViewChild('terminal', {read: ElementRef}) terminalPre!: ElementRef<HTMLPreElement>;
+  @ViewChild('questionBox', {read: ElementRef}) questionBox!: ElementRef<HTMLTextAreaElement>;
+  @ViewChild('btn', {read: ElementRef}) button!: ElementRef<HTMLButtonElement>;
   @ViewChild(DynamicComponentDirective, {static: true}) dynamicRef!: DynamicComponentDirective;
 
   @Input({required: true}) dialogElem!: DialogElem;
@@ -56,7 +56,7 @@ export class ChatComponent implements AfterViewInit {
         next: (letter: string) => this.questionBox.nativeElement.value += letter,
         complete: (): void => {
           this.button.nativeElement.click();
-          this.questionInProgress.set(true)
+          this.questionInProgress.set(true);
           this.answerGeneration();
         }
       }
@@ -76,8 +76,8 @@ export class ChatComponent implements AfterViewInit {
               },
                 () => {
                   this.focusElem(this.questionBox.nativeElement);
-                  this.answeredEvt.emit(true)
-                })
+                  this.answeredEvt.emit(true);
+                });
           }
         }
       );
@@ -92,7 +92,7 @@ export class ChatComponent implements AfterViewInit {
 
   private contentFiller(text: string,
                         delayMs = 0): Observable<string> {
-    const letters: string[] = [...text]
+    const letters: string[] = [...text];
     return of(null)
       .pipe(
         delay(delayMs),
@@ -101,7 +101,7 @@ export class ChatComponent implements AfterViewInit {
         mergeMap(_ => interval(this.letterGeneratingSpeed)),
         map(_ => letters.shift() as string),
         takeWhile(letter => !!letter)
-      )
+      );
   }
 
 

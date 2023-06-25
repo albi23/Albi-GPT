@@ -5,7 +5,7 @@
     <div class="wrapper">
       <div id="border-gradient"></div>
       <div id="scrollable-root" class="content-base">
-        <div class="chat" *ngFor="let dialogElem of conversation()">
+        <div class="chat" *ngFor="let dialogElem of conversation(); trackByProperty: 'question'">
           <albi-chat
             [dialogElem]="dialogElem"
             (answeredEvt)="nextQuestion()"
