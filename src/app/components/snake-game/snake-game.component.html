@@ -1,6 +1,8 @@
-<div>
-  <div>
-    <canvas id="game" height="400px" width="800px"></canvas>
-  </div>
-  <button><span>Move forward</span><i></i></button>
+<div class="game-board">
+  <canvas id="game" height="400px" width="800px"></canvas>
+</div>
+<div class="buttons">
+  <button *ngIf="endGame()"
+  (click)="restartGame()"><span>Restart</span><i></i></button>
+  <button id="continueBtn"><span>Continue</span><i></i></button>
 </div>

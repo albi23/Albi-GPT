@@ -1,9 +1,21 @@
 $btn-color: #FF0099;
 
+.game-board {
+  display: flex;
+  justify-content: center;
+  -webkit-box-direction: normal;
+  -webkit-box-orient: horizontal;
+  margin-bottom: 1rem;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-around;
+}
+
 button {
   position: relative;
   background: #444;
-  color: #fff;
   text-decoration: none;
   text-transform: uppercase;
   border: none;
@@ -12,13 +24,9 @@ button {
   padding: 1rem 3rem;
   transition: 0.2s;
 
-  &:hover {
-    //letter-spacing: 0.2rem;
-    padding: 1.1rem 3.1rem;
-    background: $btn-color;
-    color: $btn-color;
-    animation: box 3s infinite;
-  }
+  background: $btn-color;
+  color: $btn-color;
+  animation: box 3s infinite;
 
   &::before {
     content: "";
@@ -31,6 +39,7 @@ button {
     position: relative;
     z-index: 1;
   }
+
   & i {
     position: absolute;
     inset: 0;
@@ -49,7 +58,7 @@ button {
     transition: 0.2s;
   }
 
-  &:hover i::before {
+  i::before {
     width: 15px;
     left: 20%;
     animation: move 3s infinite;
@@ -67,13 +76,12 @@ button {
     transition: 0.2s;
   }
 
-  &:hover i::after {
+  i::after {
     width: 15px;
     left: 80%;
     animation: move 3s infinite;
   }
 }
-
 
 
 @keyframes move {
@@ -90,12 +98,12 @@ button {
 
 @keyframes box {
   0% {
-    box-shadow: #27272c;
+    box-shadow: #27272CFF;
   }
   50% {
     box-shadow: 0 0 25px $btn-color;
   }
   100% {
-    box-shadow: #27272c;
+    box-shadow: #27272CFF;
   }
 }

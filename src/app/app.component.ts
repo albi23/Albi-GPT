@@ -3,6 +3,7 @@ import {DialogElem} from './model/dialog-elem';
 import {SkillsComponent} from './components/skills/skills.component';
 import {MapComponent} from './components/map/map.component';
 import {SnakeGameComponent} from './components/snake-game/snake-game.component';
+import {Optional} from './components/utils/optional';
 
 @Component({
   selector: 'albi-root',
@@ -41,7 +42,7 @@ export class AppComponent implements AfterViewInit {
     {
       question: 'If you are good enough then you can at least write snake game...',
       dynamicComponent: SnakeGameComponent,
-      answer: 'Here you go',
+      answer: 'Here you go:',
     }
   ];
 
@@ -52,10 +53,7 @@ export class AppComponent implements AfterViewInit {
 
   nextQuestion(): void {
     this.conversation.mutate((curr: DialogElem[]) => {
-      const item = this.source.shift();
-      if (item) {
-        curr.push(item);
-      }
+      Optional.of(this.source.shift()).ifPresent((dialogElem: DialogElem) => curr.push(dialogElem));
     });
 
   }
