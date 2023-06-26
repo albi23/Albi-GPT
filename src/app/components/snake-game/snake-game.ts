@@ -130,6 +130,7 @@ export class SnakeGame {
     }
 
     if (event.key === 'ArrowUp' && !downMove) {
+      event.preventDefault();
       return {dx: 0, dy: -this.snakeWidth};
     }
 
@@ -138,6 +139,7 @@ export class SnakeGame {
     }
 
     if (event.key === 'ArrowDown' && !upMove) {
+      event.preventDefault();
       return {dx: 0, dy: this.snakeWidth};
     }
     return move;
