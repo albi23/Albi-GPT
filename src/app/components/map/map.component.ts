@@ -7,6 +7,8 @@ import {Renderable} from '../../model/renderable';
   standalone: true
 })
 export class MapComponent extends Renderable {
+  svgWidth = Math.min(window.screen.width, 727);
+  svgHeight = Math.min(window.screen.width, 480);
 
   override renderDone(evt: EventEmitter<boolean>): void {
     Renderable.scrollToBottom();

@@ -44,7 +44,7 @@ export class ChatComponent implements AfterViewInit {
 
   readonly questionInProgress: WritableSignal<boolean> = signal<boolean>(false);
   private readonly ANSWER_DELAY: number = 600;
-  private readonly letterGeneratingSpeed: number = 1;
+  private readonly letterGeneratingSpeed: number = 70;
 
   ngAfterViewInit(): void {
     this.focusElem(this.questionBox.nativeElement);
