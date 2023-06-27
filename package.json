@@ -9,6 +9,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "build:prod": "ng build --configuration production --base-href https://albi23.github.io/Albi-GPT/",
+    "build:prod-local": "ng build --configuration production",
     "test:headless": "ng test --watch=false --browsers=ChromeHeadless"
   },
   "private": true,

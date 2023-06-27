@@ -46,9 +46,15 @@ export class SnakeGameComponent extends Renderable {
 
   private initGameState(): void {
     this.canvasRef = document.getElementById('game') as HTMLCanvasElement;
+    this.applySizeIfMobile();
     this.game = new SnakeGame(this.canvasRef, this.endGame);
     this.game.initialGameState();
     this.cdr.markForCheck();
+  }
+
+  private applySizeIfMobile() {
+    this.canvasRef.width = Math.min(800, (this.canvasRef.parentElement as HTMLElement).offsetWidth - 20);
+    this.canvasRef.height = Math.min(400, window.screen.height);
   }
 
   startGame(): void {
@@ -58,6 +64,7 @@ export class SnakeGameComponent extends Renderable {
 
   restartGame(): void {
     this.endGame.set(false);
+    this.applySizeIfMobile();
     this.game = new SnakeGame(this.canvasRef, this.endGame);
     this.startGame();
   }

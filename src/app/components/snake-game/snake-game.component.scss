@@ -83,6 +83,12 @@ button {
   }
 }
 
+@media screen and (max-width: 450px) {
+  .buttons {
+    flex-direction: column;
+    gap: 5px;
+  }
+}
 
 @keyframes move {
   0% {

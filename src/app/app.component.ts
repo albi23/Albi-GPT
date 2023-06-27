@@ -30,7 +30,7 @@ export class AppComponent implements AfterViewInit {
     },
     {
       question: 'Who are you?',
-      answer: 'I\'m a full-stack developer. I creating software mainly using the Angular framework when it comes to UI.\n' +
+      answer: 'I\'m a full-stack developer. I\'m creating software mainly using the Angular framework when it comes to UI.\n' +
         'By contrast, when it comes to creating business logic on the backend I use Java for this purpose.',
     },
     {
