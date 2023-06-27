@@ -30,7 +30,7 @@ export class AppComponent implements AfterViewInit {
     },
     {
       question: 'Who are you?',
-      answer: 'I am a full-stack developer. I creating software mainly using the Angular framework when it comes to UI.\n' +
+      answer: 'I\'m a full-stack developer. I creating software mainly using the Angular framework when it comes to UI.\n' +
         'By contrast, when it comes to creating business logic on the backend I use Java for this purpose.',
     },
     {
@@ -40,7 +40,7 @@ export class AppComponent implements AfterViewInit {
       renderDoneDelay: 8000
     },
     {
-      question: 'If you are good enough then you can at least write snake game...',
+      question: 'If you are good enough then you could at least write snake game...',
       dynamicComponent: SnakeGameComponent,
       answer: 'Here you go:',
     }
