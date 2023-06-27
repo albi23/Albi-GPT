@@ -3,7 +3,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   ElementRef,
-  EventEmitter,
+  EventEmitter, HostListener,
   Input,
   Output,
   signal,
@@ -44,7 +44,7 @@ export class ChatComponent implements AfterViewInit {
 
   readonly questionInProgress: WritableSignal<boolean> = signal<boolean>(false);
   private readonly ANSWER_DELAY: number = 600;
-  private readonly letterGeneratingSpeed: number = 70;
+  private readonly letterGeneratingSpeed: number = 1;
 
   ngAfterViewInit(): void {
     this.focusElem(this.questionBox.nativeElement);
@@ -53,7 +53,10 @@ export class ChatComponent implements AfterViewInit {
       this.dialogElem?.questionDelay || 0
     ).subscribe(
       {
-        next: (letter: string) => this.questionBox.nativeElement.value += letter,
+        next: (letter: string) => {
+          this.questionBox.nativeElement.value += letter;
+          this.autoHeightAdjuster();
+        },
         complete: (): void => {
           this.button.nativeElement.click();
           this.questionInProgress.set(true);
@@ -62,6 +65,12 @@ export class ChatComponent implements AfterViewInit {
       }
     );
 
+  }
+
+  @HostListener('window:resize', ['$event'])
+  autoHeightAdjuster(): void {
+    this.questionBox.nativeElement.style.height = '5px';
+    this.questionBox.nativeElement.style.height = (this.questionBox.nativeElement.scrollHeight - 10) + 'px';
   }
 
   private answerGeneration() {

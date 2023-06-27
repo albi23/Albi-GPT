@@ -30,6 +30,7 @@
     color: white;
     padding: 0 1rem 1rem;
     margin: 0;
+    text-wrap: inherit;
   }
 }
 
@@ -47,7 +48,7 @@
     background-color: transparent;
     resize: none;
     width: 100%;
-    padding: 0.5rem 2.5rem 0.5rem 0.75rem;
+    padding: 0.5rem .5rem 0.5rem 0.75rem;
     overflow-y: hidden;
     max-height: 200px;
     line-height: 1.5rem;
