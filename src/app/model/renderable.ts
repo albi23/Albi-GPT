@@ -25,4 +25,8 @@ export class Renderable {
     const objDiv = document.getElementById('scrollable-root') as HTMLDivElement;
     objDiv.scrollTop = objDiv.scrollHeight;
   }
+
+  static scrollToBottomAfterDelay(delay: number): void {
+    Renderable.actionAfterDelay(delay, () => Renderable.scrollToBottom());
+  }
 }

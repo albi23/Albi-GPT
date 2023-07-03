@@ -70,10 +70,10 @@ ul {
 
 @for $i from 1 through 8 {
   li:nth-child(#{$i}) {
-    animation-delay: #{$i - 1}s;
+    //animation-delay: #{$i - 1}s;
     animation-timing-function: linear;
     animation-name: make-visible;
-    animation-duration: 1s;
+    animation-duration: 400ms;
     animation-iteration-count: 1;
     animation-fill-mode: forwards;
   }

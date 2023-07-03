@@ -6,7 +6,7 @@ import {
   EventEmitter, HostListener,
   Input,
   Output,
-  signal,
+  signal, Type,
   ViewChild,
   WritableSignal
 } from '@angular/core';
@@ -43,8 +43,14 @@ export class ChatComponent implements AfterViewInit {
   @Output() answeredEvt = new EventEmitter<boolean>();
 
   readonly questionInProgress: WritableSignal<boolean> = signal<boolean>(false);
+  readonly isMobileDevice: boolean;
   private readonly ANSWER_DELAY: number = 600;
   private readonly letterGeneratingSpeed: number = 70;
+
+
+  constructor() {
+    this.isMobileDevice = window.matchMedia('(max-width: 767px)').matches;
+  }
 
   ngAfterViewInit(): void {
     this.focusElem(this.questionBox.nativeElement);
@@ -73,20 +79,26 @@ export class ChatComponent implements AfterViewInit {
     this.questionBox.nativeElement.style.height = (this.questionBox.nativeElement.scrollHeight - 10) + 'px';
   }
 
-  private answerGeneration() {
+  private answerGeneration(): void {
     this.contentFiller(this.dialogElem.answer, this.ANSWER_DELAY)
       .subscribe({
-          next: (l: string) => this.terminalPre.nativeElement.innerText += l,
+          next: (letter: string) => {
+            this.terminalPre.nativeElement.innerText += letter;
+            if (this.isMobileDevice){
+              Renderable.scrollToBottom(); // TODO: improve it
+            }
+          },
           complete: (): void => {
-            Optional.of(this.dialogElem.dynamicComponent)
-              .ifPresentOrElse((dynamicComponent) =>{
+            Optional.of(this.dialogElem.dynamicComponent).ifPresentOrElse(
+              (dynamicComponent: Type<Renderable>): void => {
                 const componentRef = this.dynamicRef.viewContainerRef.createComponent<Renderable>(dynamicComponent);
                 componentRef.instance.renderDone(this.answeredEvt);
               },
-                () => {
-                  this.focusElem(this.questionBox.nativeElement);
-                  this.answeredEvt.emit(true);
-                });
+              () => {
+                this.focusElem(this.questionBox.nativeElement);
+                this.answeredEvt.emit(true);
+              }
+            );
           }
         }
       );
@@ -105,10 +117,10 @@ export class ChatComponent implements AfterViewInit {
     return of(null)
       .pipe(
         delay(delayMs),
-        tap(_ => this.questionInProgress.set(false)),
+        tap(() => this.questionInProgress.set(false)),
         take(1),
-        mergeMap(_ => interval(this.letterGeneratingSpeed)),
-        map(_ => letters.shift() as string),
+        mergeMap(() => interval(this.letterGeneratingSpeed)),
+        map(() => letters.shift() as string),
         takeWhile(letter => !!letter)
       );
   }

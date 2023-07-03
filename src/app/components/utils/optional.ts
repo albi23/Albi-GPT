@@ -11,7 +11,7 @@ export class Optional<T> {
   }
 
   ifPresent<T>(action: (arg: T) => void): void {
-    if (this.val !== null) {
+    if (this.val !== null && this.val !== undefined) {
       action(this.val as T);
     }
   }
