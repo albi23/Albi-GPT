@@ -37,7 +37,7 @@ export class AppComponent implements AfterViewInit {
       question: 'What technologies are you using in your front-end applications?  ',
       answer: 'Here you have a few of them:',
       dynamicComponent: SkillsComponent,
-      renderDoneDelay: 8000
+      renderDoneDelay: 8_000
     },
     {
       question: 'If you are good enough then you could at least write snake game...',

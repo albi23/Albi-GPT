@@ -20,7 +20,7 @@ export class SkillsComponent extends Renderable {
 
   isMobileDevice = false;
 
-  private readonly RENDER_ITEM_DELAY: number = 700;
+  private readonly RENDER_ITEM_DELAY: number = 900;
 
   skillCount = toSignal<number>(interval(this.RENDER_ITEM_DELAY)
     .pipe(tap(() => Renderable.scrollToBottomAfterDelay(200)),
@@ -34,7 +34,7 @@ export class SkillsComponent extends Renderable {
 
   override renderDone(evt: EventEmitter<boolean>): void {
     Renderable.scrollToBottom();
-    Renderable.actionAfterDelay(8000, () => evt.emit(true));
+    Renderable.actionAfterDelay(8_000, () => evt.emit(true));
     this.cdr.markForCheck();
   }
 
