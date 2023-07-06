@@ -26,13 +26,14 @@ export class SnakeGame {
    * snakeLength - defines how many block will the snake have as his length
    */
   constructor(private readonly canvasRef: HTMLCanvasElement,
+              private readonly score: WritableSignal<number>,
               private readonly endGame: WritableSignal<boolean> = signal(false),
               private readonly snakeLength: number = 10) {
     this.canvasContext = canvasRef.getContext('2d') as CanvasRenderingContext2D;
     this.currMove = {dx: this.snakeWidth, dy: 0};
     this.nextMove = structuredClone(this.currMove); // deep clone
     this.apple = this.getRandomPoint();
-    this.snake = this.initSnake(150, 100, this.snakeLength);
+    this.snake = this.initSnake(this.snakeWidth * snakeLength, this.snakeWidth, this.snakeLength);
   }
 
   public initialGameState(): void {
@@ -50,6 +51,7 @@ export class SnakeGame {
       const end: boolean | EndGameReason = this.isEndGame();
       this.drawSnake(end);
       if (end) {
+        this.score.update(() => 0);
         this.endGame.set(true);
         return;
       }
@@ -66,7 +68,7 @@ export class SnakeGame {
 
   private initSnake(startX: number, startY: number, length: number): Point[] {
     if (length < 3) {
-      throw Error('At least snake must be 2 unit width');
+      throw Error('At least snake must be 3 unit width');
     }
     const arr: Point[] = [];
     for (let i = 0; i < length; i++) {
@@ -174,7 +176,6 @@ export class SnakeGame {
   }
 
   private getRandomPoint(): Point {
-    // return {x:50, y: 50};
     const randPossibility = Math.random();
     let randX = this.getRandomInt(this.canvasRef.width - this.snakeWidth);
     let randY = this.getRandomInt(this.canvasRef.height - this.snakeWidth);
@@ -191,9 +192,32 @@ export class SnakeGame {
     if (this.snake[0].x === this.apple.x && this.snake[0].y === this.apple.y) {
       const score = {x: this.apple.x + this.currMove.dx, y: this.apple.y + this.currMove.dy};
       this.snake.unshift(score);
+      this.score.update(this.calculateScore());
       this.renderApple();
     } else {
       this.renderApple(this.apple);
     }
+  }
+
+  private calculateScore() {
+    return (val: number): number => {
+      const gainedDots: number = this.snake.length - this.snakeLength;
+      if (gainedDots < 4) {
+        return val + 10;
+      }
+      if (gainedDots < 6) {
+        return val + 20;
+      }
+      if (gainedDots < 10) {
+        return val + 30;
+      }
+      if (gainedDots < 15) {
+        return val + 40;
+      }
+      if (gainedDots < 20) {
+        return val + 40;
+      }
+      return val + (gainedDots + 20);
+    };
   }
 }

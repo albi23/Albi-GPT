@@ -26,6 +26,7 @@ export class SnakeGameComponent extends Renderable {
 
   endGame: WritableSignal<boolean> = signal(false);
   notStartedGame: WritableSignal<boolean> = signal(true);
+  score: WritableSignal<number> = signal(0);
 
   private canvasRef!: HTMLCanvasElement;
   private game!: SnakeGame;
@@ -47,7 +48,7 @@ export class SnakeGameComponent extends Renderable {
   private initGameState(): void {
     this.canvasRef = document.getElementById('game') as HTMLCanvasElement;
     this.applySizeIfMobile();
-    this.game = new SnakeGame(this.canvasRef, this.endGame);
+    this.game = new SnakeGame(this.canvasRef, this.score, this.endGame);
     this.game.initialGameState();
     this.cdr.markForCheck();
   }
@@ -65,7 +66,7 @@ export class SnakeGameComponent extends Renderable {
   restartGame(): void {
     this.endGame.set(false);
     this.applySizeIfMobile();
-    this.game = new SnakeGame(this.canvasRef, this.endGame);
+    this.game = new SnakeGame(this.canvasRef, this.score, this.endGame);
     this.startGame();
   }
 }

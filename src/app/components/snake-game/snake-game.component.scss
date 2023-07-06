@@ -1,5 +1,12 @@
 $btn-color: #FF0099;
 
+.score {
+  display: flex;
+  justify-content: center;
+  color: white;
+  font-size: 1rem;
+}
+
 .game-board {
   display: flex;
   justify-content: center;

@@ -26,7 +26,6 @@ export class AppComponent implements AfterViewInit {
       question: 'Where the Poland is located?',
       answer: 'In central Europe.',
       dynamicComponent: MapComponent,
-      renderDoneDelay: 2000
     },
     {
       question: 'Who are you?',
@@ -37,7 +36,6 @@ export class AppComponent implements AfterViewInit {
       question: 'What technologies are you using in your front-end applications?  ',
       answer: 'Here you have a few of them:',
       dynamicComponent: SkillsComponent,
-      renderDoneDelay: 8_000
     },
     {
       question: 'If you are good enough then you could at least write snake game...',
