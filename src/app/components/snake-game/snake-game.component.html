@@ -1,9 +1,9 @@
 <div class="score">Score: {{score()}}</div>
 <div class="game-board">
-  <canvas id="game" height="400px" width="800px"></canvas>
+  <canvas [id]="'game'+idSuffix" height="400px" width="800px"></canvas>
 </div>
 <div class="buttons">
   <button *ngIf="endGame()" (click)="restartGame()"><span>Restart</span><i></i></button>
   <button *ngIf="notStartedGame()" (click)="startGame()"><span>Start</span><i></i></button>
-  <button id="continueBtn"><span>Continue</span><i></i></button>
+  <button [id]="'continueBtn'+ idSuffix"><span>Continue</span><i></i></button>
 </div>

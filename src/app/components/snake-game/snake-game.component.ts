@@ -1,8 +1,8 @@
 import {
+  AfterViewInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
-  effect,
   EventEmitter,
   signal,
   WritableSignal
@@ -10,7 +10,7 @@ import {
 import {CommonModule} from '@angular/common';
 import {Renderable} from '../../model/renderable';
 import {fromEvent, take} from 'rxjs';
-import {toSignal} from '@angular/core/rxjs-interop';
+import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {SnakeGame} from './snake-game';
 
 
@@ -22,33 +22,44 @@ import {SnakeGame} from './snake-game';
   styleUrls: ['./snake-game.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SnakeGameComponent extends Renderable {
+export class SnakeGameComponent extends Renderable implements AfterViewInit {
 
+  static instanceCount = 0;
   endGame: WritableSignal<boolean> = signal(false);
   notStartedGame: WritableSignal<boolean> = signal(true);
   score: WritableSignal<number> = signal(0);
 
+  readonly idSuffix: number;
   private canvasRef!: HTMLCanvasElement;
   private game!: SnakeGame;
+  private evt!: EventEmitter<boolean>;
 
   constructor(private cdr: ChangeDetectorRef) {
     super();
-    const keySignal = toSignal<Event>(fromEvent(document, 'keydown'));
-    effect((): void => this.game?.newKeyboardMove(keySignal()));
+    this.idSuffix = ++SnakeGameComponent.instanceCount;
+    fromEvent(document, 'keydown')
+      .pipe(takeUntilDestroyed())
+      .subscribe((evt: Event): void => this.game?.newKeyboardMove(evt));
   }
 
   override renderDone(evt: EventEmitter<boolean>): void {
+    this.evt = evt;
     Renderable.scrollToBottom();
-    this.initGameState();
-    fromEvent(document.getElementById('continueBtn') as HTMLButtonElement, 'click')
-      .pipe(take(1))
-      .subscribe(() => evt.emit(true));
+    this.cdr.markForCheck();
   }
 
+  ngAfterViewInit(): void {
+    fromEvent(document.getElementById('continueBtn' + this.idSuffix) as HTMLButtonElement, 'click')
+      .pipe(take(1))
+      .subscribe(() => this.evt.emit(true));
+    this.initGameState();
+  }
+
+
   private initGameState(): void {
-    this.canvasRef = document.getElementById('game') as HTMLCanvasElement;
+    this.canvasRef = document.getElementById('game' + this.idSuffix) as HTMLCanvasElement;
     this.applySizeIfMobile();
-    this.game = new SnakeGame(this.canvasRef, this.score, this.endGame);
+    this.game = this.getSnakeGameInstance();
     this.game.initialGameState();
     this.cdr.markForCheck();
   }
@@ -68,5 +79,11 @@ export class SnakeGameComponent extends Renderable {
     this.applySizeIfMobile();
     this.game = new SnakeGame(this.canvasRef, this.score, this.endGame);
     this.startGame();
+  }
+
+  private getSnakeGameInstance(): SnakeGame {
+    return (SnakeGameComponent.instanceCount === 1) ?
+      new SnakeGame(this.canvasRef, this.score, this.endGame) :
+      new SnakeGame(this.canvasRef, this.score, this.endGame, 70, 20);
   }
 }

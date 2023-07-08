@@ -43,6 +43,11 @@ export class AppComponent implements AfterViewInit {
       answer: 'Here you go:',
     },
     {
+      question: 'Ok,  can you make it bigger and a little bit slower?',
+      dynamicComponent: SnakeGameComponent,
+      answer: 'Of course! Catch this:',
+    },
+    {
       question: 'Next question in build phase... ;)',
       answer: '. . .',
     }

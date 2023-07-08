@@ -10,8 +10,6 @@ enum EndGameReason {
 
 export class SnakeGame {
 
-  private readonly GAME_SPEED: number = 50;
-  private readonly snakeWidth: number = 10;
   private readonly canvasContext!: CanvasRenderingContext2D;
 
   private currMove: Move;
@@ -28,18 +26,20 @@ export class SnakeGame {
   constructor(private readonly canvasRef: HTMLCanvasElement,
               private readonly score: WritableSignal<number>,
               private readonly endGame: WritableSignal<boolean> = signal(false),
+              private readonly GAME_SPEED: number = 50,
+              private readonly snakeDotSize: number = 10,
               private readonly snakeLength: number = 10) {
     this.canvasContext = canvasRef.getContext('2d') as CanvasRenderingContext2D;
-    this.currMove = {dx: this.snakeWidth, dy: 0};
+    this.snake = this.initSnake(0, 0, this.snakeLength);
+    this.currMove = this.calculateInitialMove();
     this.nextMove = structuredClone(this.currMove); // deep clone
-    this.apple = this.getRandomPoint();
-    this.snake = this.initSnake(this.snakeWidth * snakeLength, this.snakeWidth, this.snakeLength);
+    this.apple = this.renderApple();
   }
 
   public initialGameState(): void {
     this.clearCanvas(this.canvasContext, this.canvasRef);
     this.drawSnake(false);
-    this.renderApple();
+    this.apple = this.renderApple();
   }
 
   public gameLoop(): void {
@@ -70,11 +70,40 @@ export class SnakeGame {
     if (length < 3) {
       throw Error('At least snake must be 3 unit width');
     }
+    if (startX < 0 || startY < 0 || startX > (this.canvasRef.width - this.snakeDotSize)
+      || startY > (this.canvasRef.height - this.snakeDotSize)) {
+      throw Error(`Provided incorrect value [startX: ${startX}, startY: ${startY}].\n
+       Allowed: 0 <= startX <= ${this.canvasRef.width - this.snakeDotSize}\n
+                0 <= startY <= ${this.canvasRef.height - this.snakeDotSize}\n`
+      );
+    }
     const arr: Point[] = [];
+    const maxXCord: number = (this.canvasRef.width);
+    let xPos: number = startX;
+    let yPos: number = startY;
+    let step: number = this.snakeDotSize;
     for (let i = 0; i < length; i++) {
-      arr.push({x: startX - (i * this.snakeWidth), y: startY});
+      if (xPos >= maxXCord || xPos < 0) {
+        xPos = (xPos >= maxXCord) ? maxXCord - this.snakeDotSize : 0;
+        yPos += Math.abs(step);
+        step = -step;
+      }
+      arr.unshift({x: xPos, y: yPos});
+      xPos += step;
     }
     return arr;
+  }
+
+  private calculateInitialMove(): Move {
+    const isGoingToLeft: boolean = (this.snake[0].x - this.snake[1].x < 0);
+    if (isGoingToLeft) {
+      const isCloseToLeftWall: boolean = (this.snake[0].x === 0 || this.snake[0].x === this.snakeDotSize);
+      return (isCloseToLeftWall) ? {dx: 0, dy: this.snakeDotSize} : {dx: -this.snakeDotSize, dy: 0};
+    } else {
+      const isCloseToRightWall: boolean = (this.snake[0].x === this.canvasRef.width - 2 * this.snakeDotSize ||
+        this.snake[0].x === this.canvasRef.width - this.snakeDotSize);
+      return (isCloseToRightWall) ? {dx: 0, dy: this.snakeDotSize} : {dx: this.snakeDotSize, dy: 0};
+    }
   }
 
 
@@ -88,15 +117,15 @@ export class SnakeGame {
     context.strokeRect(0, 0, canvasRef.width, canvasRef.height);
   }
 
-  private renderApple(applePosition?: Point): void {
+  private renderApple(applePosition?: Point): Point {
     if (!applePosition) {
       applePosition = this.getRandomPoint();
-      while (this.snake.includes(applePosition)) {
+      while (this.snake.find((snakePoint) => snakePoint.x === applePosition?.x && snakePoint.y === applePosition?.y)) {
         applePosition = this.getRandomPoint();
       }
-      this.apple = applePosition;
     }
     this.renderCircle(this.canvasContext, applePosition, 'green', 'black');
+    return applePosition;
   }
 
   private renderCircle(context: CanvasRenderingContext2D,
@@ -107,7 +136,7 @@ export class SnakeGame {
     context.strokeStyle = strokeStyle;
 
     context.beginPath();
-    const radius = this.snakeWidth * 0.5;
+    const radius = this.snakeDotSize * 0.5;
     context.arc(snakePart.x + radius, snakePart.y + radius, radius, 0, 2 * Math.PI, false);
     context.fill();
     context.stroke();
@@ -122,27 +151,27 @@ export class SnakeGame {
 
 
   private changeDirection(event: KeyboardEvent, move: Move): Move {
-    const upMove: boolean = move.dy === -this.snakeWidth;
-    const downMove: boolean = move.dy === this.snakeWidth;
-    const rightMove: boolean = move.dx === this.snakeWidth;
-    const leftMove: boolean = move.dx === -this.snakeWidth;
+    const upMove: boolean = move.dy === -this.snakeDotSize;
+    const downMove: boolean = move.dy === this.snakeDotSize;
+    const rightMove: boolean = move.dx === this.snakeDotSize;
+    const leftMove: boolean = move.dx === -this.snakeDotSize;
 
     if (event.key === 'ArrowLeft' && !rightMove) {
-      return {dx: -this.snakeWidth, dy: 0};
+      return {dx: -this.snakeDotSize, dy: 0};
     }
 
     if (event.key === 'ArrowUp' && !downMove) {
       event.preventDefault();
-      return {dx: 0, dy: -this.snakeWidth};
+      return {dx: 0, dy: -this.snakeDotSize};
     }
 
     if (event.key === 'ArrowRight' && !leftMove) {
-      return {dx: this.snakeWidth, dy: 0};
+      return {dx: this.snakeDotSize, dy: 0};
     }
 
     if (event.key === 'ArrowDown' && !upMove) {
       event.preventDefault();
-      return {dx: 0, dy: this.snakeWidth};
+      return {dx: 0, dy: this.snakeDotSize};
     }
     return move;
   }
@@ -167,9 +196,9 @@ export class SnakeGame {
     }
 
     const hitLeftWall = this.snake[0].x < 0;
-    const hitRightWall = this.snake[0].x > this.canvasRef.width - this.snakeWidth;
+    const hitRightWall = this.snake[0].x > this.canvasRef.width - this.snakeDotSize;
     const hitTopWall = this.snake[0].y < 0;
-    const hitBottomWall = this.snake[0].y > this.canvasRef.height - this.snakeWidth;
+    const hitBottomWall = this.snake[0].y > this.canvasRef.height - this.snakeDotSize;
 
     return (hitLeftWall || hitRightWall || hitTopWall || hitBottomWall) ?
       EndGameReason.WALL_HIT : false;
@@ -177,10 +206,10 @@ export class SnakeGame {
 
   private getRandomPoint(): Point {
     const randPossibility = Math.random();
-    let randX = this.getRandomInt(this.canvasRef.width - this.snakeWidth);
-    let randY = this.getRandomInt(this.canvasRef.height - this.snakeWidth);
-    randX = (randPossibility > 0.5) ? randX - randX % this.snakeWidth : randX + (this.snakeWidth - randX % this.snakeWidth);
-    randY = (randPossibility > 0.5) ? randY - randY % this.snakeWidth : randY + (this.snakeWidth - randY % this.snakeWidth);
+    let randX = this.getRandomInt(this.canvasRef.width - this.snakeDotSize);
+    let randY = this.getRandomInt(this.canvasRef.height - this.snakeDotSize);
+    randX = (randPossibility > 0.5) ? randX - randX % this.snakeDotSize : randX + (this.snakeDotSize - randX % this.snakeDotSize);
+    randY = (randPossibility > 0.5) ? randY - randY % this.snakeDotSize : randY + (this.snakeDotSize - randY % this.snakeDotSize);
     return {x: randX, y: randY};
   }
 
@@ -193,9 +222,9 @@ export class SnakeGame {
       const score = {x: this.apple.x + this.currMove.dx, y: this.apple.y + this.currMove.dy};
       this.snake.unshift(score);
       this.score.update(this.calculateScore());
-      this.renderApple();
+      this.apple = this.renderApple();
     } else {
-      this.renderApple(this.apple);
+      this.apple = this.renderApple(this.apple);
     }
   }
 
