@@ -1,4 +1,5 @@
 import {signal, WritableSignal} from '@angular/core';
+import {ScoreCalculator} from './score-calculator';
 
 type Point = { x: number, y: number }
 type Move = { dx: number, dy: number }
@@ -16,6 +17,7 @@ export class SnakeGame {
   private nextMove: Move;
   private apple: Point;
   private snake: Point[];
+  private readonly scoreGenerator: ScoreCalculator = new ScoreCalculator();
 
   /**
    * canvasRef   - anchor for rendering game
@@ -228,25 +230,12 @@ export class SnakeGame {
     }
   }
 
-  private calculateScore() {
-    return (val: number): number => {
+  private calculateScore(): (val: number) => number {
+    return (currentScore: number): number => {
       const gainedDots: number = this.snake.length - this.snakeLength;
-      if (gainedDots < 4) {
-        return val + 10;
-      }
-      if (gainedDots < 6) {
-        return val + 20;
-      }
-      if (gainedDots < 10) {
-        return val + 30;
-      }
-      if (gainedDots < 15) {
-        return val + 40;
-      }
-      if (gainedDots < 20) {
-        return val + 40;
-      }
-      return val + (gainedDots + 20);
+      return this.scoreGenerator.calculateScore(currentScore, gainedDots);
     };
   }
+
 }
+
