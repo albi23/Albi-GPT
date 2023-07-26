@@ -48,9 +48,18 @@ export class AppComponent implements AfterViewInit {
       answer: 'Of course! Catch this:',
     },
     {
+      question: 'You said that You are Full Stack dev so how about the backend?',
+      answer: 'What do you want to know?',
+    },
+    {
       question: 'Next question in build phase... ;)',
       answer: '. . .',
     }
+    // {
+    //   question: 'What tools are you using ',
+    //   dynamicComponent: DevToolsComponent,
+    //   answer: 'What do you want to know?',
+    // }
   ];
 
   ngAfterViewInit(): void {

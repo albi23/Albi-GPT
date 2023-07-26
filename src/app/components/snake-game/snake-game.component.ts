@@ -77,7 +77,7 @@ export class SnakeGameComponent extends Renderable implements AfterViewInit {
   restartGame(): void {
     this.endGame.set(false);
     this.applySizeIfMobile();
-    this.game = new SnakeGame(this.canvasRef, this.score, this.endGame);
+    this.game = this.getSnakeGameInstance();
     this.startGame();
   }
 
