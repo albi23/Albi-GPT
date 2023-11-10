@@ -24,7 +24,7 @@ import {SnakeGame} from './snake-game';
 })
 export class SnakeGameComponent extends Renderable implements AfterViewInit {
 
-  static instanceCount = 0;
+  private static instanceCount = 0;
   endGame: WritableSignal<boolean> = signal(false);
   notStartedGame: WritableSignal<boolean> = signal(true);
   score: WritableSignal<number> = signal(0);
