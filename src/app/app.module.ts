@@ -11,13 +11,13 @@ import {NgOptimizedImage} from '@angular/common';
   declarations: [
     AppComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    ChatComponent,
-    NgOptimizedImage,
-    NgForTrackByFieldDirective
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        ChatComponent,
+        NgOptimizedImage,
+        NgForTrackByFieldDirective,
+    ],
   providers: [],
   exports: [],
   bootstrap: [AppComponent]

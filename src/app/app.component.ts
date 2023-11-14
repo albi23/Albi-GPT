@@ -68,8 +68,8 @@ export class AppComponent implements AfterViewInit {
 
 
   nextQuestion(): void {
-    this.conversation.mutate((curr: DialogElem[]) => {
-      Optional.of(this.source.shift()).ifPresent((dialogElem: DialogElem) => curr.push(dialogElem));
+    Optional.of(this.source.shift()).ifPresent((dialogElem: DialogElem) => {
+      this.conversation.set(this.conversation().concat(dialogElem));
     });
 
   }
