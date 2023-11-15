@@ -15,7 +15,7 @@ export class AppComponent implements AfterViewInit {
   source!: DialogElem[];
 
   constructor(private readonly dialogService: DialogProviderService) {
-    this.source = this.dialogService.dialog.slice(this.dialogService.dialog.slice().length-2);
+    this.source = this.dialogService.dialog.slice();
   }
 
   ngAfterViewInit(): void {
