@@ -41,9 +41,15 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "node_modules/prismjs/themes/prism-tomorrow.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/prismjs/prism.js",
+              "node_modules/prismjs/components/prism-properties.js",
+              "node_modules/prismjs/components/prism-java.js",
+              "node_modules/clipboard/dist/clipboard.min.js"
+            ]
           },
           "configurations": {
             "production": {
