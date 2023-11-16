@@ -18,7 +18,7 @@ import {SafePipe} from '../../pipes/safe.pipe';
 import {DynamicComponentDirective} from '../../directives/dynamic-component.directive';
 import {Renderable} from '../../model/renderable';
 import {Optional} from '../utils/optional';
-import {environment} from '../../../environments/environment.development';
+import {environment} from '../../../environments/environment';
 
 @Component({
   selector: 'albi-chat',

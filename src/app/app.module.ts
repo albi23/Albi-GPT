@@ -7,6 +7,7 @@ import {ChatComponent} from './components/chat/chat.component';
 import {NgForTrackByFieldDirective} from './directives/ng-for-track-by-field.directive';
 import {NgOptimizedImage} from '@angular/common';
 import {MarkdownModule} from 'ngx-markdown';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import {MarkdownModule} from 'ngx-markdown';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     ChatComponent,
     NgOptimizedImage,
@@ -22,7 +24,7 @@ import {MarkdownModule} from 'ngx-markdown';
 
   ],
   providers: [],
-  exports: [],
+  exports: [BrowserModule],
   bootstrap: [AppComponent]
 })
 export class AppModule {
