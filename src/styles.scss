@@ -8,6 +8,10 @@ html, body {
 
 }
 
+code[class*="language-java"] {
+  color: #9876AA !important;
+}
+
 // Custom scroll bar
 div.content-base {
   /* Firefox */

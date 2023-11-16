@@ -1,17 +1,26 @@
-<h1 class="txt">Junit parallel test execution setup</h1>
 @defer(on timer(1s)) {
-  <h1 class="txt">Step I</h1>
-  <div clipboard markdown [clipboardButtonComponent]="clipboardButton">{{ properties }}</div>
+  <h1 class="txt">Junit parallel test execution setup</h1>
 }
 
 @defer(on timer(2s)) {
-  <h1 class="txt">Step II</h1>
-  <div clipboard markdown [clipboardButtonComponent]="clipboardButton">{{ annotation }}</div>
+  <h1 class="txt" [hidden]="!parsingDone()">Step I</h1>
+  <div class="code" clipboard markdown
+    [clipboardButtonComponent]="clipboardButton"
+    [hidden]="!parsingDone()"
+    (ready)="onParseReady(0)">{{ properties }}</div>
 }
 
 @defer(on timer(3s)) {
-  <h1 class="txt">Step III</h1>
-  <div clipboard markdown [clipboardButtonComponent]="clipboardButton">{{ code }}</div>
-}@loading{
- <p>loading '3'</p>
+  <h1 class="txt" [hidden]="!parsingDone()">Step II</h1>
+  <div class="code" clipboard markdown
+      [clipboardButtonComponent]="clipboardButton"
+      [hidden]="!parsingDone()"
+      (ready)="onParseReady(0)">{{ annotation }}</div>
+}
+
+@defer(on timer(4s)) {
+  <h1 class="txt" [hidden]="!parsingDone()">Step III</h1>
+  <div class="code" clipboard markdown
+       [clipboardButtonComponent]="clipboardButton"
+       (ready)="onParseReady(0)">{{ code }}</div>
 }

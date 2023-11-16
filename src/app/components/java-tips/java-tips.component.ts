@@ -1,7 +1,7 @@
-import {ChangeDetectionStrategy, Component, ElementRef, EventEmitter, TemplateRef, ViewChild} from '@angular/core';
+import {ChangeDetectionStrategy, Component, EventEmitter, signal, WritableSignal} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {Renderable} from '../../model/renderable';
-import {MarkdownComponent, MarkdownService, SECURITY_CONTEXT} from 'ngx-markdown';
+import {MarkdownComponent, MarkdownService} from 'ngx-markdown';
 import {ClipboardButtonComponent} from './clipboard-button/clipboard-button.component';
 
 
@@ -16,7 +16,8 @@ import {ClipboardButtonComponent} from './clipboard-button/clipboard-button.comp
 })
 export class JavaTipsComponent implements Renderable {
 
-  @ViewChild('customBtn') copyBtn!: TemplateRef<HTMLButtonElement>;
+  parsingDone: WritableSignal<boolean> = signal(false);
+
   readonly clipboardButton = ClipboardButtonComponent;
 
   readonly properties = '```properties' +
@@ -41,7 +42,8 @@ export class JavaTipsComponent implements Renderable {
     '\n// Give it try!' +
     '\n@ParallelTest' +
     '\nclass EnvironmentTest {' +
-    '\n\n    void methodRunInParallel(){' +
+    '\n    @Test' +
+    '\n    void methodRunInParallel(){' +
     '\n        System.out.println(Thread.currentThread().getName());' +
     '\n    }\n}\n';
 
@@ -53,5 +55,8 @@ export class JavaTipsComponent implements Renderable {
     Renderable.scrollToBottomAfterDelay(4000);
   }
 
+  onParseReady(componentIdx: number): void {
+    this.parsingDone.set(true);
+  }
 
 }

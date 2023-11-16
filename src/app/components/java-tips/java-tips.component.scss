@@ -2,14 +2,21 @@
   color: white;
   font-size: 1rem;
   padding: 0 .5rem 0 1rem;
-  animation-name: wider;
+  animation-name: make-visible;
   animation-duration: .5s;
   animation-timing-function: ease-in-out;
   animation-delay: 0;
 }
 
+.code {
+  animation-name: make-visible;
+  animation-duration: .5s;
+  animation-timing-function: ease-in-out;
+  animation-delay: 0;
 
-@keyframes wider {
+}
+
+@keyframes make-visible {
   0% {
     opacity: 0;
   }

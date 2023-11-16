@@ -18,6 +18,7 @@ import {SafePipe} from '../../pipes/safe.pipe';
 import {DynamicComponentDirective} from '../../directives/dynamic-component.directive';
 import {Renderable} from '../../model/renderable';
 import {Optional} from '../utils/optional';
+import {environment} from '../../../environments/environment.development';
 
 @Component({
   selector: 'albi-chat',
@@ -45,7 +46,7 @@ export class ChatComponent implements AfterViewInit {
   readonly questionInProgress: WritableSignal<boolean> = signal<boolean>(false);
   readonly isMobileDevice: boolean;
   private readonly ANSWER_DELAY: number = 600;
-  private readonly letterGeneratingSpeed: number = 70;
+  private readonly letterGeneratingSpeed: number = environment.letterGeneratingSpeed;
 
 
   constructor() {
