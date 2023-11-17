@@ -45,7 +45,7 @@ export class ChatComponent implements AfterViewInit {
 
   readonly questionInProgress: WritableSignal<boolean> = signal<boolean>(false);
   readonly isMobileDevice: boolean;
-  private readonly ANSWER_DELAY: number = 600;
+  private readonly ANSWER_DELAY: number = environment.ANSWER_DELAY;
   private readonly letterGeneratingSpeed: number = environment.letterGeneratingSpeed;
 
 
