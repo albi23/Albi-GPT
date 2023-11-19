@@ -19,6 +19,7 @@ import {DynamicComponentDirective} from '../../directives/dynamic-component.dire
 import {Renderable} from '../../model/renderable';
 import {Optional} from '../utils/optional';
 import {environment} from '../../../environments/environment';
+import {PUNCTUATION_SPACE} from '../../constans/litelar.constans';
 
 @Component({
   selector: 'albi-chat',
@@ -56,7 +57,7 @@ export class ChatComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     this.focusElem(this.questionBox.nativeElement);
 
-    this.contentFiller(this.dialogElem.question,
+    this.contentFiller(this.dialogElem.question, // question generation
       this.dialogElem?.questionDelay || 0
     ).subscribe(
       {
@@ -66,6 +67,7 @@ export class ChatComponent implements AfterViewInit {
         },
         complete: (): void => {
           this.button.nativeElement.click();
+          this.questionBox.nativeElement.disabled = true;
           this.questionInProgress.set(true);
           this.answerGeneration();
         }
@@ -81,28 +83,40 @@ export class ChatComponent implements AfterViewInit {
   }
 
   private answerGeneration(): void {
-    this.contentFiller(this.dialogElem.answer, this.ANSWER_DELAY)
+    this.contentFiller(this.dialogElem.answer, this.ANSWER_DELAY, true)
       .subscribe({
           next: (letter: string) => {
             this.terminalPre.nativeElement.innerText += letter;
-            if (this.isMobileDevice){
-              Renderable.scrollToBottom(); // TODO: improve it
-            }
+            this.scrollToContentIfNeeded(letter);
           },
           complete: (): void => {
+            // Components
             Optional.of(this.dialogElem.dynamicComponent).ifPresentOrElse(
               (dynamicComponent: Type<Renderable>): void => {
                 const componentRef = this.dynamicRef.viewContainerRef.createComponent<Renderable>(dynamicComponent);
                 componentRef.instance.renderDone(this.answeredEvt);
               },
-              () => {
+              (): void => { // Just text
                 this.focusElem(this.questionBox.nativeElement);
+                Renderable.scrollToBottom();
                 this.answeredEvt.emit(true);
               }
             );
           }
         }
       );
+  }
+
+  private scrollToContentIfNeeded(letter: string): void {
+    if (letter === PUNCTUATION_SPACE) {
+      Renderable.scrollToBottom();
+      return;
+    }
+    if (this.isMobileDevice && this.terminalPre.nativeElement.innerText.length % 20 === 0) {
+      Renderable.scrollToBottom();
+    } else if (!this.isMobileDevice && (letter === '\n' || this.terminalPre.nativeElement.innerText.length % 50 === 0)) {
+      Renderable.scrollToBottom();
+    }
   }
 
   private focusElem(elem: HTMLElement): void {
@@ -113,16 +127,22 @@ export class ChatComponent implements AfterViewInit {
 
 
   private contentFiller(text: string,
-                        delayMs = 0): Observable<string> {
+                        delayMs = 0,
+                        scrollToBottom = false): Observable<string> {
     const letters: string[] = [...text];
     return of(null)
       .pipe(
+        tap(() => {
+          if (scrollToBottom) {
+            Renderable.scrollToBottomAfterDelay(100);
+          }
+        }),
         delay(delayMs),
         tap(() => this.questionInProgress.set(false)),
         take(1),
         mergeMap(() => interval(this.letterGeneratingSpeed)),
         map(() => letters.shift() as string),
-        takeWhile(letter => !!letter)
+        take(text.length)
       );
   }
 

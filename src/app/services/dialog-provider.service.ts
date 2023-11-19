@@ -5,6 +5,7 @@ import {MapComponent} from '../components/map/map.component';
 import {SkillsComponent} from '../components/skills/skills.component';
 import {SnakeGameComponent} from '../components/snake-game/snake-game.component';
 import {AngularSnippetComponent} from '../components/angular-snippet/angular-snippet.component';
+import {PUNCTUATION_SPACE} from '../constans/litelar.constans';
 
 @Injectable()
 export class DialogProviderService {
@@ -29,7 +30,7 @@ export class DialogProviderService {
       id: 4,
       question: 'Who are you?',
       answer: 'I\'m a full-stack developer. I\'m creating software mainly using the Angular framework when it comes to UI.\n' +
-        'By contrast, when it comes to creating business logic on the backend I use Java for this purpose.',
+        'By contrast, when it comes to creating business logic on the backend I use Java for this purpose.' + PUNCTUATION_SPACE,
     },
     {
       id: 5,
@@ -61,7 +62,7 @@ export class DialogProviderService {
     {
       id: 9,
       question: 'You said that You are Full Stack dev so how about the backend?',
-      answer: 'What do you want to know?',
+      answer: 'What do you want to know?' + PUNCTUATION_SPACE,
     },
     {
       id: 10,
@@ -72,7 +73,7 @@ export class DialogProviderService {
     {
       id: 11,
       question: 'Next question in build phase... ;)',
-      answer: '. . .',
+      answer: '. . .' + PUNCTUATION_SPACE,
     }
   ];
 

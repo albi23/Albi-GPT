@@ -65,6 +65,7 @@ export class SnakeGameComponent extends Renderable implements AfterViewInit {
     this.evt = evt;
     Renderable.scrollToBottom();
     this.cdr.markForCheck();
+    Renderable.scrollToBottomAfterDelay(100);
   }
 
   ngAfterViewInit(): void {
@@ -72,7 +73,10 @@ export class SnakeGameComponent extends Renderable implements AfterViewInit {
       fromEvent(document.getElementById('continueBtn' + this.idSuffix) as HTMLButtonElement, 'click'),
       this.inactivitySkip
     )
-      .pipe(take(1))
+      .pipe(
+        take(1),
+        tap(() => this.inactivitySkip.next())
+      )
       .subscribe(() => this.evt.emit(true));
     this.initGameState();
     this.startInactivityDetection();
