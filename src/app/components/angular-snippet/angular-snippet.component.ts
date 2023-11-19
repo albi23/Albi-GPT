@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, signal, WritableSignal} from '@angular/core';
+import {ChangeDetectionStrategy, Component, EventEmitter, signal, WritableSignal} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {Renderable} from '../../model/renderable';
 import {MarkdownComponent} from 'ngx-markdown';
@@ -46,6 +46,10 @@ export class AngularSnippetComponent extends Renderable {
     '  }';
 
 
+  override renderDone(evt: EventEmitter<boolean>) {
+    Renderable.scrollToBottom();
+    Renderable.actionAfterDelay(2000, () => evt.emit(true));
+  }
 
   onParseReady(): void {
     this.parsingDone.set(true);
