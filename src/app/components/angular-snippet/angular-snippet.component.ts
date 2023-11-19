@@ -20,18 +20,14 @@ export class AngularSnippetComponent extends Renderable {
     '    const userMoves$ = this.activityService.listenUserEvents()\n' +
     '      .pipe(filter(x => x !== null)) as Observable<Event>;\n' +
     '\n' +
-    '    interval(this.INACTIVITY_TIME_OUT)\n' +
-    '      .pipe(\n' +
+    '    interval(this.INACTIVITY_TIME_OUT).pipe(\n' +
     '        take(1),\n' +
     '        switchMap(() => userMoves$),\n' +
     '        tap(() => this.buttonText.set(\'Next\')),\n' +
     '        switchMap(() =>\n' +
     '          interval(this.INACTIVITY_TIME_OUT).pipe(\n' +
     '            take(1),\n' +
-    '            switchMap(\n' +
-    '              () => timer(0, 1000)\n' +
-    '              .pipe(map((x: number) => x + 1))\n' +
-    '            ),\n' +
+    '            switchMap(() => timer(0, 1000).pipe(map((i: number) => i + 1))),\n' +
     '          )\n' +
     '        ),\n' +
     '        filter((val: number): boolean => val > 4),\n' +

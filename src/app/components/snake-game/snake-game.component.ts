@@ -86,18 +86,14 @@ export class SnakeGameComponent extends Renderable implements AfterViewInit {
     const userMoves$ = this.activityService.listenUserEvents()
       .pipe(filter(x => x !== null)) as Observable<Event>;
 
-    interval(this.INACTIVITY_TIME_OUT)
-      .pipe(
+    interval(this.INACTIVITY_TIME_OUT).pipe(
         take(1),
         switchMap(() => userMoves$),
         tap(() => this.buttonText.set('Next')),
         switchMap(() =>
           interval(this.INACTIVITY_TIME_OUT).pipe(
             take(1),
-            switchMap(
-              () => timer(0, 1000)
-              .pipe(map((x: number) => x + 1))
-            ),
+            switchMap(() => timer(0, 1000).pipe(map((i: number) => i + 1))),
           )
         ),
         filter((val: number): boolean => val > 4),
