@@ -20,11 +20,14 @@
   </button>
 </div>
 <div class="terminal">
-  <div id="wave" *ngIf="questionInProgress()">
-    <span class="dot"></span>
-    <span class="dot"></span>
-    <span class="dot"></span>
-  </div>
+  @if (questionInProgress()) {
+    <div id="wave">
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+    </div>
+  }
+
   <pre #terminal></pre>
   <ng-template adHost></ng-template>
 </div>

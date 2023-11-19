@@ -48,6 +48,7 @@
               "node_modules/prismjs/prism.js",
               "node_modules/prismjs/components/prism-properties.js",
               "node_modules/prismjs/components/prism-java.js",
+              "node_modules/prismjs/components/prism-typescript.js",
               "node_modules/clipboard/dist/clipboard.min.js"
             ]
           },

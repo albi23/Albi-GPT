@@ -9,9 +9,23 @@ import {
 } from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {Renderable} from '../../model/renderable';
-import {fromEvent, take} from 'rxjs';
+import {
+  filter,
+  fromEvent,
+  interval,
+  map,
+  merge,
+  Observable,
+  Subject,
+  switchMap,
+  take,
+  takeUntil,
+  tap,
+  timer
+} from 'rxjs';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {SnakeGame} from './snake-game';
+import {UserActivityService} from '../../services/user-activity.service';
 
 
 @Component({
@@ -24,23 +38,28 @@ import {SnakeGame} from './snake-game';
 })
 export class SnakeGameComponent extends Renderable implements AfterViewInit {
 
-  private static instanceCount = 0;
+  score: WritableSignal<number> = signal(0);
   endGame: WritableSignal<boolean> = signal(false);
   notStartedGame: WritableSignal<boolean> = signal(true);
-  score: WritableSignal<number> = signal(0);
+  buttonText: WritableSignal<string> = signal<string>('Next');
 
+  private static instanceCount = 0;
   readonly idSuffix: number;
   private canvasRef!: HTMLCanvasElement;
   private game!: SnakeGame;
   private evt!: EventEmitter<boolean>;
+  private readonly inactivitySkip = new Subject<void>();
+  private readonly INACTIVITY_TIME_OUT = 10_000;
 
-  constructor(private cdr: ChangeDetectorRef) {
+  constructor(private cdr: ChangeDetectorRef,
+              private activityService: UserActivityService) {
     super();
     this.idSuffix = ++SnakeGameComponent.instanceCount;
     fromEvent(document, 'keydown')
       .pipe(takeUntilDestroyed())
       .subscribe((evt: Event): void => this.game?.newKeyboardMove(evt));
   }
+
 
   override renderDone(evt: EventEmitter<boolean>): void {
     this.evt = evt;
@@ -49,12 +68,44 @@ export class SnakeGameComponent extends Renderable implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    fromEvent(document.getElementById('continueBtn' + this.idSuffix) as HTMLButtonElement, 'click')
+    merge(
+      fromEvent(document.getElementById('continueBtn' + this.idSuffix) as HTMLButtonElement, 'click'),
+      this.inactivitySkip
+    )
       .pipe(take(1))
       .subscribe(() => this.evt.emit(true));
     this.initGameState();
+    this.startInactivityDetection();
   }
 
+  private startInactivityDetection(): void {
+    const userMoves$ = this.activityService.listenUserEvents()
+      .pipe(filter(x => x !== null)) as Observable<Event>;
+
+    interval(this.INACTIVITY_TIME_OUT)
+      .pipe(
+        take(1),
+        switchMap(() => userMoves$),
+        tap(() => this.buttonText.set('Next')),
+        switchMap(() =>
+          interval(this.INACTIVITY_TIME_OUT).pipe(
+            take(1),
+            switchMap(
+              () => timer(0, 1000)
+              .pipe(map((x: number) => x + 1))
+            ),
+          )
+        ),
+        filter((val: number): boolean => val > 4),
+        takeUntil(this.inactivitySkip),
+      ).subscribe((count: number): void => {
+      this.buttonText.set(`Next ${10 - count}`);
+      if (count == 10) {
+        this.buttonText.set('Next');
+        this.inactivitySkip.next();
+      }
+    });
+  }
 
   private initGameState(): void {
     this.canvasRef = document.getElementById('game' + this.idSuffix) as HTMLCanvasElement;

@@ -1,0 +1,29 @@
+.txt {
+  color: white;
+  font-size: 1rem;
+  padding: 0 .5rem 0 1rem;
+  animation-name: make-visible;
+  animation-duration: .5s;
+  animation-timing-function: ease-in-out;
+  animation-delay: 0;
+}
+
+.code {
+  animation-name: make-visible;
+  animation-duration: .5s;
+  animation-timing-function: ease-in-out;
+  animation-delay: 0;
+
+}
+
+@keyframes make-visible {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 50%;
+  }
+  100% {
+    opacity: 100%;
+  }
+}
