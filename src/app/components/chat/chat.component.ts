@@ -17,7 +17,7 @@ import {CommonModule} from '@angular/common';
 import {SafePipe} from '../../pipes/safe.pipe';
 import {DynamicComponentDirective} from '../../directives/dynamic-component.directive';
 import {Renderable} from '../../model/renderable';
-import {Optional} from '../utils/optional';
+import {Optional} from '../../shared/utils/optional';
 import {environment} from '../../../environments/environment';
 import {PUNCTUATION_SPACE} from '../../constans/litelar.constans';
 

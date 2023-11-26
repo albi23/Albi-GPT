@@ -1,8 +1,6 @@
 import {signal, WritableSignal} from '@angular/core';
 import {ScoreCalculator} from './score-calculator';
-
-type Point = { x: number, y: number }
-type Move = { dx: number, dy: number }
+import {Move, Point} from '../../types/types';
 
 enum EndGameReason {
   COLLISION = 'COLLISION',

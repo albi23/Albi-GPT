@@ -1,16 +1,19 @@
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
-  Component,
-  HostListener,
+  Component, ElementRef,
+  HostListener, Inject,
   signal,
-  VERSION,
+  VERSION, ViewChild,
   WritableSignal
 } from '@angular/core';
 import {DialogElem} from './model/dialog-elem';
-import {Optional} from './components/utils/optional';
+import {Optional} from './shared/utils/optional';
 import {DialogProviderService} from './services/dialog-provider.service';
 import {UserActivityService} from './services/user-activity.service';
+import {DOCUMENT} from '@angular/common';
+import {Point} from './types/types';
+import {Utils} from './shared/utils/utils';
 
 @Component({
   selector: 'albi-root',
@@ -23,9 +26,14 @@ export class AppComponent implements AfterViewInit {
   protected readonly VERSION: string = VERSION.full;
   conversation: WritableSignal<DialogElem[]> = signal<DialogElem[]>([]);
   source!: DialogElem[];
+  @ViewChild('gptSection') private gptSection!: ElementRef;
+  private lastRendered: Point = {x: 0, y: 0};
+  private colors: string[] = ['#ec4899', '#8b5cf6', '#4338ca', '#c026d3'];
+  private animation: string[] = ['fall', 'fall2', 'fall3'];
 
   constructor(private readonly dialogService: DialogProviderService,
-              private readonly userActivityService: UserActivityService) {
+              private readonly userActivityService: UserActivityService,
+              @Inject(DOCUMENT) private document: Document) {
     this.source = this.dialogService.dialog.slice();
   }
 
@@ -45,8 +53,40 @@ export class AppComponent implements AfterViewInit {
   @HostListener('mousemove', ['$event'])
   @HostListener('window:keydown', ['$event'])
   @HostListener('touchstart', ['$event'])
-  activeListener(event: Event): void {
+  activeUserListener(event: Event): void {
     this.userActivityService.nextEvt(event);
+  }
+
+  @HostListener('mousemove', ['$event'])
+  renderStars(mouseEvt: MouseEvent): void {
+    const currPoint = {x: mouseEvt.x, y: mouseEvt.y};
+    if (this.calculateDistance(currPoint, this.lastRendered) < 100) {
+      return;
+    }
+    this.lastRendered = currPoint;
+    const star: HTMLElement = this.constructStar(mouseEvt);
+    this.gptSection.nativeElement?.appendChild(star);
+    setTimeout(() => this.gptSection.nativeElement?.removeChild(star), 1500);
+  }
+
+
+  private constructStar(mouseEvt: MouseEvent): HTMLElement {
+    const star: HTMLElement = this.document.createElement('i');
+    star.style.left = `${mouseEvt.x}px`;
+    star.style.top = `${mouseEvt.y}px`;
+    star.style.color = this.pickRandom(this.colors);
+    star.style.animation = this.pickRandom(this.animation);
+    star.style.animationDuration = '1501ms';
+    star.className = 'dot fa-solid fa-star';
+    return star;
+  }
+
+  private calculateDistance(point1: Point, point2: Point): number {
+    return Math.sqrt(Math.pow((point1.x - point2.x), 2) + Math.pow((point1.y - point2.y), 2));
+  }
+
+  private pickRandom<T>(array: T[]): T {
+    return array[Utils.getRandomInt(array.length)];
   }
 
 }
