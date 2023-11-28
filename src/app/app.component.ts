@@ -59,8 +59,8 @@ export class AppComponent implements AfterViewInit {
 
   @HostListener('mousemove', ['$event'])
   renderStars(mouseEvt: MouseEvent): void {
-    const currPoint = {x: mouseEvt.x, y: mouseEvt.y};
-    if (this.calculateDistance(currPoint, this.lastRendered) < 100) {
+    const currPoint: Point = {x: mouseEvt.x, y: mouseEvt.y};
+    if (Utils.calculateDistance(currPoint, this.lastRendered) < 100) {
       return;
     }
     this.lastRendered = currPoint;
@@ -74,19 +74,11 @@ export class AppComponent implements AfterViewInit {
     const star: HTMLElement = this.document.createElement('i');
     star.style.left = `${mouseEvt.x}px`;
     star.style.top = `${mouseEvt.y}px`;
-    star.style.color = this.pickRandom(this.colors);
-    star.style.animation = this.pickRandom(this.animation);
+    star.style.color = Utils.pickRandom(this.colors);
+    star.style.animation = Utils.pickRandom(this.animation);
     star.style.animationDuration = '1501ms';
     star.className = 'dot fa-solid fa-star';
     return star;
-  }
-
-  private calculateDistance(point1: Point, point2: Point): number {
-    return Math.sqrt(Math.pow((point1.x - point2.x), 2) + Math.pow((point1.y - point2.y), 2));
-  }
-
-  private pickRandom<T>(array: T[]): T {
-    return array[Utils.getRandomInt(array.length)];
   }
 
 }

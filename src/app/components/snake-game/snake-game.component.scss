@@ -21,7 +21,66 @@ $btn-color: #FF0099;
   padding-bottom: 1rem;
 }
 
-button {
+.arrow-container {
+  margin-top: -160px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 10px;
+
+  $gap-size: 15px;
+
+  & button.arrow:first-child {
+    margin-bottom: -$gap-size;
+  }
+
+  & button.arrow:nth-child(3) {
+    margin-top: -$gap-size;
+  }
+
+  & div {
+    align-self: center;
+
+    & button.arrow:first-child {
+      margin-right: $gap-size;
+    }
+
+    & button.arrow:nth-child(2) {
+      margin-left: $gap-size;
+    }
+  }
+}
+
+.arrow {
+  background: transparent;
+  text-decoration: none;
+  text-transform: uppercase;
+  border: 2px solid $btn-color;
+  border-radius: 50%;
+  letter-spacing: 0.1rem;
+  font-size: 1rem;
+  padding: .7rem .7rem;
+  transition: 0.2s;
+  color: $btn-color;
+  opacity: 0.6;
+  align-self: center;
+
+  &:hover{
+    opacity: 0.9;
+  }
+
+  & span {
+    width: 30px;
+    height: 30px;
+    font-size: 1.75rem;
+  }
+
+  & .separator {
+
+  }
+}
+
+.button {
   position: relative;
   background: #444;
   text-decoration: none;

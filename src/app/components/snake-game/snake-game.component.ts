@@ -42,6 +42,8 @@ export class SnakeGameComponent extends Renderable implements AfterViewInit {
   endGame: WritableSignal<boolean> = signal(false);
   notStartedGame: WritableSignal<boolean> = signal(true);
   buttonText: WritableSignal<string> = signal<string>('Next');
+  isMobile: WritableSignal<boolean> = signal(true);
+
 
   private static instanceCount = 0;
   readonly idSuffix: number;
@@ -55,11 +57,12 @@ export class SnakeGameComponent extends Renderable implements AfterViewInit {
               private activityService: UserActivityService) {
     super();
     this.idSuffix = ++SnakeGameComponent.instanceCount;
+    this.isMobile.set(window.matchMedia('(max-width: 767px)').matches);
+
     fromEvent(document, 'keydown')
       .pipe(takeUntilDestroyed())
-      .subscribe((evt: Event): void => this.game?.newKeyboardMove(evt));
+      .subscribe((evt: Event): void => this.forwardEvtIntoGameHandler(evt));
   }
-
 
   override renderDone(evt: EventEmitter<boolean>): void {
     this.evt = evt;
@@ -80,6 +83,27 @@ export class SnakeGameComponent extends Renderable implements AfterViewInit {
       .subscribe(() => this.evt.emit(true));
     this.initGameState();
     this.startInactivityDetection();
+  }
+
+  startGame(): void {
+    this.notStartedGame.set(false);
+    this.game.gameLoop();
+  }
+
+  restartGame(): void {
+    this.endGame.set(false);
+    this.applySizeIfMobile();
+    this.game = this.getSnakeGameInstance();
+    this.startGame();
+  }
+
+  wrapNeEvent(direction: string): void{
+    const c = new CustomEvent('Move', {bubbles: false, detail: {key : direction} });
+    this.forwardEvtIntoGameHandler(c);
+  }
+
+  private forwardEvtIntoGameHandler(evt: Event | CustomEvent<{key: string}>): void {
+    this.game?.newKeyboardMove(evt);
   }
 
   private startInactivityDetection(): void {
@@ -118,18 +142,6 @@ export class SnakeGameComponent extends Renderable implements AfterViewInit {
   private applySizeIfMobile() {
     this.canvasRef.width = Math.min(800, (this.canvasRef.parentElement as HTMLElement).offsetWidth - 20);
     this.canvasRef.height = Math.min(400, window.screen.height);
-  }
-
-  startGame(): void {
-    this.notStartedGame.set(false);
-    this.game.gameLoop();
-  }
-
-  restartGame(): void {
-    this.endGame.set(false);
-    this.applySizeIfMobile();
-    this.game = this.getSnakeGameInstance();
-    this.startGame();
   }
 
   private getSnakeGameInstance(): SnakeGame {

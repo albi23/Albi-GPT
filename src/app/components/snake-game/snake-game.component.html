@@ -2,12 +2,22 @@
 <div class="game-board">
   <canvas [id]="'game'+idSuffix" height="400px" width="800px"></canvas>
 </div>
+@if(isMobile()){
+  <div class="arrow-container">
+    <button class="arrow" (click)="wrapNeEvent('ArrowUp')"><span class="fa-solid fa-arrow-up"></span></button>
+    <div>
+      <button class="arrow" (click)="wrapNeEvent('ArrowLeft')"><span class="fa-solid fa-arrow-left"></span></button>
+      <button class="arrow" (click)="wrapNeEvent('ArrowRight')"><span class="fa-solid fa-arrow-right"></span></button>
+    </div>
+    <button class="arrow" (click)="wrapNeEvent('ArrowDown')"><span class="fa-solid fa-arrow-down"></span></button>
+  </div>
+}
 <div class="buttons">
   @if (endGame()) {
-    <button (click)="restartGame()"><span>Restart</span><i></i></button>
+    <button class="button" (click)="restartGame()"><span>Restart</span><i></i></button>
   }
   @if (notStartedGame()) {
-    <button (click)="startGame()"><span>Start</span><i></i></button>
+    <button class="button" (click)="startGame()"><span>Start</span><i></i></button>
   }
-  <button [id]="'continueBtn'+ idSuffix"><span>{{ buttonText() }}</span><i></i></button>
+  <button class="button" [id]="'continueBtn'+ idSuffix"><span>{{ buttonText() }}</span><i></i></button>
 </div>

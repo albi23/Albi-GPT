@@ -1,6 +1,7 @@
 import {signal, WritableSignal} from '@angular/core';
 import {ScoreCalculator} from './score-calculator';
 import {Move, Point} from '../../types/types';
+import {Utils} from '../../shared/utils/utils';
 
 enum EndGameReason {
   COLLISION = 'COLLISION',
@@ -26,7 +27,7 @@ export class SnakeGame {
   constructor(private readonly canvasRef: HTMLCanvasElement,
               private readonly score: WritableSignal<number>,
               private readonly endGame: WritableSignal<boolean> = signal(false),
-              private readonly GAME_SPEED: number = 50,
+              private readonly GAME_SPEED: number = 200,
               private readonly snakeDotSize: number = 10,
               private readonly snakeLength: number = 10) {
     this.canvasContext = canvasRef.getContext('2d') as CanvasRenderingContext2D;
@@ -60,9 +61,9 @@ export class SnakeGame {
   }
 
 
-  public newKeyboardMove(event: Event | undefined): void {
+  public newKeyboardMove(event: Event | CustomEvent<{key: string}> | undefined): void {
     if (event) {
-      this.nextMove = this.changeDirection(event as KeyboardEvent, this.currMove);
+      this.nextMove = this.changeDirection(event as KeyboardEvent | CustomEvent<{key: string}>, this.currMove);
     }
   }
 
@@ -150,26 +151,27 @@ export class SnakeGame {
   }
 
 
-  private changeDirection(event: KeyboardEvent, move: Move): Move {
+  private changeDirection(event: KeyboardEvent | CustomEvent<{key: string}>, move: Move): Move {
     const upMove: boolean = move.dy === -this.snakeDotSize;
     const downMove: boolean = move.dy === this.snakeDotSize;
     const rightMove: boolean = move.dx === this.snakeDotSize;
     const leftMove: boolean = move.dx === -this.snakeDotSize;
 
-    if (event.key === 'ArrowLeft' && !rightMove) {
+    const key = (event instanceof KeyboardEvent) ? event.key :  event.detail.key;
+    if (key === 'ArrowLeft' && !rightMove) {
       return {dx: -this.snakeDotSize, dy: 0};
     }
 
-    if (event.key === 'ArrowUp' && !downMove) {
+    if (key === 'ArrowUp' && !downMove) {
       event.preventDefault();
       return {dx: 0, dy: -this.snakeDotSize};
     }
 
-    if (event.key === 'ArrowRight' && !leftMove) {
+    if (key === 'ArrowRight' && !leftMove) {
       return {dx: this.snakeDotSize, dy: 0};
     }
 
-    if (event.key === 'ArrowDown' && !upMove) {
+    if (key === 'ArrowDown' && !upMove) {
       event.preventDefault();
       return {dx: 0, dy: this.snakeDotSize};
     }
@@ -206,15 +208,11 @@ export class SnakeGame {
 
   private getRandomPoint(): Point {
     const randPossibility = Math.random();
-    let randX = this.getRandomInt(this.canvasRef.width - this.snakeDotSize);
-    let randY = this.getRandomInt(this.canvasRef.height - this.snakeDotSize);
+    let randX = Utils.getRandomInt(this.canvasRef.width - this.snakeDotSize);
+    let randY = Utils.getRandomInt(this.canvasRef.height - this.snakeDotSize);
     randX = (randPossibility > 0.5) ? randX - randX % this.snakeDotSize : randX + (this.snakeDotSize - randX % this.snakeDotSize);
     randY = (randPossibility > 0.5) ? randY - randY % this.snakeDotSize : randY + (this.snakeDotSize - randY % this.snakeDotSize);
     return {x: randX, y: randY};
-  }
-
-  private getRandomInt(max: number): number {
-    return Math.floor(Math.random() * max);
   }
 
   private checkScore(): void {
