@@ -97,12 +97,12 @@ export class SnakeGameComponent extends Renderable implements AfterViewInit {
     this.startGame();
   }
 
-  wrapNeEvent(direction: string): void{
-    const c = new CustomEvent('Move', {bubbles: false, detail: {key : direction} });
+  wrapNeEvent(direction: string): void {
+    const c = new CustomEvent('Move', {bubbles: false, detail: {key: direction}});
     this.forwardEvtIntoGameHandler(c);
   }
 
-  private forwardEvtIntoGameHandler(evt: Event | CustomEvent<{key: string}>): void {
+  private forwardEvtIntoGameHandler(evt: Event | CustomEvent<{ key: string }>): void {
     this.game?.newKeyboardMove(evt);
   }
 
@@ -111,18 +111,18 @@ export class SnakeGameComponent extends Renderable implements AfterViewInit {
       .pipe(filter(x => x !== null)) as Observable<Event>;
 
     interval(this.INACTIVITY_TIME_OUT).pipe(
-        take(1),
-        switchMap(() => userMoves$),
-        tap(() => this.buttonText.set('Next')),
-        switchMap(() =>
-          interval(this.INACTIVITY_TIME_OUT).pipe(
-            take(1),
-            switchMap(() => timer(0, 1000).pipe(map((i: number) => i + 1))),
-          )
-        ),
-        filter((val: number): boolean => val > 4),
-        takeUntil(this.inactivitySkip),
-      ).subscribe((count: number): void => {
+      take(1),
+      switchMap(() => userMoves$),
+      tap(() => this.buttonText.set('Next')),
+      switchMap(() =>
+        interval(this.INACTIVITY_TIME_OUT).pipe(
+          take(1),
+          switchMap(() => timer(0, 1000).pipe(map((i: number) => i + 1))),
+        )
+      ),
+      filter((val: number): boolean => val > 4),
+      takeUntil(this.inactivitySkip),
+    ).subscribe((count: number): void => {
       this.buttonText.set(`Next ${10 - count}`);
       if (count == 10) {
         this.buttonText.set('Next');
@@ -145,8 +145,9 @@ export class SnakeGameComponent extends Renderable implements AfterViewInit {
   }
 
   private getSnakeGameInstance(): SnakeGame {
+
     return (SnakeGameComponent.instanceCount === 1) ?
-      new SnakeGame(this.canvasRef, this.score, this.endGame) :
-      new SnakeGame(this.canvasRef, this.score, this.endGame, 70, 20);
+      new SnakeGame(this.canvasRef, this.score, this.endGame, this.isMobile() ? 70 : 50) :
+      new SnakeGame(this.canvasRef, this.score, this.endGame, this.isMobile() ? 100 : 70, 20);
   }
 }

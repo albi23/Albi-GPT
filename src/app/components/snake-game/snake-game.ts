@@ -27,7 +27,7 @@ export class SnakeGame {
   constructor(private readonly canvasRef: HTMLCanvasElement,
               private readonly score: WritableSignal<number>,
               private readonly endGame: WritableSignal<boolean> = signal(false),
-              private readonly GAME_SPEED: number = 200,
+              private readonly GAME_SPEED: number = 50,
               private readonly snakeDotSize: number = 10,
               private readonly snakeLength: number = 10) {
     this.canvasContext = canvasRef.getContext('2d') as CanvasRenderingContext2D;
