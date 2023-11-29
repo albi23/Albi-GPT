@@ -132,6 +132,24 @@ section#gpt-section {
   }
 }
 
-footer{
+footer {
   color: #bab8b8;
 }
+
+//$cellmini-order: (2, 4, 6, 8, 10, 11, 15, 17, 19, 23);
+//
+//.cell-mini {
+//  @include cell;
+//  margin: 0;
+//  width: 5px;
+//  height: 5px;
+//  background: $body-color;
+//}
+//
+//@for $i from 0 to length($cellmini-order) {
+//  .cell-mini:nth-child(#{nth($cellmini-order, $i+1)}) {
+//    background: $glow-color;
+//    animation: glow 1.5s infinite linear;
+//    -webkit-animation: glow 1.5s infinite linear;
+//  }
+//}

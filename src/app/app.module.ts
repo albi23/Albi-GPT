@@ -8,6 +8,7 @@ import {NgForTrackByFieldDirective} from './directives/ng-for-track-by-field.dir
 import {NgOptimizedImage} from '@angular/common';
 import {MarkdownModule} from 'ngx-markdown';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {LoaderComponent} from './components/loader/loader.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     NgOptimizedImage,
     NgForTrackByFieldDirective,
     MarkdownModule.forRoot(),
+    LoaderComponent,
 
   ],
   providers: [],

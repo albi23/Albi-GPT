@@ -1,20 +1,25 @@
-<div class="fancy-animations"></div>
-<section #gptSection id="gpt-section">
-  <div class="content" role="main">
-    <h1 class="main-header">ALBI GPT</h1>
-    <div class="wrapper">
-      <div id="border-gradient"></div>
-      <div id="scrollable-root" class="content-base">
-        @for (dialogElem of conversation(); track dialogElem.question){
-          <albi-chat
-            [dialogElem]="dialogElem"
-            (answeredEvt)="nextQuestion()">
-          </albi-chat>
-        }
+@if (animationDone()) {
+  <div class="fancy-animations"></div>
+  <section #gptSection id="gpt-section">
+    <div class="content" role="main">
+      <h1 class="main-header">ALBI GPT</h1>
+      <div class="wrapper">
+        <div id="border-gradient"></div>
+        <div id="scrollable-root" class="content-base">
+          @for (dialogElem of conversation();track dialogElem.question) {
+            <albi-chat
+              [dialogElem]="dialogElem"
+              (answeredEvt)="nextQuestion()">
+            </albi-chat>
+          }
+        </div>
       </div>
+      <footer>
+        Angular {{ VERSION }} preview | © Albi
+      </footer>
     </div>
-    <footer>
-      Angular {{VERSION}} preview | © Albi
-    </footer>
-  </div>
-</section>
+  </section>
+} @else {
+  <albi-loader></albi-loader>
+}
+

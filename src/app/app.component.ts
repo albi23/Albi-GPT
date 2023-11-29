@@ -1,10 +1,14 @@
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
-  Component, ElementRef,
-  HostListener, Inject,
+  Component,
+  ElementRef,
+  HostListener,
+  Inject,
+  Signal,
   signal,
-  VERSION, ViewChild,
+  VERSION,
+  ViewChild,
   WritableSignal
 } from '@angular/core';
 import {DialogElem} from './model/dialog-elem';
@@ -14,6 +18,8 @@ import {UserActivityService} from './services/user-activity.service';
 import {DOCUMENT} from '@angular/common';
 import {Point} from './types/types';
 import {Utils} from './shared/utils/utils';
+import {toSignal} from '@angular/core/rxjs-interop';
+import {interval, map, take} from 'rxjs';
 
 @Component({
   selector: 'albi-root',
@@ -26,6 +32,9 @@ export class AppComponent implements AfterViewInit {
   protected readonly VERSION: string = VERSION.full;
   conversation: WritableSignal<DialogElem[]> = signal<DialogElem[]>([]);
   source!: DialogElem[];
+  animationDone: Signal<boolean> = toSignal(interval(10000).pipe(
+      take(1),
+      map(() => true)), {initialValue: false}) as Signal<boolean>;
   @ViewChild('gptSection') private gptSection!: ElementRef;
   private lastRendered: Point = {x: 0, y: 0};
   private colors: string[] = ['#ec4899', '#8b5cf6', '#4338ca', '#c026d3'];
