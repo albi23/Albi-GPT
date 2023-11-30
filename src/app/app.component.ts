@@ -33,8 +33,8 @@ export class AppComponent implements AfterViewInit {
   conversation: WritableSignal<DialogElem[]> = signal<DialogElem[]>([]);
   source!: DialogElem[];
   animationDone: Signal<boolean> = toSignal(interval(10000).pipe(
-      take(1),
-      map(() => true)), {initialValue: false}) as Signal<boolean>;
+    take(1),
+    map(() => true)), {initialValue: false}) as Signal<boolean>;
   @ViewChild('gptSection') private gptSection!: ElementRef;
   private lastRendered: Point = {x: 0, y: 0};
   private colors: string[] = ['#ec4899', '#8b5cf6', '#4338ca', '#c026d3'];
