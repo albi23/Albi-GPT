@@ -98,7 +98,8 @@ export class SnakeGameComponent extends Renderable implements AfterViewInit {
   }
 
   wrapNeEvent(direction: string): void {
-    const c = new CustomEvent('Move', {bubbles: false, detail: {key: direction}});
+    const c = new CustomEvent('Move', {detail: {key: direction}});
+    c.preventDefault();
     this.forwardEvtIntoGameHandler(c);
   }
 

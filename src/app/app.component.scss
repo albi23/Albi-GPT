@@ -133,23 +133,51 @@ section#gpt-section {
 }
 
 footer {
+  font-size: 1rem;
   color: #bab8b8;
+  display: flex;
+  display: -webkit-flex;
+  flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  align-items: center;
+  -webkit-align-items: center;
+  align-content: center;
+  -webkit-align-content: center;
+  justify-content: center;
 }
 
-//$cellmini-order: (2, 4, 6, 8, 10, 11, 15, 17, 19, 23);
-//
-//.cell-mini {
-//  @include cell;
-//  margin: 0;
-//  width: 5px;
-//  height: 5px;
-//  background: $body-color;
-//}
-//
-//@for $i from 0 to length($cellmini-order) {
-//  .cell-mini:nth-child(#{nth($cellmini-order, $i+1)}) {
-//    background: $glow-color;
-//    animation: glow 1.5s infinite linear;
-//    -webkit-animation: glow 1.5s infinite linear;
-//  }
-//}
+$heart: (2, 4, 6, 8, 10, 11, 15, 17, 19, 23);
+
+.heart {
+  margin-left: 6px;
+  display: flex;
+  display: -webkit-flex;
+  flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  align-items: center;
+  -webkit-align-items: center;
+  align-content: center;
+  -webkit-align-content: center;
+  justify-content: center;
+  width: 25px;
+  height: 35px;
+}
+
+$glow-color: #FF0099;
+
+.cell-mini {
+  margin: 0;
+  width: 5px;
+  height: 5px;
+  background: transparent;
+  border-radius: 50%;
+  opacity: 50%;
+}
+
+
+@for $i from 0 to length($heart) {
+  .cell-mini:nth-child(#{nth($heart, $i+1)}) {
+    background: $glow-color;
+  }
+}
+

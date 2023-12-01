@@ -1,6 +1,6 @@
 @if (animationDone()) {
   <div class="fancy-animations"></div>
-  <section #gptSection id="gpt-section">
+  <section #gptSection mouseDecorator id="gpt-section">
     <div class="content" role="main">
       <h1 class="main-header">ALBI GPT</h1>
       <div class="wrapper">
@@ -15,7 +15,12 @@
         </div>
       </div>
       <footer>
-        Angular {{ VERSION }} preview | © Albi
+        Angular {{ VERSION }} | Created by Albi
+       <div class="heart">
+         @for (i of grid25;track i) {
+           <div class="cell-mini"></div>
+         }
+       </div>
       </footer>
     </div>
   </section>

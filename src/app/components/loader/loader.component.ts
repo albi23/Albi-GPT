@@ -21,16 +21,12 @@ import {interval, take} from 'rxjs';
 export class LoaderComponent implements AfterViewInit {
   readonly grid25: number[] = this.fill(25);
   readonly grid20: number[] = this.fill(20);
-  width: WritableSignal<number> =  signal(0);
-  @ViewChild('percentage', {read: ElementRef}) progressText!: ElementRef<HTMLSpanElement>;
+  percentage: WritableSignal<number> =  signal(0);
 
   ngAfterViewInit(): void {
-    interval(97.5).pipe(
+    interval(96.5).pipe(
       take(100))
-      .subscribe((num: number) => {
-        this.width.set(num + 1);
-        this.progressText.nativeElement.textContent = `Loading ${num + 1}%`;
-      });
+      .subscribe((num: number) => this.percentage.set(num + 1));
   }
 
 

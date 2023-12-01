@@ -58,6 +58,13 @@ div.content-base {
 
 }
 
+.star {
+  height: 1px;
+  width: 1px;
+  position: absolute;
+  content: "\f005";
+}
+
 
 /* Animations */
 @keyframes spin {
@@ -122,14 +129,6 @@ $outline-color: rgba(0, 204, 255, 0.3);
     transform: rotate(360deg);
   }
 }
-
-.dot {
-  height: 1px;
-  width: 1px;
-  position: absolute;
-  content: "\f005";
-}
-
 
 @keyframes fall {
   0% {

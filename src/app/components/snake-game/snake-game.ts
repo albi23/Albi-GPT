@@ -61,9 +61,9 @@ export class SnakeGame {
   }
 
 
-  public newKeyboardMove(event: Event | CustomEvent<{key: string}> | undefined): void {
+  public newKeyboardMove(event: Event | CustomEvent<{ key: string }> | undefined): void {
     if (event) {
-      this.nextMove = this.changeDirection(event as KeyboardEvent | CustomEvent<{key: string}>, this.currMove);
+      this.nextMove = this.changeDirection(event as KeyboardEvent | CustomEvent<{ key: string }>, this.currMove);
     }
   }
 
@@ -151,13 +151,13 @@ export class SnakeGame {
   }
 
 
-  private changeDirection(event: KeyboardEvent | CustomEvent<{key: string}>, move: Move): Move {
+  private changeDirection(event: KeyboardEvent | CustomEvent<{ key: string }>, move: Move): Move {
     const upMove: boolean = move.dy === -this.snakeDotSize;
     const downMove: boolean = move.dy === this.snakeDotSize;
     const rightMove: boolean = move.dx === this.snakeDotSize;
     const leftMove: boolean = move.dx === -this.snakeDotSize;
 
-    const key = (event instanceof KeyboardEvent) ? event.key :  event.detail.key;
+    const key = (event instanceof KeyboardEvent) ? event.key : event.detail.key;
     if (key === 'ArrowLeft' && !rightMove) {
       return {dx: -this.snakeDotSize, dy: 0};
     }

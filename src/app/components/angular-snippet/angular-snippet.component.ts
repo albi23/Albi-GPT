@@ -42,7 +42,7 @@ export class AngularSnippetComponent extends Renderable {
     '  }';
 
 
-  override renderDone(evt: EventEmitter<boolean>) {
+  override renderDone(evt: EventEmitter<boolean>): void {
     Renderable.scrollToBottom();
     Renderable.scrollToBottomAfterDelay(1000);
     Renderable.actionAfterDelay(6000, () => evt.emit(true));

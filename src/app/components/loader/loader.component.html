@@ -43,8 +43,8 @@
 
   <div class="content-box">
     <div class="progress">
-      <span #percentage class="progress-indicator"></span>
-      <div class="progress-done" [ngStyle]="{'width.%': width()}">
+      <span class="progress-indicator">Loading awesome webpage {{ percentage() }}%</span>
+      <div class="progress-done" [ngStyle]="{'width.%': percentage()}">
       </div>
     </div>
   </div>
