@@ -85,7 +85,7 @@ section#gpt-section {
 
 .main-header {
   color: white;
-  font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace;
+  font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji",Segoe UI Symbol;
   font-size: 3rem;
 }
 
@@ -124,13 +124,6 @@ section#gpt-section {
   overflow: hidden;
 }
 
-
-/* Responsive Styles */
-@media screen and (max-width: 767px) {
-  .content-base {
-    width: 100%;
-  }
-}
 
 footer {
   font-size: 1rem;
@@ -181,3 +174,20 @@ $glow-color: #FF0099;
   }
 }
 
+/* Responsive Styles */
+@media screen and (max-width: 767px) {
+  .content-base {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 300px) {
+  footer {
+    span {
+      display: none;
+    }
+  }
+  .main-header{
+    font-size: 2.5rem;
+  }
+}

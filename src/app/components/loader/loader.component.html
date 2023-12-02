@@ -43,7 +43,7 @@
 
   <div class="content-box">
     <div class="progress">
-      <span class="progress-indicator">Loading awesome webpage {{ percentage() }}%</span>
+      <span class="progress-indicator">{{loadingText}} {{ percentage() }}%</span>
       <div class="progress-done" [ngStyle]="{'width.%': percentage()}">
       </div>
     </div>

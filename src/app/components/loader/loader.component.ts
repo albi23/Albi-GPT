@@ -21,7 +21,13 @@ import {interval, take} from 'rxjs';
 export class LoaderComponent implements AfterViewInit {
   readonly grid25: number[] = this.fill(25);
   readonly grid20: number[] = this.fill(20);
+  readonly loadingText: string;
   percentage: WritableSignal<number> =  signal(0);
+
+  constructor() {
+    const isSmallMobileDevice: boolean = window.matchMedia('(max-width: 300px)').matches;
+    this.loadingText = (isSmallMobileDevice) ? 'Loading webpage' : 'Loading awesome webpage';
+  }
 
   ngAfterViewInit(): void {
     interval(96.5).pipe(
