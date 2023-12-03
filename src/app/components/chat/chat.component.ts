@@ -63,7 +63,7 @@ export class ChatComponent implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.focusElem(this.questionBox.nativeElement);
+    // this.focusElem(this.questionBox.nativeElement);
     this.contentFiller(this.dialogElem.question, // question generation
       this.dialogElem?.questionDelay || 0
     ).subscribe(
@@ -113,7 +113,7 @@ export class ChatComponent implements AfterViewInit {
                 componentRef.instance.renderDone(this.answeredEvt);
               },
               (): void => { // Just text
-                this.focusElem(this.questionBox.nativeElement);
+                // this.focusElem(this.questionBox.nativeElement);
                 Renderable.scrollToBottom();
                 this.answeredEvt.emit(true);
               }

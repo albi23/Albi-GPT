@@ -30,7 +30,7 @@ export class DialogProviderService {
       4,
       'Who are you?',
       'I\'m a software engineer. I\'m creating software mainly using the Angular framework when it comes to UI.\n' +
-      'By contrast, when it comes to creating business logic on the backend I use Java for this purpose.' + PUNCTUATION_SPACE,
+      'By contrast, when it comes to creating business logic on the backend I use Java for this purpose.' ,
     ),
     new DialogElem(
       5,
@@ -62,7 +62,7 @@ export class DialogProviderService {
     new DialogElem(
       9,
       'You said that You are Full Stack dev so how about the backend?',
-      'What do you want to know?' + PUNCTUATION_SPACE,
+      'What do you want to know?' ,
     ),
     new DialogElem(
       10,

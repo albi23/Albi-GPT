@@ -2,24 +2,19 @@ import {
   AfterViewInit,
   ChangeDetectionStrategy,
   Component,
-  ElementRef,
   HostListener,
-  Inject,
   Signal,
   signal,
   VERSION,
-  ViewChild,
   WritableSignal
 } from '@angular/core';
 import {DialogElem} from './model/dialog-elem';
 import {Optional} from './shared/utils/optional';
 import {DialogProviderService} from './services/dialog-provider.service';
 import {UserActivityService} from './services/user-activity.service';
-import {DOCUMENT} from '@angular/common';
-import {Point} from './types/types';
-import {Utils} from './shared/utils/utils';
 import {toSignal} from '@angular/core/rxjs-interop';
 import {interval, map, take} from 'rxjs';
+import {environment} from '../environments/environment';
 
 @Component({
   selector: 'albi-root',
@@ -32,7 +27,7 @@ export class AppComponent implements AfterViewInit {
   protected readonly VERSION: string = VERSION.full;
   source!: DialogElem[];
   conversation: WritableSignal<DialogElem[]> = signal<DialogElem[]>([]);
-  animationDone: Signal<boolean> = toSignal(interval(9_650).pipe(
+  animationDone: Signal<boolean> = toSignal(interval(environment.WELCOME_ANIMATION_DURATION).pipe(
     take(1),
     map(() => true)), {initialValue: false}) as Signal<boolean>;
   readonly grid25: number[] = new Array<number>(25);
