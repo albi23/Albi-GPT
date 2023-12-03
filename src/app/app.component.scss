@@ -190,4 +190,20 @@ $glow-color: #FF0099;
   .main-header{
     font-size: 2.5rem;
   }
+
+  .wrapper{
+    height: calc(100dvh - 2.5rem - 85px);
+  }
+  .content-base{
+    height: calc(100dvh - 2.5rem - 85px);
+  }
+}
+
+@media screen and (max-width: 440px) {
+  .wrapper{
+    height: calc(100dvh - 3rem - 85px);
+  }
+  .content-base{
+    height: calc(100dvh - 3rem - 85px);
+  }
 }
