@@ -158,12 +158,12 @@ export class ChatComponent implements AfterViewInit {
         }, 1),
         filter(x => x > 0),
         map(() => letters.shift() as string),
-        take(text.length)
+        take(letters.length)
       ):
       baseObservable.pipe(
         mergeMap(() => interval(this.letterGeneratingSpeed)),
         map(() => letters.shift() as string),
-        take(text.length)
+        take(letters.length)
       );
   }
 

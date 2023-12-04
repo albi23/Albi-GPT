@@ -4,7 +4,7 @@ import {animate, style, transition, trigger} from '@angular/animations';
 
 @Component({
   selector: 'albi-map',
-  templateUrl: './map.component.svg',
+  templateUrl: './map.component.html',
   standalone: true,
   styleUrls: ['./map.component.scss'],
   animations: [

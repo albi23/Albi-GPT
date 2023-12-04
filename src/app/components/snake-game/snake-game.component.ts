@@ -141,7 +141,7 @@ export class SnakeGameComponent extends Renderable implements AfterViewInit {
   }
 
   private applySizeIfMobile() {
-    this.canvasRef.width = Math.min(800, (this.canvasRef.parentElement as HTMLElement).offsetWidth - 20);
+    this.canvasRef.width = Math.min(1000, (this.canvasRef.parentElement as HTMLElement).offsetWidth - 20);
     this.canvasRef.height = Math.min(400, window.screen.height);
   }
 
