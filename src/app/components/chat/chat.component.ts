@@ -22,6 +22,7 @@ import {Renderable} from '../../model/renderable';
 import {Optional} from '../../shared/utils/optional';
 import {environment} from '../../../environments/environment';
 import {UserActivityService} from '../../services/user-activity.service';
+import {Utils} from '../../shared/utils/utils';
 
 @Component({
   selector: 'albi-chat',
@@ -49,11 +50,11 @@ export class ChatComponent implements AfterViewInit {
   readonly questionInProgress: WritableSignal<boolean> = signal<boolean>(false);
   readonly isMobileDevice: boolean;
   private readonly ANSWER_DELAY: number = environment.ANSWER_DELAY;
-  private readonly letterGeneratingSpeed: number = environment.letterGeneratingSpeed;
+  private readonly letterGeneratingSpeed: number = environment.LETTER_GENERATING_SPEED;
   private readonly userKeyboardAction$: Observable<number>;
 
   constructor(private readonly userActivities: UserActivityService) {
-    this.isMobileDevice = window.matchMedia('(max-width: 767px)').matches;
+    this.isMobileDevice = Utils.isMobileDevice();
     this.userKeyboardAction$ = this.userActivities.listenUserEvents().pipe(
       filter((evt: Event | null) => {
         return !!evt && evt instanceof KeyboardEvent && (evt as KeyboardEvent).code === 'Space';

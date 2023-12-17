@@ -1,9 +1,10 @@
-import {ChangeDetectorRef, Component, effect, EventEmitter, Signal} from '@angular/core';
-import {CommonModule, NgOptimizedImage, NgSwitch} from '@angular/common';
+import {ChangeDetectorRef, Component, EventEmitter, Signal} from '@angular/core';
+import {CommonModule, NgOptimizedImage} from '@angular/common';
 import {RxJsComponent} from './rx-js/rx-js.component';
 import {Renderable} from '../../model/renderable';
-import {delay, interval, map, mergeMap, Observable, of, take, takeWhile, tap} from 'rxjs';
+import {interval, take, tap} from 'rxjs';
 import {toSignal} from '@angular/core/rxjs-interop';
+import {Utils} from '../../shared/utils/utils';
 
 @Component({
   selector: 'albi-skills',
@@ -29,7 +30,7 @@ export class SkillsComponent extends Renderable {
 
   constructor(private cdr: ChangeDetectorRef) {
     super();
-    this.isMobileDevice = window.matchMedia('(max-width: 767px)').matches;
+    this.isMobileDevice = Utils.isMobileDevice();
   }
 
   override renderDone(evt: EventEmitter<boolean>): void {

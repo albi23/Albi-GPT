@@ -2,6 +2,7 @@ import {
   AfterViewInit,
   ChangeDetectionStrategy,
   Component,
+  effect,
   HostListener,
   Signal,
   signal,
@@ -15,6 +16,7 @@ import {UserActivityService} from './services/user-activity.service';
 import {toSignal} from '@angular/core/rxjs-interop';
 import {interval, map, take} from 'rxjs';
 import {environment} from '../environments/environment';
+import {Utils} from './shared/utils/utils';
 
 @Component({
   selector: 'albi-root',
@@ -36,10 +38,36 @@ export class AppComponent implements AfterViewInit {
   constructor(private readonly dialogService: DialogProviderService,
               private readonly userActivityService: UserActivityService) {
     this.source = this.dialogService.dialog.slice();
+    effect((): void => {
+      if (this.animationDone()) {
+        this.extracted();
+      }
+    });
   }
 
   ngAfterViewInit(): void {
     this.nextQuestion();
+  }
+
+  private extracted(): void {
+    setTimeout(() => {
+      const starToAnimate = document.getElementsByClassName('magic-star') as HTMLCollectionOf<HTMLSpanElement>;
+      for (let i = 0; i < starToAnimate.length; i++) {
+        const star = starToAnimate.item(i) as HTMLSpanElement;
+        setTimeout((): void => {
+          this.starAnimation(star, i);
+          setInterval((): void => this.starAnimation(star, i), 750);
+        }, (i) * 250);
+      }
+    }, 1);
+
+  }
+  private starAnimation(star: HTMLSpanElement, i: number): void {
+    star.style.setProperty('--star-left', `${Utils.getRandomInRange(-10, 100)}%`);
+    star.style.setProperty('--star-top', `${Utils.getRandomInRange(-10, 80)}%`);
+    star.style.animation = 'none';
+    star.offsetHeight;
+    star.style.animation = '';
   }
 
   nextQuestion(): void {

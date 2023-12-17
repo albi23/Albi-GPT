@@ -2,7 +2,14 @@
   <div class="fancy-animations"></div>
   <section #gptSection mouseDecorator id="gpt-section">
     <div class="content" role="main">
-      <h1 class="main-header">ALBI GPT</h1>
+      <h1 class="main-header">
+        <span class="animated">
+          <span class="magic-star"><i class="fa-solid fa-star"></i></span>
+          <span class="magic-star"><i class="fa-solid fa-star"></i></span>
+          <span class="magic-star"><i class="fa-solid fa-star"></i></span>
+         <span class="app-title">ALBI GPT</span>
+        </span>
+      </h1>
       <div class="wrapper">
         <div id="border-gradient"></div>
         <div id="scrollable-root" class="content-base">
@@ -16,11 +23,11 @@
       </div>
       <footer>
         <span>Angular {{ VERSION }} |&nbsp;</span> Created by Albi
-       <div class="heart">
-         @for (i of grid25;track i) {
-           <div class="cell-mini"></div>
-         }
-       </div>
+        <div class="heart">
+          @for (i of grid25;track i) {
+            <div class="cell-mini"></div>
+          }
+        </div>
       </footer>
     </div>
   </section>

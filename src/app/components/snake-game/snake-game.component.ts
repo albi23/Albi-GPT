@@ -26,6 +26,7 @@ import {
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {SnakeGame} from './snake-game';
 import {UserActivityService} from '../../services/user-activity.service';
+import {Utils} from '../../shared/utils/utils';
 
 
 @Component({
@@ -57,7 +58,7 @@ export class SnakeGameComponent extends Renderable implements AfterViewInit {
               private activityService: UserActivityService) {
     super();
     this.idSuffix = ++SnakeGameComponent.instanceCount;
-    this.isMobile.set(window.matchMedia('(max-width: 767px)').matches);
+    this.isMobile.set(Utils.isMobileDevice());
 
     fromEvent(document, 'keydown')
       .pipe(takeUntilDestroyed())
