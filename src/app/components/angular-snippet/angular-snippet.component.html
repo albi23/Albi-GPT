@@ -1,0 +1,7 @@
+@defer (on timer(1s)) {
+  <div class="code" clipboard markdown
+       [clipboardButtonComponent]="clipboardButton"
+       [hidden]="!parsingDone()"
+       (ready)="onParseReady()">{{ rxJsSnippet }}
+  </div>
+}

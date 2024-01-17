@@ -1,0 +1,164 @@
+@import url("https://pro.fontawesome.com/releases/v6.0.0-beta1/css/all.css");
+
+// Define the color variables
+$background-color: #000022;
+$scrollbar-track-color: rgba(255, 255, 255, 0.3);
+
+html, body {
+  background: $background-color;
+  height: max-content;
+
+}
+
+code[class*="language-java"] {
+  color: #9876AA !important;
+}
+
+// Custom scroll bar
+div.content-base {
+  /* Firefox */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #397524 #DFE9EB;
+  }
+
+  //& Chrome, Edge and Safari &/
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  &::-webkit-scrollbar-track {
+    width: 4px;
+    border-radius: 2px;
+    background-color: $scrollbar-track-color;
+
+    &:hover {
+      background-color: $scrollbar-track-color;
+    }
+
+    &:active {
+      background-color: $scrollbar-track-color;
+    }
+  }
+
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 100px;
+    background: rgba(255, 255, 255, 0.85);
+    border: 6px solid rgba(0, 0, 0, 0.2);
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.9);
+    }
+
+    &:active {
+      background-color: rgba(255, 255, 255, 0.9);
+    }
+  }
+
+}
+
+.star {
+  height: 1px;
+  width: 1px;
+  position: absolute;
+  content: "\f005";
+}
+
+
+/* Animations */
+@keyframes spin {
+  to {
+    transform: rotate(1turn)
+  }
+}
+
+@keyframes morph {
+  0% {
+    border-radius: 40% 60% 60% 40%/70% 30%
+  }
+
+  to {
+    border-radius: 40% 60%
+  }
+}
+
+
+$outline-color: rgba(0, 204, 255, 0.3);
+
+@keyframes extension {
+
+  0% {
+    outline: 0 solid $outline-color;
+  }
+  10% {
+    outline: 0.025rem solid $outline-color;
+  }
+  20% {
+    outline: 0.05rem solid $outline-color;
+  }
+  30% {
+    outline: 0.075rem solid $outline-color;
+  }
+  40% {
+    outline: 0.1rem solid $outline-color;
+  }
+  50% {
+    outline: 0.125rem solid $outline-color;
+  }
+  60% {
+    outline: 0.15rem solid $outline-color;
+  }
+  70% {
+    outline: 0.175rem solid $outline-color;
+  }
+  80% {
+    outline: 0.2rem solid $outline-color;
+  }
+  90% {
+    outline: 0.225rem solid $outline-color;
+  }
+}
+
+@keyframes square-rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes fall {
+  0% {
+    transform: translate(0px, 0px) ;
+    opacity: 1;
+  }
+  100% {
+    transform: translate(0px, 220px) rotate3d(1, 1, 1, 270deg);;
+    opacity: 0;
+  }
+}
+
+@keyframes fall2 {
+  0% {
+    transform: translate(0px, 0px) ;
+    opacity: 1;
+  }
+  100% {
+    transform: translate(0px, 200px) rotate3d(80, 20, 20, 360deg);;
+    opacity: 0;
+  }
+}
+
+@keyframes fall3 {
+  0% {
+    transform: translate(0px, 0px) ;
+    opacity: 1;
+  }
+  100% {
+    transform: translate(0px, 180px) rotate3d(30, 25, 80, 480deg);;
+    opacity: 0;
+  }
+}
