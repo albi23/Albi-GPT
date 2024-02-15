@@ -1,6 +1,6 @@
 {
   "name": "albi-gpt",
-  "version": "1.0.29",
+  "version": "1.0.37",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",

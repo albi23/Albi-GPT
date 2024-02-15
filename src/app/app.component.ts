@@ -40,7 +40,7 @@ export class AppComponent implements AfterViewInit {
     this.source = this.dialogService.dialog.slice();
     effect((): void => {
       if (this.animationDone()) {
-        this.extracted();
+        this.startHeaderAnimations();
       }
     });
   }
@@ -49,11 +49,11 @@ export class AppComponent implements AfterViewInit {
     this.nextQuestion();
   }
 
-  private extracted(): void {
-    setTimeout(() => {
-      const starToAnimate = document.getElementsByClassName('magic-star') as HTMLCollectionOf<HTMLSpanElement>;
-      for (let i = 0; i < starToAnimate.length; i++) {
-        const star = starToAnimate.item(i) as HTMLSpanElement;
+  private startHeaderAnimations(): void {
+    setTimeout((): void => {
+      const starsToAnimate = document.getElementsByClassName('magic-star') as HTMLCollectionOf<HTMLSpanElement>;
+      for (let i = 0; i < starsToAnimate.length; i++) {
+        const star = starsToAnimate.item(i) as HTMLSpanElement;
         setTimeout((): void => {
           this.starAnimation(star, i);
           setInterval((): void => this.starAnimation(star, i), 750);
