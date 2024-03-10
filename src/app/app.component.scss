@@ -41,6 +41,8 @@ $content-width: 1248px;
   overflow: auto;
   overflow-x: hidden;
   background: #151615;
+  z-index: 2;
+
 
   &:before {
     content: '';
@@ -48,6 +50,7 @@ $content-width: 1248px;
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.95);
+    z-index: -1;
   }
 
 }
