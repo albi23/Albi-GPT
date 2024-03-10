@@ -1,0 +1,94 @@
+<ul class="tilesWrap">
+  @if (skillCount() >= 0) {
+    <li>
+      <h2>01</h2>
+      <h3>Java</h3>
+      <p>
+        Java is a high-level, class-based, object-oriented programming language
+        that is designed to have as few implementation dependencies as possible.
+      </p>
+      <button (click)="openLink('https://www.oracle.com/java/')">Read more</button>
+    </li>
+  }
+
+  @if (skillCount() >= 1) {
+    <li>
+      <h2>02</h2>
+      <h3>Spring</h3>
+      <p>
+        The Spring Framework is an application framework and inversion
+        of control container for the Java platform.
+      </p>
+      <button (click)="openLink('https://spring.io/projects/spring-framework')">Read more</button>
+    </li>
+  }
+
+  @if (skillCount() >= 2) {
+    <li>
+      <h2>03</h2>
+      <h3>Hibernate</h3>
+      <p>
+        Hibernate ORM provides a framework for mapping an object-oriented domain model to a relational database.
+      </p>
+      <button (click)="openLink('https://www.gnu.org/savannah-checkouts/gnu/bash/manual/bash.html')">Read more</button>
+    </li>
+  }
+ @if (skillCount() >= 3) {
+    <li>
+      <h2>04</h2>
+      <h3>Bash</h3>
+      <p>
+        Bash is a Unix shell and command language written by Brian Fox for the
+        GNU Project as a free software replacement for the Bourne shell.
+      </p>
+      <button (click)="openLink('https://www.oracle.com/java/')">Read more</button>
+    </li>
+  }
+  @if (skillCount() >= 4) {
+    <li>
+      <h2>05</h2>
+      <h3>Linux</h3>
+      <p>
+        Linux is a family of open-source Unix-like operating systems based on the Linux kernel, an operating system
+        kernel
+        first released on September 17, 1991, by Linus Torvalds.
+      </p>
+      <button (click)="openLink('https://www.linux.org/')">Read more</button>
+    </li>
+  }
+  @if (skillCount() >= 5) {
+    <li>
+      <h2>06</h2>
+      <h3>SQL</h3>
+      <p>
+        Structured Query Language (SQL) is a domain-specific language used to manage data,
+        especially in a relational database management system (RDBMS).
+      </p>
+      <button (click)="openLink('https://www.w3schools.com/sql/')">Read more</button>
+    </li>
+  }
+  @if (skillCount() >= 6) {
+    <li>
+      <h2>07</h2>
+      <h3>Docker</h3>
+      <p>
+        Docker is a set of platform as a service (PaaS) products that use OS-level virtualization
+        to deliver software in packages called containers.
+      </p>
+      <button (click)="openLink('https://www.docker.com/')">Read more</button>
+    </li>
+  }
+  @if (skillCount() >= 7) {
+    <li>
+      <h2>08</h2>
+      <h3>Kafka</h3>
+      <p>
+        Apache Kafka is an open-source distributed event streaming platform used by thousands of
+        companies for high-performance data pipelines, streaming analytics, data integration,
+        and mission-critical applications.
+      </p>
+      <button (click)="openLink('https://kafka.apache.org/')">Read more</button>
+    </li>
+  }
+
+</ul>
