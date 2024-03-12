@@ -27,6 +27,7 @@ import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {SnakeGame} from './snake-game';
 import {UserActivityService} from '../../services/user-activity.service';
 import {Utils} from '../../shared/utils/utils';
+import {environment} from '../../../environments/environment';
 
 
 @Component({
@@ -52,7 +53,7 @@ export class SnakeGameComponent extends Renderable implements AfterViewInit {
   private game!: SnakeGame;
   private evt!: EventEmitter<boolean>;
   private readonly inactivitySkip = new Subject<void>();
-  private readonly INACTIVITY_TIME_OUT = 10_000;
+  private readonly INACTIVITY_TIME_OUT = environment.INACTIVITY_TIME_OUT;
 
   constructor(private cdr: ChangeDetectorRef,
               private activityService: UserActivityService) {

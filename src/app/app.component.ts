@@ -55,14 +55,14 @@ export class AppComponent implements AfterViewInit {
       for (let i = 0; i < starsToAnimate.length; i++) {
         const star = starsToAnimate.item(i) as HTMLSpanElement;
         setTimeout((): void => {
-          this.starAnimation(star, i);
-          setInterval((): void => this.starAnimation(star, i), 750);
+          this.starAnimation(star);
+          setInterval((): void => this.starAnimation(star), 750);
         }, (i) * 250);
       }
     }, 1);
 
   }
-  private starAnimation(star: HTMLSpanElement, i: number): void {
+  private starAnimation(star: HTMLSpanElement): void {
     star.style.setProperty('--star-left', `${Utils.getRandomInRange(-10, 100)}%`);
     star.style.setProperty('--star-top', `${Utils.getRandomInRange(-10, 80)}%`);
     star.style.animation = 'none';

@@ -255,3 +255,9 @@ $t-order: (1, 2, 3, 4, 5, 8, 13, 18, 23);
     height: 70px;
   }
 }
+
+@media screen and (max-width: 360px) {
+  .progress-indicator {
+    font-size: 1rem;
+  }
+}

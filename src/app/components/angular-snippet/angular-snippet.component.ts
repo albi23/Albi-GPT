@@ -50,5 +50,6 @@ export class AngularSnippetComponent extends Renderable {
 
   onParseReady(): void {
     this.parsingDone.set(true);
+    Renderable.scrollToBottom();
   }
 }

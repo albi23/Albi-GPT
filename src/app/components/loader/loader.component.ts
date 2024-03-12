@@ -25,7 +25,7 @@ export class LoaderComponent implements AfterViewInit {
   percentage: WritableSignal<number> =  signal(0);
 
   constructor() {
-    const isSmallMobileDevice: boolean = window.matchMedia('(max-width: 300px)').matches;
+    const isSmallMobileDevice: boolean = window.matchMedia('(max-width: 360px)').matches;
     this.loadingText = (isSmallMobileDevice) ? 'Loading webpage' : 'Loading awesome webpage';
   }
 
