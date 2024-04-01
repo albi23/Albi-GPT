@@ -57,11 +57,12 @@ $content-width: 1248px;
 
 #border-gradient {
   position: absolute;
-  width: 110%;
-  height: 110%;
+  top: 35%;
+  left: -10%;
+  width: 120%;
+  aspect-ratio: 4 / 1;
   animation: square-rotation 4s linear infinite;
-  transform: translate(-5%, -5%);
-  background-image: conic-gradient(transparent, transparent, transparent, transparent, #00ccff);
+  background-image: conic-gradient(transparent 66deg, #00ccff 83deg, transparent 58deg);
 }
 
 .wrapper {
