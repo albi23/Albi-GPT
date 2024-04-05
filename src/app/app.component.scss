@@ -138,7 +138,7 @@ $pink: rgb(182, 40, 182);
 }
 
 .fancy-animations {
-  min-height: calc(100vh - 3.5rem);
+  min-height: calc(100vh - 2.1rem);
   padding-top: 2rem;
   overflow: hidden;
   position: relative
@@ -146,16 +146,16 @@ $pink: rgb(182, 40, 182);
 
 .fancy-animations:before, .fancy-animations:after {
   content: "";
-  width: 65vmax;
-  height: 65vmax;
+  width: 60vmax;
+  height: 60vmax;
   position: absolute;
   background: rgba(255, 255, 255, .07);
   left: -20vmin;
   top: -20vmin;
-  animation: morph 15s linear infinite alternate, spin 20s linear infinite, extension 10s linear infinite;
+  animation: morph 15s linear infinite alternate, spin 20s linear infinite, extension 9s linear infinite;
   z-index: 1;
   will-change: border-radius, transform;
-  transform-origin: 55% 55%;
+  transform-origin:65% 65%;
   pointer-events: none;
   overflow: hidden;
 }
@@ -167,7 +167,7 @@ $pink: rgb(182, 40, 182);
   right: -10vmin;
   top: auto;
   bottom: 0;
-  animation: morph 10s linear infinite alternate, spin 26s linear infinite reverse, extension 10s linear infinite alternate;
+  animation: morph 10s linear infinite alternate, spin 26s linear infinite reverse, extension 12s linear infinite alternate;
   transform-origin: 20% 20%;
   overflow: hidden;
 }

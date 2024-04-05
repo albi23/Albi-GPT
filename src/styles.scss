@@ -4,6 +4,10 @@
 $background-color: #000022;
 $scrollbar-track-color: rgba(255, 255, 255, 0.3);
 
+body{
+  margin: 0;
+}
+
 html, body {
   background: $background-color;
   height: max-content;

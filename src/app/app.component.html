@@ -11,7 +11,9 @@
         </span>
       </h1>
       <div class="wrapper">
-        <div id="border-gradient"></div>
+        @if(!isMobile()){
+          <div id="border-gradient"></div>
+        }
         <div id="scrollable-root" class="content-base">
           @for (dialogElem of conversation();track dialogElem.question) {
             <albi-chat
