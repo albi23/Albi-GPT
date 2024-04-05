@@ -29,6 +29,7 @@ export class AppComponent implements AfterViewInit {
   protected readonly VERSION: string = VERSION.full;
   source!: DialogElem[];
   conversation: WritableSignal<DialogElem[]> = signal<DialogElem[]>([]);
+  isMobile: Signal<boolean> = signal<boolean>(Utils.isMobileDevice());
   animationDone: Signal<boolean> = toSignal(interval(environment.WELCOME_ANIMATION_DURATION).pipe(
     take(1),
     map(() => true)), {initialValue: false}) as Signal<boolean>;
