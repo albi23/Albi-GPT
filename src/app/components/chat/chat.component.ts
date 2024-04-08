@@ -1,11 +1,11 @@
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
-  Component,
+  Component, effect,
   ElementRef,
   EventEmitter,
-  HostListener,
-  Input,
+  HostListener, input,
+  Input, InputSignal,
   Output,
   signal,
   Type,
@@ -46,6 +46,7 @@ export class ChatComponent implements AfterViewInit {
 
   @Input({required: true}) dialogElem!: DialogElem;
   @Output() answeredEvt = new EventEmitter<boolean>();
+  skipSlide: InputSignal<boolean> = input.required<boolean>();
 
   readonly questionInProgress: WritableSignal<boolean> = signal<boolean>(false);
   readonly isMobileDevice: boolean;
@@ -57,17 +58,26 @@ export class ChatComponent implements AfterViewInit {
     this.isMobileDevice = Utils.isMobileDevice();
     this.userKeyboardAction$ = this.userActivities.listenUserEvents().pipe(
       filter((evt: Event | null) => {
-        return !!evt && evt instanceof KeyboardEvent && (evt as KeyboardEvent).code === 'Space';
+        return !!evt && (
+         ( evt instanceof KeyboardEvent && (evt as KeyboardEvent).code === 'Space')
+          || evt instanceof CustomEvent && evt.type === 'presentationChange'
+        );
       }),
       map(() => -1)
     );
+
+    effect((): void => {
+      // if (this.skipSlide.) {
+      //
+      // }
+    });
   }
 
   ngAfterViewInit(): void {
-    // this.focusElem(this.questionBox.nativeElement);
-    this.contentFiller(this.dialogElem.question, // question generation
+    const stringObservable = this.contentFiller(this.dialogElem.question, // question generation
       this.dialogElem?.questionDelay || 0
-    ).subscribe(
+    );
+    stringObservable.subscribe(
       {
         next: (letter: string) => {
           const prevHeight = this.questionBox.nativeElement.scrollHeight;
@@ -114,7 +124,6 @@ export class ChatComponent implements AfterViewInit {
                 componentRef.instance.renderDone(this.answeredEvt);
               },
               (): void => { // Just text
-                // this.focusElem(this.questionBox.nativeElement);
                 Renderable.scrollToBottom();
                 this.answeredEvt.emit(true);
               }

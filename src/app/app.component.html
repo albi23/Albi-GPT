@@ -15,18 +15,33 @@
           <div id="border-gradient"></div>
         }
         <div id="scrollable-root" class="content-base">
-          @for (dialogElem of conversation();track dialogElem.question) {
+          @for (dialogElem of conversation(); track dialogElem.question) {
             <albi-chat
+              [skipSlide]="skipSlide"
               [dialogElem]="dialogElem"
               (answeredEvt)="nextQuestion()">
             </albi-chat>
           }
         </div>
       </div>
+      <div class="action-buttons">
+        <div class="button-groups">
+          <button class="arrow" (click)="onSkipSlide()">
+            <span class="fa-sharp fa-regular fa-forward" ></span>
+          </button>
+          <button class="arrow" (click)="onChangePresentation()">
+            <span [ngClass]="{'fa-play': presentationMode(), 'fa-stop': !presentationMode()}"
+                  class="fa-regular" ></span>
+          </button>
+          <button class="arrow">
+            <span class="fa-sharp fa-regular fa-backward"></span>
+          </button>
+        </div>
+      </div>
       <footer>
         <span>Angular {{ VERSION }} |&nbsp;</span> Created by Albi
         <div class="heart">
-          @for (i of grid25;track i) {
+          @for (i of grid25; track i) {
             <div class="cell-mini"></div>
           }
         </div>

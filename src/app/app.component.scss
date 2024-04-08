@@ -215,6 +215,59 @@ $glow-color: #FF0099;
   opacity: 50%;
 }
 
+.action-buttons {
+  position: relative;
+  margin-left: auto;
+
+  & .button-groups {
+    position: absolute;
+    top: -152px;
+    gap: 4px;
+    flex-direction: column;
+    display: flex;
+    //margin-left: 3px; // todo was 3px
+    margin-left: -30px;
+
+    $btn-color: #FF0099;
+
+    & button.arrow {
+      background: transparent;
+      text-decoration: none;
+      text-transform: uppercase;
+      border: 2px solid $btn-color;
+      border-radius: 5px;
+      letter-spacing: 0.1rem;
+      font-size: 1rem;
+      padding: .2rem .2rem;
+      transition: 0.2s;
+      color: $btn-color;
+      opacity: 0.5;
+      align-self: center;
+
+      &:hover {
+        opacity: 0.9;
+      }
+
+      & span {
+        width: 35px;
+        height: 35px;
+        font-size: 1.75rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+
+    & button.arrow:nth-child(1) {
+      transform: rotate(270deg);
+    }
+
+    & button.arrow:nth-child(3) {
+      transform: rotate(270deg);
+
+    }
+  }
+}
 
 @for $i from 0 to length($heart) {
   .cell-mini:nth-child(#{nth($heart, $i+1)}) {

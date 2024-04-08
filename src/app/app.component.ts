@@ -29,11 +29,13 @@ export class AppComponent implements AfterViewInit {
   protected readonly VERSION: string = VERSION.full;
   source!: DialogElem[];
   conversation: WritableSignal<DialogElem[]> = signal<DialogElem[]>([]);
+  presentationMode: WritableSignal<boolean> = signal<boolean>(false);
   isMobile: Signal<boolean> = signal<boolean>(Utils.isMobileDevice());
   animationDone: Signal<boolean> = toSignal(interval(environment.WELCOME_ANIMATION_DURATION).pipe(
     take(1),
-    map(() => true)), {initialValue: false}) as Signal<boolean>;
+    map(() => true)), {initialValue: environment.SKIP_LOADER}) as Signal<boolean>;
   readonly grid25: number[] = new Array<number>(25);
+  skipSlide: WritableSignal<boolean> = signal<boolean>(false);
 
 
   constructor(private readonly dialogService: DialogProviderService,
@@ -50,25 +52,9 @@ export class AppComponent implements AfterViewInit {
     this.nextQuestion();
   }
 
-  private startHeaderAnimations(): void {
-    setTimeout((): void => {
-      const starsToAnimate = document.getElementsByClassName('magic-star') as HTMLCollectionOf<HTMLSpanElement>;
-      for (let i = 0; i < starsToAnimate.length; i++) {
-        const star = starsToAnimate.item(i) as HTMLSpanElement;
-        setTimeout((): void => {
-          this.starAnimation(star);
-          setInterval((): void => this.starAnimation(star), 750);
-        }, (i) * 250);
-      }
-    }, 1);
-
-  }
-  private starAnimation(star: HTMLSpanElement): void {
-    star.style.setProperty('--star-left', `${Utils.getRandomInRange(-10, 100)}%`);
-    star.style.setProperty('--star-top', `${Utils.getRandomInRange(-10, 80)}%`);
-    star.style.animation = 'none';
-    star.offsetHeight;
-    star.style.animation = '';
+  onSkipSlide(): void{
+    this.skipSlide.set(true);
+    this.nextQuestion();
   }
 
   nextQuestion(): void {
@@ -85,4 +71,31 @@ export class AppComponent implements AfterViewInit {
     this.userActivityService.nextEvt(event);
   }
 
+
+  onChangePresentation(): void {
+    this.presentationMode.set(!this.presentationMode());
+    this.userActivityService.nextEvt(new CustomEvent('presentationChange'));
+  }
+
+  private startHeaderAnimations(): void {
+    setTimeout((): void => {
+      const starsToAnimate = document.getElementsByClassName('magic-star') as HTMLCollectionOf<HTMLSpanElement>;
+      for (let i = 0; i < starsToAnimate.length; i++) {
+        const star = starsToAnimate.item(i) as HTMLSpanElement;
+        setTimeout((): void => {
+          this.starAnimation(star);
+          setInterval((): void => this.starAnimation(star), 750);
+        }, i * 250);
+      }
+    }, 1);
+
+  }
+
+  private starAnimation(star: HTMLSpanElement): void {
+    star.style.setProperty('--star-left', `${Utils.getRandomInRange(-10, 100)}%`);
+    star.style.setProperty('--star-top', `${Utils.getRandomInRange(-10, 80)}%`);
+    star.style.animation = 'none';
+    star.offsetHeight;
+    star.style.animation = '';
+  }
 }
