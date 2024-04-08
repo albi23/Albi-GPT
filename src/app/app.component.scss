@@ -42,6 +42,7 @@ $content-width: 1248px;
   overflow-x: hidden;
   background: #151615;
   z-index: 0;
+  border-top: solid 1px rgba(255,0, 153, 18%);
 
 
   &:before {
@@ -263,6 +264,18 @@ $glow-color: #FF0099;
 
   .main-header {
     font-size: 2.5rem;
+  }
+}
+
+@media screen and (min-width: 1800px) {
+  $content-width: 1600px;
+
+  .content {
+    max-width: $content-width;
+  }
+
+  .content-base {
+    max-width: $content-width;
   }
 }
 
