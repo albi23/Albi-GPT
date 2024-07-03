@@ -1,4 +1,4 @@
-# Albi-GPT (Angular 17 )
+# Albi-GPT
 
 ## See it live => [Albi-GPT](https://albi23.github.io/Albi-GPT/)
 
