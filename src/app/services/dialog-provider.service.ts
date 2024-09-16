@@ -7,6 +7,7 @@ import {AngularSnippetComponent} from '../components/angular-snippet/angular-sni
 import {PUNCTUATION_SPACE} from '../constans/litelar.constans';
 import {UiSkillsComponent} from '../components/ui-skills/ui-skills.component';
 import {BackendSkillsComponent} from '../components/backend-skills/backend-skills.component';
+import {PortraitComponent} from '../components/portrait/portrait.component';
 
 @Injectable()
 export class DialogProviderService {
@@ -89,8 +90,14 @@ export class DialogProviderService {
     new DialogElem(
       this.yieldNextId(), // 11
       'How many different technologies are you using in your backend development?',
-      'I will enumerate them for you: ' ,
+      'I will enumerate them for you: ',
       BackendSkillsComponent
+    ),
+    new DialogElem(
+      this.yieldNextId(), //12
+      'Can you show yourself?',
+      'That\'s me.. ;)',
+      PortraitComponent
     ),
     new DialogElem(
       this.yieldNextId(),
