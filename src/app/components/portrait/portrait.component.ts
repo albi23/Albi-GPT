@@ -68,6 +68,7 @@ export class PortraitComponent implements Renderable, AfterViewInit {
 
 
   renderDone(evt: EventEmitter<boolean>): void {
+    Renderable.progressiveScroll(0.25, 300);
     Renderable.actionAfterDelay(2000, () => evt.emit(true));
   }
 
