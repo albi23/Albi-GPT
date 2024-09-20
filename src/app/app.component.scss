@@ -42,7 +42,7 @@ $content-width: 1248px;
   overflow-x: hidden;
   background: #151615;
   z-index: 0;
-  border-top: solid 1px rgba(255,0, 153, 8%);
+  border-top: solid 1px rgba(255, 0, 153, 8%);
 
 
   &:before {
@@ -156,7 +156,7 @@ $pink: rgb(182, 40, 182);
   animation: morph 15s linear infinite alternate, spin 20s linear infinite, extension 9s linear infinite;
   z-index: 1;
   will-change: border-radius, transform;
-  transform-origin:65% 65%;
+  transform-origin: 65% 65%;
   pointer-events: none;
   overflow: hidden;
 }
@@ -188,7 +188,8 @@ footer {
   justify-content: center;
 }
 
-$heart: (2, 4, 6, 8, 10, 11, 15, 17, 19, 23);
+$outside-heart: (2, 4, 6, 8, 10, 11, 15, 17, 19, 23);
+$inside-heart: (7, 9, 12, 13, 14, 18);
 
 .heart {
   margin-left: 6px;
@@ -217,9 +218,15 @@ $glow-color: #FF0099;
 }
 
 
-@for $i from 0 to length($heart) {
-  .cell-mini:nth-child(#{nth($heart, $i+1)}) {
+@for $i from 0 to length($outside-heart) {
+  .cell-mini:nth-child(#{nth($outside-heart, $i+1)}) {
     background: $glow-color;
+  }
+}
+
+@for $i from 0 to length($inside-heart) {
+  .cell-mini:nth-child(#{nth($inside-heart, $i+1)}) {
+    animation: hearth-beep 5s linear infinite;
   }
 }
 
@@ -232,7 +239,17 @@ $glow-color: #FF0099;
   }
 }
 
-
+@keyframes hearth-beep {
+  0%{
+    background: transparent;
+  }
+  50% {
+    background: $glow-color;
+  }
+  100% {
+    background: transparent;
+  }
+}
 /* Responsive Styles */
 @media screen and (max-width: 767px) {
   .content-base {
