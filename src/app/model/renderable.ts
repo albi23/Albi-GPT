@@ -17,7 +17,7 @@ export class Renderable {
       .pipe(
         delay(delayMs),
         take(1)
-      ).subscribe(_ => action());
+      ).subscribe(() => action());
 
   }
 
@@ -30,24 +30,27 @@ export class Renderable {
     Renderable.actionAfterDelay(delay, () => Renderable.scrollToBottom());
   }
 
-  static progressiveScroll(scrollPercentage: number, timeInterval : number = 100): void {
+  static progressiveScroll(scrollPercentage: number, lengthToScroll: number = Renderable.currScrollHeight(), timeInterval: number = 100): void {
     if (scrollPercentage < 0 && scrollPercentage > 1) {
       throw Error('Percentage arg \'scrollPercentage\' must be in range  [0,1]');
     }
     const objDiv = document.getElementById('scrollable-root') as HTMLDivElement;
-    const lengthToScroll: number = objDiv.scrollHeight;
     const maxSteps = Math.round(1.0 / scrollPercentage);
 
     interval(timeInterval)
       .pipe(
         take(maxSteps),
       ).subscribe({
-      next: (step) => {
-        objDiv.scrollTop = (step + 1)  * lengthToScroll * scrollPercentage;
+      next: (step: number) => {
+        objDiv.scrollTop += (step + 1) * lengthToScroll * scrollPercentage;
       },
       complete: () => {
-        objDiv.scrollTop = lengthToScroll;
+        objDiv.scrollTop += lengthToScroll;
       }
     });
+  }
+
+  static currScrollHeight(): number {
+    return (document.getElementById('scrollable-root') as HTMLDivElement).scrollHeight;
   }
 }
