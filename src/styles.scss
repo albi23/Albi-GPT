@@ -70,6 +70,10 @@ div.content-base {
 }
 
 
+code[class*="language-"],
+pre[class*="language-"]{
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, "Roboto Mono", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !important;
+}
 /* Animations */
 @keyframes spin {
   to {
