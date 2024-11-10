@@ -11,6 +11,7 @@ export class MouseDecoratorDirective {
   private lastRendered: Point = {x: 0, y: 0};
   private readonly colors: string[] = ['#ec4899', '#8b5cf6', '#4338ca', '#c026d3'];
   private readonly animation: string[] = ['fall', 'fall2', 'fall3'];
+  private readonly ANIMATION_DURATION = 1_500;
 
   constructor(private readonly element: ElementRef,
               @Inject(DOCUMENT) private document: Document) {
@@ -23,20 +24,20 @@ export class MouseDecoratorDirective {
       return;
     }
     this.lastRendered = currPoint;
-    const star: HTMLElement = this.constructStar(mouseEvt);
-    this.element.nativeElement?.appendChild(star);
-    setTimeout(() => this.element.nativeElement?.removeChild(star), 1_500);
+    const icon: HTMLElement = this.constructIcon(mouseEvt);
+    this.element.nativeElement?.appendChild(icon);
+    setTimeout(() => this.element.nativeElement?.removeChild(icon), this.ANIMATION_DURATION);
   }
 
 
-  private constructStar(mouseEvt: MouseEvent): HTMLElement {
-    const star: HTMLElement = this.document.createElement('i');
-    star.style.left = `${mouseEvt.x}px`;
-    star.style.top = `${mouseEvt.y}px`;
-    star.style.color = Utils.pickRandom(this.colors);
-    star.style.animation = Utils.pickRandom(this.animation);
-    star.style.animationDuration = '1501ms';
-    star.className = 'star fa-solid fa-star';
-    return star;
+  private constructIcon(mouseEvt: MouseEvent): HTMLElement {
+    const icon: HTMLElement = this.document.createElement('i');
+    icon.style.left = `${mouseEvt.x}px`;
+    icon.style.top = `${mouseEvt.y}px`;
+    icon.style.color = Utils.pickRandom(this.colors);
+    icon.style.animation = Utils.pickRandom(this.animation);
+    icon.style.animationDuration = `${this.ANIMATION_DURATION + 1}ms`;
+    icon.className = 'absolute fa-solid fa-dollar-sign';
+    return icon;
   }
 }
