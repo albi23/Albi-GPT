@@ -85,4 +85,31 @@ export class AppComponent implements AfterViewInit {
     this.userActivityService.nextEvt(event);
   }
 
+  delayedRandomizer(event: MouseEvent): void {
+    const target = event.target as HTMLElement;
+    if (target.innerText != target.dataset['value']) {
+      return;
+    }
+
+    const letters: string = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    let iterations : number = 0;
+
+    const interval = setInterval(() => {
+      target.innerText = target.innerText.split('')
+        .map((_, index: number): string => {
+          if (index < iterations) {
+            return (target.dataset['value'] as string)[index];
+          }
+          return letters[Math.floor(Math.random() * 26)];
+        })
+        .join('');
+
+      if (iterations >= target.innerText.length) {
+        clearInterval(interval);
+      }
+
+      iterations += 1 / 3;
+    }, 30);
+  }
+
 }
