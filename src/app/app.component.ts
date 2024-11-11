@@ -63,6 +63,7 @@ export class AppComponent implements AfterViewInit {
     }, 1);
 
   }
+
   private starAnimation(star: HTMLSpanElement): void {
     star.style.setProperty('--star-left', `${Utils.getRandomInRange(-10, 100)}%`);
     star.style.setProperty('--star-top', `${Utils.getRandomInRange(-10, 80)}%`);
@@ -83,33 +84,6 @@ export class AppComponent implements AfterViewInit {
   @HostListener('touchstart', ['$event'])
   activeUserListener(event: Event): void {
     this.userActivityService.nextEvt(event);
-  }
-
-  delayedRandomizer(event: MouseEvent): void {
-    const target = event.target as HTMLElement;
-    if (target.innerText != target.dataset['value']) {
-      return;
-    }
-
-    const letters: string = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    let iterations : number = 0;
-
-    const interval = setInterval(() => {
-      target.innerText = target.innerText.split('')
-        .map((_, index: number): string => {
-          if (index < iterations) {
-            return (target.dataset['value'] as string)[index];
-          }
-          return letters[Math.floor(Math.random() * 26)];
-        })
-        .join('');
-
-      if (iterations >= target.innerText.length) {
-        clearInterval(interval);
-      }
-
-      iterations += 1 / 3;
-    }, 30);
   }
 
 }
