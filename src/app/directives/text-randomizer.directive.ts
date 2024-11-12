@@ -30,8 +30,8 @@ export class TextRandomizerDirective implements AfterViewInit {
 
     const interval = setInterval(() => {
       target.innerText = target.innerText.split('')
-        .map((_, index: number): string => {
-          if (index < iterations) {
+        .map((letter: string, index: number): string => {
+          if (index < iterations || letter.match('[\t ]')) {
             return (target.dataset[this.DATA_KEY] as string)[index];
           }
           return this.alphabet[Math.floor(Math.random() * 26)];
@@ -43,7 +43,7 @@ export class TextRandomizerDirective implements AfterViewInit {
       }
 
       iterations += 0.25;
-    }, 30);
+    }, 55);
   }
 
 }

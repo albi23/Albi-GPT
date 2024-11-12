@@ -96,8 +96,9 @@ $pink: rgb(182, 40, 182);
 
 .main-header {
   color: white;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", Segoe UI Symbol;
+  font-family: "JetBrains Mono", monospace;
   font-size: 3rem;
+  font-weight: 900;
 
   & span.animated {
     display: inline-block;
