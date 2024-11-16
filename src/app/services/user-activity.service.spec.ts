@@ -1,6 +1,6 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { UserActivityService } from './user-activity.service';
+import {UserActivityService} from './user-activity.service';
 
 describe('UserActivityService', () => {
   let service: UserActivityService;

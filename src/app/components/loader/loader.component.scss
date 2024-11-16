@@ -113,6 +113,18 @@ $bg-color: darken($glow-color, 40);
   color: white;
   font-weight: 500;
   font-size: 1.1rem;
+  &:after {
+    margin-left: 4px;
+    content: "0%";
+    display: block;
+    color: white;
+    font-weight: 500;
+    font-size: 1.1rem;
+    animation-name: countTo100;
+    animation-duration: 9650ms;
+    animation-fill-mode: forwards;
+    animation-timing-function: linear
+  }
 }
 
 .progress-done {
@@ -123,11 +135,30 @@ $bg-color: darken($glow-color, 40);
   align-items: center;
   justify-content: center;
   height: 100%;
-  width: 0;
   opacity: 1;
-  transition: 0.1s;
+  animation-name: fill-width;
+  animation-duration: 9650ms;
+  animation-fill-mode: forwards;
+  animation-timing-function: linear
 }
 
+@keyframes fill-width {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+
+@keyframes countTo100 {
+  @for $i from 1 through 100 {
+    #{$i+ "%"} {
+      content: $i + "%";
+    }
+  }
+}
 /****** LOADING GRID #1 ******/
 
 $animation-time: 0.2s;
