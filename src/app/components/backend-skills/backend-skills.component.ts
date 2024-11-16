@@ -14,20 +14,21 @@ import {interval, take, tap} from 'rxjs';
 export class BackendSkillsComponent implements Renderable {
 
   private readonly RENDER_ITEM_DELAY: number = 900;
+  private readonly RENDERED_ITEMS: number = 9;
 
   skillCount = toSignal<number>(interval(this.RENDER_ITEM_DELAY)
     .pipe(tap(() => {
         Renderable.scrollToBottomAfterDelay(200);
         this.cdr.markForCheck();
       }),
-      take(8))) as Signal<number>;
+      take(this.RENDERED_ITEMS))) as Signal<number>;
 
 
   constructor(private cdr: ChangeDetectorRef) {
   }
 
   renderDone(evt: EventEmitter<boolean>): void {
-    Renderable.actionAfterDelay(8_000, () => evt.emit(true));
+    Renderable.actionAfterDelay(1_000 * this.RENDERED_ITEMS, () => evt.emit(true));
   }
 
 

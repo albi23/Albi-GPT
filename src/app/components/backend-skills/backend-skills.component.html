@@ -91,4 +91,18 @@
     </li>
   }
 
+  @if (skillCount() >= 8) {
+    <li>
+      <h2>09</h2>
+      <h3>Redis</h3>
+      <p>
+        Redis is the world's fastest in-memory database.
+        It provides cloud and on-prem solutions for caching, vector search,
+        and NoSQL databases that seamlessly fit into any tech stack-making it simple for digital customers to build,
+        scale, and deploy the fast apps our world runs on.
+      </p>
+      <button (click)="openLink('https://redis.io//')">Read more</button>
+    </li>
+  }
+
 </ul>
