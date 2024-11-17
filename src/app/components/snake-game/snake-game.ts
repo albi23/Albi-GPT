@@ -1,7 +1,9 @@
 import {signal, WritableSignal} from '@angular/core';
 import {ScoreCalculator} from './score-calculator';
-import {Move, Point} from '../../types/types';
+import {Move, Point, ScoreTracker} from '../../types/types';
 import {Utils} from '../../shared/utils/utils';
+import {Optional} from '../../shared/utils/optional';
+import {FireworksRenderer} from './fireworks-renderer';
 
 enum EndGameReason {
   COLLISION = 'COLLISION',
@@ -17,6 +19,7 @@ export class SnakeGame {
   private apple: Point;
   private snake: Point[];
   private readonly scoreGenerator: ScoreCalculator = new ScoreCalculator();
+  private readonly fireworksRenderer: FireworksRenderer;
 
   /**
    * canvasRef   - anchor for rendering game
@@ -25,7 +28,7 @@ export class SnakeGame {
    * snakeLength - defines how many block will the snake have as his length
    */
   constructor(private readonly canvasRef: HTMLCanvasElement,
-              private readonly score: WritableSignal<number>,
+              private readonly score: WritableSignal<ScoreTracker>,
               private readonly endGame: WritableSignal<boolean> = signal(false),
               private readonly GAME_SPEED: number = 50,
               private readonly snakeDotSize: number = 10,
@@ -35,15 +38,21 @@ export class SnakeGame {
     this.currMove = this.calculateInitialMove();
     this.nextMove = structuredClone(this.currMove); // deep clone
     this.apple = this.renderApple();
+    this.fireworksRenderer = new FireworksRenderer(canvasRef.width, canvasRef.height, this.canvasContext);
   }
 
   public initialGameState(): void {
+    this.initializeScoreTracker(this.score());
     this.clearCanvas(this.canvasContext, this.canvasRef);
     this.drawSnake(false);
     this.apple = this.renderApple();
   }
 
-  public gameLoop(): void {
+  lunchGame(): void {
+    this.gameLoop();
+  }
+
+  private gameLoop(): void {
     setTimeout((): void => {
       this.clearCanvas(this.canvasContext, this.canvasRef);
       this.currMove = this.nextMove;
@@ -52,12 +61,37 @@ export class SnakeGame {
       const end: boolean | EndGameReason = this.isEndGame();
       this.drawSnake(end);
       if (end) {
-        this.score.update(() => 0);
         this.endGame.set(true);
+        this.endingFireworks(end);
+
         return;
       }
       this.gameLoop();
     }, this.GAME_SPEED);
+  }
+
+  private endingFireworks(end: EndGameReason.COLLISION | EndGameReason.WALL_HIT | boolean) {
+    setTimeout(() => {
+      this.drawSnake(end);
+      this.clearCanvas(this.canvasContext, this.canvasRef);
+      this.fireworksRenderer.renderFireworks();
+      if (this.endGame()) {
+        this.endingFireworks(end);
+      } else {
+        this.fireworksRenderer.restoreDefaultsCanvas();
+      }
+    }, this.GAME_SPEED * 0.5);
+  }
+
+  private initializeScoreTracker(currentScore: ScoreTracker): void {
+    Optional.of(localStorage.getItem('SCORE'))
+      .ifPresentOrElse((savedScore): void => {
+          const scoreFromLocalStorage = +(savedScore as string);
+          this.score.set({currScore: 0, bestScore: Math.max(currentScore.currScore, scoreFromLocalStorage)});
+        },
+        (): void => this.score.set({currScore: 0, bestScore: Math.max(currentScore.bestScore, currentScore.currScore)})
+      );
+    localStorage.setItem('SCORE', String(this.score().bestScore));
   }
 
 
@@ -226,10 +260,13 @@ export class SnakeGame {
     }
   }
 
-  private calculateScore(): (val: number) => number {
-    return (currentScore: number): number => {
+  private calculateScore(): (val: ScoreTracker) => ScoreTracker {
+    return (scoreTracker: ScoreTracker): ScoreTracker => {
       const gainedDots: number = this.snake.length - this.snakeLength;
-      return this.scoreGenerator.calculateScore(currentScore, gainedDots);
+      return {
+        currScore: this.scoreGenerator.calculateScore(scoreTracker.currScore, gainedDots),
+        bestScore: scoreTracker.bestScore
+      };
     };
   }
 

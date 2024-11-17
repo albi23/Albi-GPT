@@ -28,6 +28,7 @@ import {SnakeGame} from './snake-game';
 import {UserActivityService} from '../../services/user-activity.service';
 import {Utils} from '../../shared/utils/utils';
 import {environment} from '../../../environments/environment';
+import {ScoreTracker} from '../../types/types';
 
 
 @Component({
@@ -40,7 +41,7 @@ import {environment} from '../../../environments/environment';
 })
 export class SnakeGameComponent extends Renderable implements AfterViewInit {
 
-  score: WritableSignal<number> = signal(0);
+  score: WritableSignal<ScoreTracker> = signal({currScore: 0, bestScore: 0});
   endGame: WritableSignal<boolean> = signal(false);
   notStartedGame: WritableSignal<boolean> = signal(true);
   buttonText: WritableSignal<string> = signal<string>('Next');
@@ -89,17 +90,18 @@ export class SnakeGameComponent extends Renderable implements AfterViewInit {
 
   startGame(): void {
     this.notStartedGame.set(false);
-    this.game.gameLoop();
+    this.game.lunchGame();
   }
 
   restartGame(): void {
     this.endGame.set(false);
     this.applySizeIfMobile();
     this.game = this.getSnakeGameInstance();
+    this.game.initialGameState();
     this.startGame();
   }
 
-  wrapNeEvent(direction: string): void {
+  wrapNewEvent(direction: string): void {
     const c = new CustomEvent('Move', {detail: {key: direction}});
     c.preventDefault();
     this.forwardEvtIntoGameHandler(c);
@@ -148,7 +150,6 @@ export class SnakeGameComponent extends Renderable implements AfterViewInit {
   }
 
   private getSnakeGameInstance(): SnakeGame {
-
     return (SnakeGameComponent.instanceCount === 1) ?
       new SnakeGame(this.canvasRef, this.score, this.endGame, this.isMobile() ? 70 : 50) :
       new SnakeGame(this.canvasRef, this.score, this.endGame, this.isMobile() ? 100 : 70, 20);

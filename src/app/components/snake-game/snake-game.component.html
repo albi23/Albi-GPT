@@ -1,14 +1,14 @@
-<div class="score">Score: {{ score() }}</div>
+<div class="score">Score: {{ score().currScore }} | Best {{score().bestScore}}</div>
 <div class="game-board">
   <canvas [id]="'game'+idSuffix" height="400px" width="800px"></canvas>
 </div>
 @if(isMobile()){
   <div class="arrow-container">
-    <button class="arrow" (touchstart)="wrapNeEvent('ArrowUp')"><span class="fa-solid fa-arrow-up"></span></button>
+    <button class="arrow" (touchstart)="wrapNewEvent('ArrowUp')"><span class="fa-solid fa-arrow-up"></span></button>
     <div>
-      <button class="arrow" (touchstart)="wrapNeEvent('ArrowLeft')"><span class="fa-solid fa-arrow-left"></span></button>
-      <button class="arrow" (touchstart)="wrapNeEvent('ArrowDown')"><span class="fa-solid fa-arrow-down"></span></button>
-      <button class="arrow" (touchstart)="wrapNeEvent('ArrowRight')"><span class="fa-solid fa-arrow-right"></span></button>
+      <button class="arrow" (touchstart)="wrapNewEvent('ArrowLeft')"><span class="fa-solid fa-arrow-left"></span></button>
+      <button class="arrow" (touchstart)="wrapNewEvent('ArrowDown')"><span class="fa-solid fa-arrow-down"></span></button>
+      <button class="arrow" (touchstart)="wrapNewEvent('ArrowRight')"><span class="fa-solid fa-arrow-right"></span></button>
     </div>
   </div>
 }

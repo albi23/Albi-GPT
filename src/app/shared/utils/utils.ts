@@ -6,6 +6,10 @@ export class Utils {
     return Math.floor(Math.random() * max);
   }
 
+  static random(min: number, max: number): number {
+    return Math.random() * ( max - min ) + min;
+  }
+
   static getRandomInRange(min: number, max: number): number {
     return Math.floor(Math.random() * (max - min + 1));
   }
