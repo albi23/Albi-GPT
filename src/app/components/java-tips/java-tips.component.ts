@@ -6,13 +6,12 @@ import {ClipboardButtonComponent} from './clipboard-button/clipboard-button.comp
 
 
 @Component({
-  selector: 'albi-java-tips',
-  standalone: true,
-  imports: [CommonModule, MarkdownComponent, ClipboardButtonComponent],
-  providers: [MarkdownService],
-  templateUrl: './java-tips.component.html',
-  styleUrls: ['./java-tips.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'albi-java-tips',
+    imports: [CommonModule, MarkdownComponent, ClipboardButtonComponent],
+    providers: [MarkdownService],
+    templateUrl: './java-tips.component.html',
+    styleUrls: ['./java-tips.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class JavaTipsComponent implements Renderable {
 

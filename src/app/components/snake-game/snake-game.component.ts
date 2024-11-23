@@ -32,12 +32,11 @@ import {ScoreTracker} from '../../types/types';
 
 
 @Component({
-  selector: 'albi-snake-game',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './snake-game.component.html',
-  styleUrls: ['./snake-game.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'albi-snake-game',
+    imports: [CommonModule],
+    templateUrl: './snake-game.component.html',
+    styleUrls: ['./snake-game.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SnakeGameComponent extends Renderable implements AfterViewInit {
 

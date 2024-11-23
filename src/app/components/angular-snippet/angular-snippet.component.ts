@@ -5,12 +5,11 @@ import {MarkdownComponent} from 'ngx-markdown';
 import {ClipboardButtonComponent} from '../java-tips/clipboard-button/clipboard-button.component';
 
 @Component({
-  selector: 'albi-angular-snippet',
-  standalone: true,
-  imports: [CommonModule, MarkdownComponent],
-  templateUrl: './angular-snippet.component.html',
-  styleUrl: './angular-snippet.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'albi-angular-snippet',
+    imports: [CommonModule, MarkdownComponent],
+    templateUrl: './angular-snippet.component.html',
+    styleUrl: './angular-snippet.component.scss',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AngularSnippetComponent extends Renderable {
   parsingDone: WritableSignal<boolean> = signal(false);

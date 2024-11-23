@@ -4,12 +4,11 @@ import {toSignal} from '@angular/core/rxjs-interop';
 import {interval, take, tap} from 'rxjs';
 
 @Component({
-  selector: 'albi-backend-skills',
-  standalone: true,
-  imports: [],
-  templateUrl: './backend-skills.component.html',
-  styleUrl: './backend-skills.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'albi-backend-skills',
+    imports: [],
+    templateUrl: './backend-skills.component.html',
+    styleUrl: './backend-skills.component.scss',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BackendSkillsComponent implements Renderable {
 

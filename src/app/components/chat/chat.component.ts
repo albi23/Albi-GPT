@@ -25,17 +25,16 @@ import {UserActivityService} from '../../services/user-activity.service';
 import {Utils} from '../../shared/utils/utils';
 
 @Component({
-  selector: 'albi-chat',
-  templateUrl: './chat.component.html',
-  styleUrls: ['./chat.component.scss'],
-  standalone: true,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [
-    FormsModule,
-    CommonModule,
-    SafePipe,
-    DynamicComponentDirective
-  ]
+    selector: 'albi-chat',
+    templateUrl: './chat.component.html',
+    styleUrls: ['./chat.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [
+        FormsModule,
+        CommonModule,
+        SafePipe,
+        DynamicComponentDirective
+    ]
 })
 export class ChatComponent implements AfterViewInit {
 

@@ -215,7 +215,7 @@ export class SnakeGame {
 
   private drawSnake(end: boolean | EndGameReason): void {
     if (end) {
-      const coloredIndexes = (EndGameReason.WALL_HIT) ? [0, 1] : [0, 1, 2];
+      const coloredIndexes = (end === EndGameReason.WALL_HIT) ? [0, 1] : [0, 1, 2];
       coloredIndexes.map(i => this.snake[i])
         .forEach((p: Point) => this.renderCircle(this.canvasContext, p, 'red'));
       this.snake.slice(coloredIndexes.length).forEach((p: Point) => this.renderCircle(this.canvasContext, p));

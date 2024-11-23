@@ -19,11 +19,12 @@ import {environment} from '../environments/environment';
 import {Utils} from './shared/utils/utils';
 
 @Component({
-  selector: 'albi-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [DialogProviderService, UserActivityService]
+    selector: 'albi-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [DialogProviderService, UserActivityService],
+    standalone: false
 })
 export class AppComponent implements AfterViewInit {
   protected readonly VERSION: string = VERSION.full;

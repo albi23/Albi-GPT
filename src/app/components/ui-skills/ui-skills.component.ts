@@ -6,15 +6,14 @@ import {interval, take, tap} from 'rxjs';
 import {toSignal} from '@angular/core/rxjs-interop';
 
 @Component({
-  selector: 'albi-skills',
-  templateUrl: './ui-skills.component.html',
-  styleUrls: ['./ui-skills.component.scss'],
-  imports: [
-    NgOptimizedImage,
-    RxJsComponent,
-    CommonModule,
-  ],
-  standalone: true
+    selector: 'albi-skills',
+    templateUrl: './ui-skills.component.html',
+    styleUrls: ['./ui-skills.component.scss'],
+    imports: [
+        NgOptimizedImage,
+        RxJsComponent,
+        CommonModule,
+    ]
 })
 export class UiSkillsComponent extends Renderable {
 

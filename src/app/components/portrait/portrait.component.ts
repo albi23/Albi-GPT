@@ -3,12 +3,11 @@ import {Renderable} from '../../model/renderable';
 import {asciiLZWEncodedImage} from './portrait.consts';
 
 @Component({
-  selector: 'albi-portrait',
-  standalone: true,
-  imports: [],
-  templateUrl: './portrait.component.html',
-  styleUrl: './portrait.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'albi-portrait',
+    imports: [],
+    templateUrl: './portrait.component.html',
+    styleUrl: './portrait.component.scss',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PortraitComponent implements Renderable, AfterViewInit {
 
