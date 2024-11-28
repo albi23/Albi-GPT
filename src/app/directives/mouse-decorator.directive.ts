@@ -20,7 +20,7 @@ export class MouseDecoratorDirective {
   @HostListener('mousemove', ['$event'])
   renderStars(mouseEvt: MouseEvent): void {
     const currPoint: Point = {x: mouseEvt.x, y: mouseEvt.y};
-    if (Utils.calculateDistance(currPoint, this.lastRendered) < 100) {
+    if (Utils.calculateDistance(currPoint, this.lastRendered) < Utils.random(50, 100)) {
       return;
     }
     this.lastRendered = currPoint;

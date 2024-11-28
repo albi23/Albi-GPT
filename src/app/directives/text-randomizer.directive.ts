@@ -26,7 +26,7 @@ export class TextRandomizerDirective implements AfterViewInit {
       return;
     }
 
-    let iterations: number = 0;
+    let iterations: number = -2;
 
     const interval = setInterval(() => {
       target.innerText = target.innerText.split('')
@@ -43,7 +43,7 @@ export class TextRandomizerDirective implements AfterViewInit {
       }
 
       iterations += 0.25;
-    }, 55);
+    }, 75);
   }
 
 }
