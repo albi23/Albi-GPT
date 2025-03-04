@@ -9,6 +9,7 @@ import {CommonModule} from '@angular/common';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LoaderComponent  {
+  readonly grid200: number[] = this.fill(250);
   readonly grid25: number[] = this.fill(25);
   readonly grid20: number[] = this.fill(20);
   readonly loadingText: string;
