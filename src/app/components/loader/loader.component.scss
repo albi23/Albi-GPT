@@ -37,7 +37,7 @@ div.grid-bg {
   &:before {
     content: '';
     position: absolute;
-    width: 100%;
+    width: 99%;
     height: 75%;
     background: linear-gradient(#000, #b13ba1, #000);
     animation: flow 6s linear infinite;

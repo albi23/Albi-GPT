@@ -12,3 +12,11 @@
     overflow-x: scroll;
   }
 }
+
+@media screen and (max-width: 400px) {
+  #portrait {
+    font-size: 1.75px;
+    overflow-x: scroll;
+  }
+}
+
