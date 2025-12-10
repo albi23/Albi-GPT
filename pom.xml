@@ -61,11 +61,10 @@
         <version>3.3.2</version>
         <configuration>
           <filesets>
-            <!-- Remove the 'node' folder in the project root -->
-            <fileset>
+            <!--<fileset>
               <directory>${project.basedir}/node</directory>
               <followSymlinks>false</followSymlinks>
-            </fileset>
+            </fileset>-->
             <fileset>
               <directory>${project.basedir}/dist</directory>
               <followSymlinks>false</followSymlinks>
