@@ -71,6 +71,7 @@
             </fileset>
             <fileset>
               <directory>${project.basedir}/.angular</directory>
+              <directory>${project.basedir}/node_modules</directory>
               <followSymlinks>false</followSymlinks>
             </fileset>
 
