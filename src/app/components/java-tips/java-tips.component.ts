@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, Component, EventEmitter, signal, WritableSignal} from '@angular/core';
-import {CommonModule} from '@angular/common';
+
 import {Renderable} from '../../model/renderable';
 import {MarkdownComponent, MarkdownService} from 'ngx-markdown';
 import {ClipboardButtonComponent} from './clipboard-button/clipboard-button.component';
@@ -7,7 +7,7 @@ import {ClipboardButtonComponent} from './clipboard-button/clipboard-button.comp
 
 @Component({
     selector: 'albi-java-tips',
-    imports: [CommonModule, MarkdownComponent, ClipboardButtonComponent],
+    imports: [MarkdownComponent, ClipboardButtonComponent],
     providers: [MarkdownService],
     templateUrl: './java-tips.component.html',
     styleUrls: ['./java-tips.component.scss'],

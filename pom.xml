@@ -7,7 +7,7 @@
   <groupId>org</groupId>
   <artifactId>software</artifactId>
   <name>albi-gpt</name>
-  <version>1.0.37</version>
+  <version>1.0.70</version>
 
   <description>Albi GPT</description>
   <inceptionYear>2023</inceptionYear>
@@ -55,6 +55,30 @@
         </executions>
 
       </plugin>
+
+      <plugin>
+        <artifactId>maven-clean-plugin</artifactId>
+        <version>3.3.2</version>
+        <configuration>
+          <filesets>
+            <!-- Remove the 'node' folder in the project root -->
+            <fileset>
+              <directory>${project.basedir}/node</directory>
+              <followSymlinks>false</followSymlinks>
+            </fileset>
+            <fileset>
+              <directory>${project.basedir}/dist</directory>
+              <followSymlinks>false</followSymlinks>
+            </fileset>
+            <fileset>
+              <directory>${project.basedir}/.angular</directory>
+              <followSymlinks>false</followSymlinks>
+            </fileset>
+
+          </filesets>
+        </configuration>
+      </plugin>
+
     </plugins>
   </build>
 

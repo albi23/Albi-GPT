@@ -15,7 +15,7 @@ import {
 import {delay, filter, interval, map, mergeMap, mergeWith, Observable, of, scan, take, tap} from 'rxjs';
 import {DialogElem} from '../../model/dialog-elem';
 import {FormsModule} from '@angular/forms';
-import {CommonModule} from '@angular/common';
+
 import {SafePipe} from '../../pipes/safe.pipe';
 import {DynamicComponentDirective} from '../../directives/dynamic-component.directive';
 import {Renderable} from '../../model/renderable';
@@ -30,11 +30,10 @@ import {Utils} from '../../shared/utils/utils';
     styleUrls: ['./chat.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [
-        FormsModule,
-        CommonModule,
-        SafePipe,
-        DynamicComponentDirective
-    ]
+    FormsModule,
+    SafePipe,
+    DynamicComponentDirective
+]
 })
 export class ChatComponent implements AfterViewInit {
 

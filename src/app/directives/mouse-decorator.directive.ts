@@ -1,7 +1,7 @@
-import {Directive, ElementRef, HostListener, Inject} from '@angular/core';
+import {Directive, ElementRef, HostListener, Inject, DOCUMENT} from '@angular/core';
 import {Point} from '../types/types';
 import {Utils} from '../shared/utils/utils';
-import {DOCUMENT} from '@angular/common';
+
 
 @Directive({
   selector: '[mouseDecorator]',

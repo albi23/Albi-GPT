@@ -7,7 +7,7 @@ import {
   signal,
   WritableSignal
 } from '@angular/core';
-import {CommonModule} from '@angular/common';
+
 import {Renderable} from '../../model/renderable';
 import {
   filter,
@@ -33,7 +33,7 @@ import {ScoreTracker} from '../../types/types';
 
 @Component({
     selector: 'albi-snake-game',
-    imports: [CommonModule],
+    imports: [],
     templateUrl: './snake-game.component.html',
     styleUrls: ['./snake-game.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush

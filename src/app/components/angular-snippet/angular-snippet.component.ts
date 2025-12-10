@@ -1,12 +1,12 @@
 import {ChangeDetectionStrategy, Component, EventEmitter, signal, WritableSignal} from '@angular/core';
-import {CommonModule} from '@angular/common';
+
 import {Renderable} from '../../model/renderable';
 import {MarkdownComponent} from 'ngx-markdown';
 import {ClipboardButtonComponent} from '../java-tips/clipboard-button/clipboard-button.component';
 
 @Component({
     selector: 'albi-angular-snippet',
-    imports: [CommonModule, MarkdownComponent],
+    imports: [MarkdownComponent],
     templateUrl: './angular-snippet.component.html',
     styleUrl: './angular-snippet.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush

@@ -1,5 +1,5 @@
 import {ChangeDetectorRef, Component, EventEmitter, Signal} from '@angular/core';
-import {CommonModule, NgOptimizedImage} from '@angular/common';
+import { NgOptimizedImage } from '@angular/common';
 import {RxJsComponent} from './rx-js/rx-js.component';
 import {Renderable} from '../../model/renderable';
 import {interval, take, tap} from 'rxjs';
@@ -10,10 +10,9 @@ import {toSignal} from '@angular/core/rxjs-interop';
     templateUrl: './ui-skills.component.html',
     styleUrls: ['./ui-skills.component.scss'],
     imports: [
-        NgOptimizedImage,
-        RxJsComponent,
-        CommonModule,
-    ]
+    NgOptimizedImage,
+    RxJsComponent
+]
 })
 export class UiSkillsComponent extends Renderable {
 

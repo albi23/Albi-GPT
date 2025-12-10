@@ -1,9 +1,9 @@
 import {ChangeDetectionStrategy, Component} from '@angular/core';
-import {CommonModule} from '@angular/common';
+
 
 @Component({
     selector: 'albi-loader',
-    imports: [CommonModule],
+    imports: [],
     templateUrl: './loader.component.html',
     styleUrl: './loader.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush
