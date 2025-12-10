@@ -10,6 +10,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "ng lint",
+    "upgrade-cli": "ng update @angular/core@20 @angular/cli@20",
     "build:prod": "ng build --configuration=production --base-href https://albi23.github.io/Albi-GPT/",
     "build:prod-local": "ng build --configuration=production --base-href='/'",
     "postbuild:prod-local": "node src/post-build-script/fix-local-build.js",
