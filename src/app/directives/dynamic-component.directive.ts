@@ -1,12 +1,10 @@
-import {Directive, ViewContainerRef} from '@angular/core';
+import { Directive, ViewContainerRef, inject } from '@angular/core';
 
 @Directive({
   selector: '[adHost]',
   standalone: true
 })
-export class DynamicComponentDirective {
+export class DynamicComponentDirective {  viewContainerRef = inject(ViewContainerRef);
 
-  constructor(public viewContainerRef: ViewContainerRef) {
-  }
 
 }

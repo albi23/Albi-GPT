@@ -1,12 +1,4 @@
-import {
-  AfterViewInit,
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  EventEmitter,
-  signal,
-  WritableSignal
-} from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, signal, WritableSignal, inject } from '@angular/core';
 
 import {Renderable} from '../../model/renderable';
 import {
@@ -39,6 +31,9 @@ import {ScoreTracker} from '../../types/types';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SnakeGameComponent extends Renderable implements AfterViewInit {
+  private cdr = inject(ChangeDetectorRef);
+  private activityService = inject(UserActivityService);
+
 
   score: WritableSignal<ScoreTracker> = signal({currScore: 0, bestScore: 0});
   endGame: WritableSignal<boolean> = signal(false);
@@ -55,8 +50,7 @@ export class SnakeGameComponent extends Renderable implements AfterViewInit {
   private readonly inactivitySkip = new Subject<void>();
   private readonly INACTIVITY_TIME_OUT = environment.INACTIVITY_TIME_OUT;
 
-  constructor(private cdr: ChangeDetectorRef,
-              private activityService: UserActivityService) {
+  constructor() {
     super();
     this.idSuffix = ++SnakeGameComponent.instanceCount;
     this.isMobile.set(Utils.isMobileDevice());

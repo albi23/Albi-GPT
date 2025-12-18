@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, EventEmitter} from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, inject } from '@angular/core';
 import {Renderable} from '../../model/renderable';
 import {animate, style, transition, trigger} from '@angular/animations';
 
@@ -21,6 +21,7 @@ import {animate, style, transition, trigger} from '@angular/animations';
   ]
 })
 export class MapComponent extends Renderable {
+  private cdr = inject(ChangeDetectorRef);
 
   tooltip = {
     visible: false,
@@ -28,10 +29,6 @@ export class MapComponent extends Renderable {
     x: 0,
     y: 0,
   };
-
-  constructor(private cdr: ChangeDetectorRef) {
-    super();
-  }
 
   override renderDone(evt: EventEmitter<boolean>): void {
     this.cdr.markForCheck();

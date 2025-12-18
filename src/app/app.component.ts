@@ -1,14 +1,4 @@
-import {
-  AfterViewInit,
-  ChangeDetectionStrategy,
-  Component,
-  effect,
-  HostListener,
-  Signal,
-  signal,
-  VERSION,
-  WritableSignal
-} from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, effect, HostListener, Signal, signal, VERSION, WritableSignal, inject } from '@angular/core';
 import {DialogElem} from './model/dialog-elem';
 import {Optional} from './shared/utils/optional';
 import {DialogProviderService} from './services/dialog-provider.service';
@@ -27,6 +17,9 @@ import {Utils} from './shared/utils/utils';
     standalone: false
 })
 export class AppComponent implements AfterViewInit {
+  private readonly dialogService = inject(DialogProviderService);
+  private readonly userActivityService = inject(UserActivityService);
+
   protected readonly VERSION: string = VERSION.full;
   source!: DialogElem[];
   conversation: WritableSignal<DialogElem[]> = signal<DialogElem[]>([]);
@@ -37,8 +30,7 @@ export class AppComponent implements AfterViewInit {
   readonly grid25: number[] = new Array<number>(25);
 
 
-  constructor(private readonly dialogService: DialogProviderService,
-              private readonly userActivityService: UserActivityService) {
+  constructor() {
     this.source = this.dialogService.dialog.slice();
     effect((): void => {
       if (this.animationDone()) {

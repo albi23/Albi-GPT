@@ -1,4 +1,4 @@
-import {Directive, ElementRef, HostListener, Inject, DOCUMENT} from '@angular/core';
+import { Directive, ElementRef, HostListener, DOCUMENT, inject } from '@angular/core';
 import {Point} from '../types/types';
 import {Utils} from '../shared/utils/utils';
 
@@ -8,14 +8,13 @@ import {Utils} from '../shared/utils/utils';
   standalone: true
 })
 export class MouseDecoratorDirective {
+  private readonly element = inject(ElementRef);
+  private document = inject<Document>(DOCUMENT);
+
   private lastRendered: Point = {x: 0, y: 0};
   private readonly colors: string[] = ['#ec4899', '#8b5cf6', '#4338ca', '#c026d3'];
   private readonly animation: string[] = ['fall', 'fall2', 'fall3'];
   private readonly ANIMATION_DURATION = 1_500;
-
-  constructor(private readonly element: ElementRef,
-              @Inject(DOCUMENT) private document: Document) {
-  }
 
   @HostListener('mousemove', ['$event'])
   renderStars(mouseEvt: MouseEvent): void {

@@ -1,17 +1,4 @@
-import {
-  AfterViewInit,
-  ChangeDetectionStrategy,
-  Component,
-  ElementRef,
-  EventEmitter,
-  HostListener,
-  Input,
-  Output,
-  signal,
-  Type,
-  ViewChild,
-  WritableSignal
-} from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, EventEmitter, HostListener, Input, Output, signal, Type, ViewChild, WritableSignal, inject } from '@angular/core';
 import {delay, filter, interval, map, mergeMap, mergeWith, Observable, of, scan, take, tap} from 'rxjs';
 import {DialogElem} from '../../model/dialog-elem';
 import {FormsModule} from '@angular/forms';
@@ -36,6 +23,8 @@ import {Utils} from '../../shared/utils/utils';
 ]
 })
 export class ChatComponent implements AfterViewInit {
+  private readonly userActivities = inject(UserActivityService);
+
 
   @ViewChild('terminal', {read: ElementRef}) terminalPre!: ElementRef<HTMLPreElement>;
   @ViewChild('questionBox', {read: ElementRef}) questionBox!: ElementRef<HTMLTextAreaElement>;
@@ -51,7 +40,7 @@ export class ChatComponent implements AfterViewInit {
   private readonly letterGeneratingSpeed: number = environment.LETTER_GENERATING_SPEED;
   private readonly userKeyboardAction$: Observable<number>;
 
-  constructor(private readonly userActivities: UserActivityService) {
+  constructor() {
     this.isMobileDevice = Utils.isMobileDevice();
     this.userKeyboardAction$ = this.userActivities.listenUserEvents().pipe(
       filter((evt: Event | null) => {

@@ -1,17 +1,15 @@
-import {AfterViewInit, Directive, ElementRef, HostListener} from '@angular/core';
+import { AfterViewInit, Directive, ElementRef, HostListener, inject } from '@angular/core';
 
 @Directive({
   selector: '[albiTextRandomizer]',
   standalone: true
 })
 export class TextRandomizerDirective implements AfterViewInit {
+  private readonly element = inject(ElementRef);
+
 
   private readonly alphabet: string = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
   private readonly DATA_KEY = 'value';
-
-
-  constructor(private readonly element: ElementRef) {
-  }
 
 
   ngAfterViewInit(): void {

@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Signal} from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Signal, inject } from '@angular/core';
 import {Renderable} from '../../model/renderable';
 import {toSignal} from '@angular/core/rxjs-interop';
 import {interval, take, tap} from 'rxjs';
@@ -11,6 +11,7 @@ import {interval, take, tap} from 'rxjs';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BackendSkillsComponent implements Renderable {
+  private cdr = inject(ChangeDetectorRef);
 
   private readonly RENDER_ITEM_DELAY: number = 900;
   private readonly RENDERED_ITEMS: number = 9;
@@ -21,10 +22,6 @@ export class BackendSkillsComponent implements Renderable {
         this.cdr.markForCheck();
       }),
       take(this.RENDERED_ITEMS))) as Signal<number>;
-
-
-  constructor(private cdr: ChangeDetectorRef) {
-  }
 
   renderDone(evt: EventEmitter<boolean>): void {
     Renderable.actionAfterDelay(1_000 * this.RENDERED_ITEMS, () => evt.emit(true));
