@@ -1,116 +1,119 @@
-<div style="height: calc(100vh - 15rem); width:100%" >
-  <svg pointer-events="none" viewBox="445 490 737 420" height="100%" width="100%" >
+<div style="height: calc(100vh - 15rem); width:100%; position: relative;" >
+  <svg  viewBox="445 490 737 420" height="100%" width="100%"
+       (mousemove)="onMouseMove($event)"
+       (mouseleave)="onMouseLeave()"
+  >
     <g>
-      <path class="ALD" stroke="#fff" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      <path class="ALD" name="Åland Islands" stroke="#fff" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
             fill="#333" fill-opacity="1" fill-rule="evenodd" d="M0 0"></path>
-      <path class="AND" stroke="#fff" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      <path class="AND" name="Andorra" stroke="#fff" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
             fill="#333" fill-opacity="1" fill-rule="evenodd" d="M677 791L675 792L674 789L678 790z"></path>
-      <path class="FRO" stroke="#fff" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      <path class="FRO" name="Faroe Islands" stroke="#fff" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
             fill="#333" fill-opacity="1" fill-rule="evenodd" d="M0 0"></path>
-      <path class="GGY" stroke="#fff" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      <path class="GGY" name="Guernsey" stroke="#fff" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
             fill="#333" fill-opacity="1" fill-rule="evenodd" d="M629 676L628 677L629 676z"></path>
-      <path class="GRC" stroke="#fff" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      <path class="GRC" name="Greece" stroke="#fff" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
             fill="#333" fill-opacity="1" fill-rule="evenodd"
             d="M929 893L932 892L932 894L935 895L951 896L952 899L957 896L957 900L940 901L936 898L926 897L926 893L928 893L928 891L929 893zM967 894L966 892L968 889L968 894zM920 884L919 881L921 883zM975 887L973 887L973 884L979 880L977 885L978 886L976 886zM948 881L947 882L948 880zM959 878L957 878L959 878zM975 879L975 878zM937 876L935 877L936 876zM947 877L947 876zM965 876L968 874L966 876zM952 875L954 874zM939 873L940 873zM965 873L964 872L966 873zM946 871L944 871L946 871zM949 873L947 873L948 869L949 872zM937 871L937 870zM936 867L935 868L935 866L937 866zM942 865L942 867L941 865zM947 866L946 865L948 866zM954 865L955 863L958 863L956 864zM945 864L943 863L945 863zM935 864L934 865L936 863zM963 861L966 862L960 862L962 861zM896 861L897 862L895 863L893 860L895 860zM942 861L939 859L940 858L942 861zM926 859L924 859L926 858zM893 852L895 856L894 857L890 853L892 851zM894 853L894 851L894 853zM955 855L954 856L954 853L952 851L954 849L956 851L955 855zM893 849L893 846L894 849zM939 846L938 847L936 845L938 845zM924 844L925 846L932 848L934 855L938 858L933 856L933 854L928 852L923 846L918 845L923 843zM929 842L927 842L926 840zM930 841L931 839L930 840zM958 839L961 843L960 842L959 844L955 842L957 841L955 842L952 840L958 838zM886 837L887 838L882 833L884 831L884 835L886 837zM947 829L947 832L943 831L943 829L948 828zM950 822L949 823L948 821L950 822zM940 819L937 819L938 817L940 819zM960 809L958 810L958 814L954 818L952 816L944 814L940 816L936 814L932 818L928 817L930 823L935 826L930 823L928 824L931 827L931 829L927 825L925 825L927 829L924 829L923 825L919 823L919 820L915 821L915 827L923 839L922 842L922 840L918 840L920 843L915 845L923 848L927 853L931 854L932 861L931 863L925 857L920 859L925 866L922 868L920 865L917 864L917 867L921 875L920 877L922 880L920 880L917 875L915 875L914 880L909 872L907 876L904 871L905 868L899 860L902 855L903 856L906 853L908 853L919 859L918 857L922 856L913 852L898 852L894 844L899 844L894 843L889 839L886 833L887 834L890 831L890 828L893 827L897 820L896 817L902 815L903 816L911 811L915 812L917 811L917 809L937 805L938 807L945 810L953 809L956 807L956 802L961 806L961 808z"></path>
-      <path class="IMN" stroke="#fff" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      <path class="IMN" name="Isle of Man" stroke="#fff" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
             fill="#333" fill-opacity="1" fill-rule="evenodd" d="M608 590L604 592L608 585L608 589z"></path>
-      <path class="ISL" stroke="#fff" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      <path class="ISL" name="Iceland" stroke="#fff" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
             fill="#333" fill-opacity="1" fill-rule="evenodd" d="M0 0"></path>
-      <path class="JEY" stroke="#fff" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      <path class="JEY" name="Jersey" stroke="#fff" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
             fill="#333" fill-opacity="1" fill-rule="evenodd" d="M635 681L633 681L634 680z"></path>
-      <path class="LIE" stroke="#fff" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      <path class="LIE" name="Liechtenstein" stroke="#fff" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
             fill="#333" fill-opacity="1" fill-rule="evenodd" d="M767 718L766 714L767 717z"></path>
-      <path class="LUX" stroke="#fff" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      <path class="LUX" name="Luxembourg" stroke="#fff" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
             fill="#333" fill-opacity="1" fill-rule="evenodd"
             d="M728 665L729 669L732 672L730 676L727 677L724 675L725 674L723 669L726 664L728 665z"></path>
-      <path class="MCO" stroke="#fff" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      <path class="MCO" name="Monaco" stroke="#fff" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
             fill="#333" fill-opacity="1" fill-rule="evenodd" d="M743 771L742 772L743 771z"></path>
-      <path class="MLT" stroke="#fff" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      <path class="MLT" name="Malta" stroke="#fff" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
             fill="#333" fill-opacity="1" fill-rule="evenodd"
             d="M824 889L821 888L823 888zM821 886L819 886L821 886z"></path>
-      <path class="SMR" stroke="#fff" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      <path class="SMR" name="San Marino" stroke="#fff" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
             fill="#333" fill-opacity="1" fill-rule="evenodd" d="M800 769L800 768z"></path>
-      <path class="SVN" stroke="#fff" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      <path class="SVN" name="Slovenia" stroke="#fff" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
             fill="#333" fill-opacity="1" fill-rule="evenodd"
             d="M846 727L844 726L843 729L835 733L836 737L832 740L833 744L827 744L824 741L821 744L817 743L816 745L812 743L816 742L813 736L811 735L813 733L810 732L812 728L818 727L824 729L828 725L834 725L837 723L840 724L841 721L844 722L846 727z"></path>
-      <path class="VAT" stroke="#fff" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      <path class="VAT" name="Vatican City" stroke="#fff" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
             fill="#333" fill-opacity="1" fill-rule="evenodd" d="M800 800L800 800z"></path>
-      <path class="CYP" stroke="#fff" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      <path class="CYP" name="Cyprus" stroke="#fff" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
             fill="#333" fill-opacity="1" fill-rule="evenodd"
             d="M1030 898L1038 898L1040 900L1043 899L1045 901L1041 901L1034 906L1027 903L1026 899L1027 900L1028 898L1030 898z"></path>
-      <path class="CYN" stroke="#fff" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      <path class="CYN" name="Cyprus" stroke="#fff" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
             fill="#333" fill-opacity="1" fill-rule="evenodd"
             d="M1045 900L1040 900L1038 898L1030 898L1032 898L1033 895L1039 896L1051 891L1044 896L1044 898z"></path>
-      <path class="EST" stroke="#fff" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      <path class="EST" name="Estonia" stroke="#fff" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
             fill="#333" fill-opacity="1" fill-rule="evenodd"
             d="M915 498L918 498L923 501L917 506L911 508L911 511L909 513L908 512L910 509L907 506L907 501L915 498zM924 500L920 498L921 497L924 499zM919 494L917 494L914 497L913 493L909 491L916 489L919 490L920 494zM974 489L970 493L971 507L974 514L971 516L969 522L965 520L960 522L954 516L946 511L935 515L937 504L936 503L932 506L928 504L925 497L927 495L925 495L925 489z"></path>
-      <path class="NOR" stroke="#fff" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      <path class="NOR" name="Norway" stroke="#fff" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
             fill="#333" fill-opacity="1" fill-rule="evenodd"
             d="M791 489L790 492L788 489L773 489L771 491L770 489L768 489L768 491L764 493L765 494L751 509L743 511L738 511L735 508L735 510L733 510L734 507L727 504L723 500L721 496L721 490L727 493L730 490L727 491L725 489z"></path>
-      <path class="LTU" stroke="#fff" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      <path class="LTU" name="Lithuania" stroke="#fff" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
             fill="#333" fill-opacity="1" fill-rule="evenodd"
             d="M897 567L896 568L898 562L898 564zM942 547L943 549L949 551L957 559L960 560L961 561L959 566L963 568L961 571L957 571L951 577L949 586L951 590L949 590L948 587L943 591L941 590L938 594L926 595L925 590L916 584L918 577L915 574L915 572L907 572L899 567L900 564L897 552L909 545L918 545L920 547L922 546L932 548L941 545z"></path>
-      <path class="FIN" stroke="#fff" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      <path class="FIN" name="Finland" stroke="#fff" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
             fill="#333" fill-opacity="1" fill-rule="evenodd" d="M0 0"></path>
-      <path class="SWE" stroke="#fff" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      <path class="SWE" name="Sweden" stroke="#fff" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
             fill="#333" fill-opacity="1" fill-rule="evenodd"
             d="M846 548L845 549L845 542L847 535L850 531L851 526L853 526L849 537zM875 515L872 518L873 524L871 528L864 535L866 531L864 527L864 521L869 515L873 513L874 514zM876 513L876 515L876 512L878 512zM868 489L867 489zM864 489L851 497L842 498L851 501L847 502L849 507L846 516L846 531L840 549L838 551L826 550L826 553L824 552L820 556L821 563L819 566L815 565L810 567L805 565L806 560L800 548L804 548L802 544L804 544L805 541L799 535L795 523L794 524L791 517L791 512L789 512L788 504L786 504L785 490L788 489L789 492L791 489z"></path>
-      <path class="BEL" stroke="#fff" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      <path class="BEL" name="Belgium" stroke="#fff" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
             fill="#333" fill-opacity="1" fill-rule="evenodd"
             d="M713 641L715 641L718 645L720 644L724 646L722 652L728 655L728 658L730 658L730 662L723 669L725 673L721 676L715 671L713 671L713 665L710 668L706 668L704 661L700 661L698 658L695 657L693 653L689 654L687 649L687 647L696 642L697 645L704 645L708 643L708 641L713 641z"></path>
-      <path class="BLR" stroke="#fff" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      <path class="BLR" name="Belarus" stroke="#fff" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
             fill="#333" fill-opacity="1" fill-rule="evenodd"
             d="M978 551L983 552L986 555L987 553L991 554L993 559L998 557L1005 558L1010 563L1010 573L1008 578L1012 581L1015 589L1020 592L1019 597L1024 597L1030 604L1030 606L1027 607L1024 611L1018 608L1014 611L1017 616L1017 625L1019 629L1010 630L1005 638L1007 643L1006 644L1004 644L1000 640L991 642L989 638L985 641L983 639L975 638L973 641L972 638L968 638L966 635L965 636L951 632L935 633L933 637L927 638L927 640L927 631L922 626L924 621L930 618L929 607L925 594L940 594L941 590L943 591L948 587L948 589L951 590L949 586L951 582L951 577L957 571L961 571L961 569L963 568L959 567L961 561L965 557L972 558L975 552L978 550z"></path>
-      <path class="HRV" stroke="#fff" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      <path class="HRV" name="Croatia" stroke="#fff" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
             fill="#333" fill-opacity="1" fill-rule="evenodd"
             d="M858 787L860 788L856 786zM847 783L854 784L848 784zM854 783L862 786L869 792L861 786L858 786L853 783zM854 781L845 780L846 779L852 781zM849 779L845 778L850 778zM833 768L834 769L832 767zM831 766L829 765zM831 769L827 765L828 766zM831 762L826 757L831 762zM827 755L825 755L826 754zM823 757L821 749L823 752L823 756zM827 752L822 750L824 748L826 750zM849 728L856 736L861 739L868 739L873 736L873 742L875 743L875 746L879 748L876 748L874 753L867 749L853 749L850 747L846 748L843 751L840 748L838 748L837 754L842 760L842 764L854 776L856 780L859 782L859 784L850 777L839 774L834 769L830 763L834 763L828 758L828 752L822 746L820 747L817 754L813 750L812 744L821 744L824 741L827 744L833 744L832 740L836 738L835 733L843 729L844 726L847 727z"></path>
-      <path class="BIH" stroke="#fff" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      <path class="BIH" name="Bosnia and Herzegovina" stroke="#fff" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
             fill="#333" fill-opacity="1" fill-rule="evenodd"
             d="M850 747L853 749L861 750L867 749L874 754L878 753L876 763L881 767L878 768L880 774L874 775L874 779L873 778L870 780L870 783L868 783L868 790L860 784L858 784L859 783L856 780L855 776L848 771L842 764L842 760L837 755L837 751L839 748L843 751L846 748L849 748z"></path>
-      <path class="SRB" stroke="#fff" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      <path class="SRB" name="Serbia" stroke="#fff" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
             fill="#333" fill-opacity="1" fill-rule="evenodd"
             d="M882 733L887 733L892 737L895 743L894 744L903 749L901 751L903 753L901 754L905 757L911 758L914 756L917 758L915 758L914 760L916 763L912 770L919 780L919 782L913 786L914 792L912 794L911 793L904 795L903 794L906 788L901 787L902 786L894 779L889 786L889 784L881 780L876 775L880 773L877 768L881 767L876 762L878 753L874 753L876 748L879 749L874 745L875 743L872 738L881 732z"></path>
-      <path class="SVK" stroke="#fff" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      <path class="SVK" name="Slovakia" stroke="#fff" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
             fill="#333" fill-opacity="1" fill-rule="evenodd"
             d="M914 683L910 695L906 696L902 692L893 692L889 697L884 700L882 698L877 701L873 701L871 703L872 704L868 706L860 706L853 702L850 695L853 687L857 688L861 686L864 683L864 681L870 676L876 678L879 675L883 679L883 681L886 682L889 678L897 679L898 677L904 677L914 683z"></path>
-      <path class="CZE" stroke="#fff" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      <path class="CZE" name="Czech Republic" stroke="#fff" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
             fill="#333" fill-opacity="1" fill-rule="evenodd"
             d="M826 652L828 651L828 649L830 649L833 653L838 654L840 656L843 655L845 657L842 660L847 665L851 663L851 660L853 660L856 663L860 662L858 665L866 669L869 669L872 676L865 680L860 687L853 687L851 692L847 688L841 689L833 685L828 685L828 688L825 690L825 692L819 692L802 677L799 672L800 669L796 663L797 662L798 664L801 660L805 660L810 656L820 652L821 649L823 649L824 652L826 652z"></path>
-      <path class="NLD" stroke="#fff" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      <path class="NLD" name="Netherlands" stroke="#fff" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
             fill="#333" fill-opacity="1" fill-rule="evenodd"
             d="M706 642L704 645L696 644L696 642L705 643zM703 636L703 638L701 636zM714 611L712 612L714 609zM716 606L714 608L715 606zM706 642L701 642L697 639L701 638L707 641L704 639L706 638L703 634L710 623L712 613L716 613L721 607L725 605L736 604L738 607L740 607L738 619L734 620L734 622L738 623L737 627L734 630L735 633L728 633L726 635L729 641L727 645L728 646L725 649L727 651L726 654L722 652L724 646L720 644L718 645L716 641L714 642L712 640L711 642L708 641L707 643zM719 605L717 605L722 604zM725 604L722 603L725 603zM730 603L728 603L730 602zM735 601L735 600z"></path>
-      <path class="HUN" stroke="#fff" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      <path class="HUN" name="Hungary" stroke="#fff" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
             fill="#333" fill-opacity="1" fill-rule="evenodd"
             d="M910 695L915 700L917 700L918 703L910 708L904 718L904 721L902 723L903 724L900 726L898 731L895 731L893 733L881 732L878 735L870 737L868 739L862 739L855 735L844 724L844 722L841 721L846 717L845 712L847 712L848 710L847 708L845 708L847 706L851 707L852 702L855 702L860 706L868 706L871 705L873 701L877 701L881 698L884 700L889 697L893 692L901 692L906 696L910 695z"></path>
-      <path class="ROU" stroke="#fff" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      <path class="ROU" name="Romania" stroke="#fff" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
             fill="#333" fill-opacity="1" fill-rule="evenodd"
             d="M979 744L980 746L985 748L985 746L987 747L990 745L996 747L994 754L989 755L989 752L987 752L987 758L984 763L983 771L979 771L967 765L956 767L948 773L922 769L919 770L919 765L914 761L917 758L914 756L909 759L901 754L903 749L894 744L894 740L888 733L893 733L899 730L908 713L908 710L922 700L924 702L937 703L942 707L948 703L956 702L957 698L963 697L979 724L978 743z"></path>
-      <path class="MDA" stroke="#fff" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      <path class="MDA" name="Moldova" stroke="#fff" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
             fill="#333" fill-opacity="1" fill-rule="evenodd"
             d="M979 744L977 742L979 725L977 719L968 707L966 701L963 697L961 697L963 695L965 696L973 694L978 698L985 700L987 703L989 702L989 710L992 712L994 715L994 719L999 723L998 726L1001 728L987 728L988 732L982 743L980 744z"></path>
-      <path class="UKR" stroke="#fff" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      <path class="UKR" name="Ukraine" stroke="#fff" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
             fill="#333" fill-opacity="1" fill-rule="evenodd"
             d="M1022 732L1024 733L1017 731L1017 729L1018 731zM1039 625L1044 626L1049 635L1048 637L1046 637L1048 643L1047 644L1057 646L1060 649L1061 658L1063 661L1066 659L1076 663L1084 660L1091 669L1093 666L1111 675L1113 674L1115 678L1112 684L1110 684L1110 686L1113 688L1109 690L1113 698L1111 704L1102 704L1094 709L1093 717L1085 717L1083 720L1077 723L1066 725L1058 733L1056 733L1060 730L1059 728L1055 732L1054 734L1056 740L1060 746L1070 744L1074 745L1070 751L1063 750L1057 755L1055 754L1050 756L1046 761L1042 761L1039 759L1040 750L1038 748L1036 749L1033 746L1028 745L1041 736L1040 734L1036 733L1028 734L1021 730L1020 731L1022 728L1017 726L1026 727L1028 725L1026 726L1022 724L1021 717L1019 715L1021 719L1020 725L1018 725L1017 722L1015 725L1008 726L1008 729L1002 737L995 740L996 746L990 745L987 747L986 746L986 748L982 747L979 744L982 743L982 741L988 733L987 728L1001 728L998 726L999 723L994 719L994 715L989 710L989 702L988 703L985 700L982 700L973 694L969 694L957 698L956 702L948 703L942 707L937 703L924 702L922 700L918 703L918 701L910 695L914 683L918 684L916 681L916 674L924 664L932 658L932 652L927 643L927 638L931 639L937 633L951 632L960 635L966 635L968 638L972 638L973 641L978 638L983 639L984 641L988 638L991 640L991 642L1000 640L1004 644L1006 644L1007 643L1005 638L1010 630L1023 630L1027 625L1031 626L1037 624z"></path>
-      <path class="LVA" stroke="#fff" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      <path class="LVA" name="Latvia" stroke="#fff" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
             fill="#333" fill-opacity="1" fill-rule="evenodd"
             d="M969 522L971 522L971 524L975 527L972 536L975 537L979 546L979 550L975 552L972 557L966 557L961 560L958 559L950 551L943 549L941 545L936 548L909 545L897 552L897 540L905 521L915 518L923 531L927 533L930 533L936 526L934 516L935 514L944 510L945 512L946 511L954 515L956 519L960 522L963 520L969 522z"></path>
-      <path class="IRL" stroke="#fff" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      <path class="IRL" name="Ireland" stroke="#fff" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
             fill="#333" fill-opacity="1" fill-rule="evenodd"
             d="M545 595L541 594L545 593zM574 573L573 577L568 580L570 582L565 584L572 591L575 591L578 585L582 592L588 592L586 594L588 600L589 614L586 624L584 625L586 626L580 628L579 626L578 628L573 629L566 634L562 633L563 636L558 639L547 641L546 640L549 637L543 637L549 633L540 635L540 633L545 629L540 628L542 626L547 626L545 623L548 621L558 618L545 620L550 616L552 610L556 608L550 608L546 606L547 605L543 604L543 602L546 601L545 598L549 597L549 595L545 596L546 591L545 592L545 590L543 590L547 587L560 589L560 586L565 582L558 580L563 576L562 574L564 571L569 570L571 568L571 574L573 573L573 568L575 568L574 566L579 569L574 573z"></path>
-      <path class="GBR" stroke="#fff" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      <path class="GBR" name="United Kingdom" stroke="#fff" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
             fill="#333" fill-opacity="1" fill-rule="evenodd"
             d="M646 655L644 657L641 655L643 653L645 654zM610 606L612 606L608 610L606 605L609 604zM585 569L589 571L593 577L591 580L595 581L596 585L593 582L594 588L588 592L583 592L578 585L576 587L577 589L572 591L565 584L570 581L568 580L573 577L574 573L577 573L579 570L584 569zM600 565L597 564L597 559L599 560L600 564zM588 555L589 559L587 561L586 559L584 560L584 558L587 555zM590 557L589 556L592 551L592 553zM592 546L588 548L586 547L588 546L588 543L586 542L588 540L590 543L592 543zM583 541L582 542L583 540L584 541zM574 534L572 534L573 532L574 533zM587 534L585 533L587 533zM576 530L574 530L574 525L576 530zM588 522L588 526L594 528L591 532L589 529L587 529L585 526L581 524L586 519L588 521zM576 518L576 522L572 520L575 519zM587 504L586 508L583 510L585 510L583 513L579 517L577 516L580 513L578 512L578 507L580 508L581 505L586 501L588 502zM623 501L623 503L612 514L614 515L611 521L619 518L634 518L638 522L629 542L621 546L625 545L628 547L627 549L621 553L616 552L634 555L640 564L643 578L657 591L656 594L659 601L655 598L650 598L655 599L661 606L662 609L659 613L661 616L664 613L674 614L678 618L678 622L672 635L667 636L668 639L663 641L664 640L668 643L674 642L674 646L669 650L660 654L647 653L642 651L643 652L641 654L635 654L636 656L629 656L625 654L619 656L616 663L610 660L604 662L599 667L594 665L603 657L610 646L622 646L630 636L621 642L617 642L614 638L611 639L611 637L608 636L602 638L598 633L611 625L613 621L611 614L608 614L606 616L605 615L611 608L618 606L623 607L623 604L627 606L625 606L623 603L625 598L623 596L626 591L622 591L617 584L619 578L623 574L619 574L613 578L603 577L602 580L599 575L605 564L602 558L606 555L603 552L603 550L602 553L599 555L598 553L601 549L596 554L597 557L595 566L592 566L595 557L594 558L594 552L599 538L594 543L590 541L590 539L588 539L593 536L591 535L593 534L595 528L592 525L594 521L593 516L599 514L596 510L597 507L601 505L601 499L605 501L607 499L608 501L619 498L623 499zM625 496L623 494L625 494zM622 494L621 495L619 492L621 492L622 494zM623 489L627 491L622 492L620 490L624 489z"></path>
-      <path class="TUR" stroke="#fff" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      <path class="TUR" name="Turkey" stroke="#fff" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
             fill="#333" fill-opacity="1" fill-rule="evenodd"
             d="M953 827L951 827L952 825L954 826zM1058 799L1060 803L1067 803L1072 810L1075 808L1080 811L1095 815L1107 812L1115 815L1124 811L1130 806L1141 807L1142 805L1144 805L1150 811L1152 811L1155 817L1155 827L1161 828L1168 833L1165 832L1163 837L1159 838L1163 853L1161 860L1165 862L1165 866L1168 868L1161 873L1160 868L1153 869L1145 867L1140 871L1138 868L1135 870L1118 872L1107 877L1099 877L1095 874L1085 877L1079 877L1076 875L1074 877L1075 883L1073 883L1069 889L1067 888L1065 882L1070 877L1069 874L1065 875L1062 878L1052 875L1045 882L1031 886L1026 884L1024 880L1015 875L1010 874L1006 875L1004 883L1003 882L997 884L990 882L988 876L970 876L976 875L979 872L968 873L968 871L971 870L966 863L968 862L968 858L962 855L960 856L958 854L959 849L961 853L967 851L963 850L965 845L963 843L964 842L962 838L964 836L963 835L955 837L956 829L962 823L969 822L973 824L974 821L976 821L976 823L988 823L989 822L987 821L987 819L998 818L989 815L988 814L990 810L1014 812L1016 809L1028 801L1037 798L1058 799zM969 798L972 800L977 799L976 801L981 807L989 810L987 814L979 812L976 814L971 814L956 828L957 824L963 819L955 820L958 814L958 810L961 808L961 806L957 802L960 801L960 799L969 797z"></path>
-      <path class="DNK" stroke="#fff" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      <path class="DNK" name="Denmark" stroke="#fff" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
             fill="#333" fill-opacity="1" fill-rule="evenodd"
             d="M787 576L791 577L792 580L788 581L784 578L784 576L786 575zM777 577L774 575L778 576zM801 574L797 576L796 575L798 572L800 574zM772 576L769 572L772 575zM780 578L779 577L782 573L782 570L780 578zM830 573L825 572L825 569L826 568L830 572zM779 561L781 570L779 573L777 573L771 569L770 563L779 561zM802 562L800 561L802 561zM779 558L778 555L779 557zM801 558L801 560L797 563L799 568L796 570L795 577L793 578L791 570L786 569L785 562L783 559L786 559L790 554L792 560L794 557L793 554L797 551L801 552L801 555zM784 528L782 527L784 527zM777 529L775 533L775 541L777 543L781 543L782 546L780 549L775 549L774 556L771 557L772 558L767 564L768 569L766 573L769 574L769 577L759 576L756 573L756 565L751 562L750 551L751 541L756 543L759 538L761 537L763 539L763 533L760 533L758 539L754 540L752 536L756 531L764 530L767 528L771 521L775 520L778 517L778 528z"></path>
-      <path class="DEU" stroke="#fff" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      <path class="DEU" name="Germany" stroke="#fff" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
             fill="#333" fill-opacity="1" fill-rule="evenodd"
             d="M820 595L816 595L815 592L818 592L820 594zM786 585L784 584L786 583L786 585zM814 586L814 588L808 587L808 583L811 579L814 583L813 585zM756 579L754 579L756 579zM763 577L767 576L771 578L772 582L770 584L780 587L783 586L784 588L781 592L782 593L788 594L792 590L796 590L801 584L803 584L811 590L814 590L816 596L820 598L822 609L819 615L823 619L826 629L824 634L826 638L825 639L828 641L829 645L827 652L826 653L823 649L821 649L820 650L822 651L806 658L806 660L803 659L796 663L800 668L799 672L802 677L815 688L815 692L811 692L811 695L803 700L807 708L806 711L802 707L797 707L787 712L783 712L779 709L774 714L774 712L770 709L766 710L762 707L759 708L754 706L754 708L756 708L746 709L744 708L744 701L751 685L745 684L743 682L738 683L737 681L736 682L733 680L730 676L732 672L727 665L730 662L730 658L728 658L729 657L726 654L727 651L725 649L728 647L727 646L729 641L726 635L728 633L735 633L734 630L738 626L734 619L738 619L740 613L740 607L738 603L741 599L749 599L751 602L750 603L751 604L752 601L755 605L755 597L763 596L768 602L763 595L759 594L759 588L756 587L756 585L760 584L757 575L763 577zM753 578L752 575L754 572L753 576L756 576L753 577z"></path>
       <path @polPath
-            class="POL"
+            class="POL" name="Poland"
             id="pol"
             stroke="#00ccff"
             stroke-opacity="1"
@@ -128,40 +131,51 @@
       <text font-size="23" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif,'Apple Color Emoji','Segoe UI Emoji',Segoe UI Symbol" fill='#00ccff'>
         <textPath xlink:href="#pol-name">POLAND</textPath>
       </text>
-      <path class="AUT" stroke="#fff" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      <path class="AUT" name="Austria" stroke="#fff" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
             fill="#333" fill-opacity="1" fill-rule="evenodd"
             d="M851 692L850 695L853 702L851 707L847 706L845 708L847 708L848 710L845 713L845 718L840 722L840 724L837 723L834 725L827 725L824 729L799 724L796 720L797 717L792 719L786 719L782 723L776 719L772 721L769 718L767 718L767 710L769 709L775 714L779 709L783 712L787 712L790 709L798 707L802 707L806 711L807 708L803 701L804 699L810 696L811 692L814 693L816 689L818 692L825 692L825 690L828 689L828 685L832 685L841 689L846 688L851 691z"></path>
-      <path class="CHE" stroke="#fff" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      <path class="CHE" name="Switzerland" stroke="#fff" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
             fill="#333" fill-opacity="1" fill-rule="evenodd"
             d="M766 710L768 711L766 714L766 718L769 718L772 721L776 719L777 725L772 726L773 731L770 729L767 730L764 727L763 732L760 735L761 738L754 731L753 728L747 736L741 737L739 737L735 733L735 728L731 728L729 732L726 732L731 721L738 713L738 710L741 712L745 709L754 709L755 706L759 708L762 707L764 709z"></path>
-      <path class="BGR" stroke="#fff" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      <path class="BGR" name="Bulgaria" stroke="#fff" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
             fill="#333" fill-opacity="1" fill-rule="evenodd"
             d="M983 771L982 777L978 777L975 783L975 787L971 791L977 799L972 800L968 797L960 799L960 801L955 803L956 807L953 809L945 810L938 807L937 805L919 809L920 803L918 799L912 794L914 792L913 786L919 782L919 780L914 775L912 770L915 764L920 766L918 769L919 770L922 769L948 773L956 767L966 765L981 771z"></path>
-      <path class="MKD" stroke="#fff" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      <path class="MKD" name="North Macedonia" stroke="#fff" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
             fill="#333" fill-opacity="1" fill-rule="evenodd"
             d="M912 794L920 802L917 811L908 812L903 816L894 815L891 810L891 804L894 798L905 794L912 794z"></path>
-      <path class="KOS" stroke="#fff" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      <path class="KOS" name="Kosovo" stroke="#fff" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
             fill="#333" fill-opacity="1" fill-rule="evenodd"
             d="M903 795L901 795L900 797L894 797L893 801L892 796L888 793L886 788L891 785L893 783L892 780L895 779L902 786L901 787L906 788L903 794z"></path>
-      <path class="ALB" stroke="#fff" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      <path class="ALB" name="Albania" stroke="#fff" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
             fill="#333" fill-opacity="1" fill-rule="evenodd"
             d="M886 790L892 796L891 810L894 815L897 816L897 820L894 823L893 827L889 829L890 831L887 834L884 828L880 826L878 823L880 810L879 807L881 802L878 801L877 796L882 789L884 791L886 790z"></path>
-      <path class="MNE" stroke="#fff" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      <path class="MNE" name="Montenegro" stroke="#fff" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
             fill="#333" fill-opacity="1" fill-rule="evenodd"
             d="M876 775L880 780L890 785L886 787L887 789L885 791L883 791L883 789L879 792L877 796L878 801L868 791L868 783L870 783L870 779L874 779L875 777L873 775L876 775z"></path>
-      <path class="ITA" stroke="#fff" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      <path class="ITA" name="Italy" stroke="#fff" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
             fill="#333" fill-opacity="1" fill-rule="evenodd"
             d="M795 876L795 875zM835 855L831 861L830 867L832 871L829 877L824 876L819 871L816 871L808 865L801 863L800 861L803 855L804 857L810 855L814 858L821 858L827 855L830 856L836 854zM754 842L754 844L754 842zM817 818L816 817L817 818zM752 813L751 814L753 813zM768 815L770 821L768 825L767 840L761 840L761 843L759 845L755 843L754 840L755 831L751 817L752 815L756 816L760 812L762 812L762 810L766 811L767 815zM776 785L777 788L773 786L776 786zM796 719L799 724L814 727L810 730L810 732L813 733L811 735L812 738L816 741L815 742L813 739L808 739L805 742L800 744L801 743L799 743L797 745L797 748L800 752L800 754L798 754L797 756L799 764L812 774L817 788L823 795L831 800L840 799L842 801L839 804L840 807L855 814L868 825L868 829L865 831L861 824L854 823L854 821L852 821L849 824L846 831L847 834L853 838L853 845L851 844L847 846L847 851L843 854L841 858L837 859L836 857L842 844L837 829L828 825L829 823L827 819L822 820L822 817L818 817L814 810L806 810L789 793L785 792L785 790L778 782L774 768L764 762L758 761L755 762L750 769L743 771L745 765L739 764L736 761L738 754L736 754L733 750L739 748L739 746L735 738L738 736L741 737L749 735L750 731L753 728L755 733L758 734L760 738L760 735L763 732L763 727L765 727L767 730L770 729L772 731L773 725L777 726L777 721L780 721L782 723L786 719L796 718zM799 768L800 768z"></path>
-      <path class="FRA" stroke="#fff" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      <path class="FRA" name="France" stroke="#fff" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
             fill="#333" fill-opacity="1" fill-rule="evenodd"
             d="M766 786L767 796L763 807L758 804L759 803L757 802L758 800L756 800L757 798L755 795L757 794L756 793L758 789L762 787L763 788L765 783L766 785zM645 737L644 738L642 734L643 735zM689 654L692 653L700 661L704 661L706 668L710 668L713 664L713 671L715 671L721 676L728 676L732 678L735 682L743 682L745 684L749 684L751 687L747 691L744 701L745 709L743 709L741 712L739 710L737 711L736 716L731 720L731 723L728 725L728 729L726 732L729 732L731 728L735 728L735 732L738 736L735 738L735 740L738 743L739 748L733 750L736 754L738 754L736 758L737 762L745 766L743 770L734 777L733 780L728 782L724 782L723 780L720 780L715 776L711 777L702 774L695 780L693 784L693 789L695 792L692 791L682 793L677 791L677 789L666 785L665 788L658 788L655 786L651 786L650 784L641 782L642 779L638 777L641 774L644 758L646 756L644 756L644 749L646 743L649 745L651 751L650 745L644 739L646 739L645 730L638 727L634 721L635 718L633 716L635 714L637 715L636 713L631 714L629 710L626 710L626 708L624 709L622 707L608 704L608 702L605 701L609 699L606 698L607 697L610 697L607 695L604 696L604 694L606 691L616 690L621 687L624 688L627 693L630 691L635 692L637 690L642 691L640 688L640 681L637 674L642 672L644 673L645 678L658 679L663 677L659 676L660 672L674 666L678 650L687 647L688 653z"></path>
-      <path class="ESP" stroke="#fff" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      <path class="ESP" name="Spain" stroke="#fff" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
             fill="#333" fill-opacity="1" fill-rule="evenodd"
             d="M676 848L674 848L676 848zM674 845L672 845L673 842L676 842L675 844zM694 832L697 833L694 839L688 835L685 835L691 830L694 829L694 831zM707 831L702 828L706 828L707 830zM570 771L573 771L575 774L591 773L607 777L614 775L631 778L637 777L642 780L642 783L643 782L651 786L655 786L657 788L664 788L666 785L674 789L675 792L695 792L695 799L682 809L672 812L666 816L668 818L658 828L654 836L656 844L660 846L660 848L652 853L649 864L643 864L639 867L633 876L608 876L605 879L599 880L597 885L596 884L595 886L588 882L587 878L585 877L586 874L585 875L580 870L580 868L574 870L573 866L573 862L579 856L574 851L578 843L572 834L579 832L579 814L587 806L583 803L583 800L581 799L576 799L575 801L565 801L565 796L557 800L559 792L558 789L555 788L556 787L553 783L555 779L561 778L564 776L565 773L569 772z"></path>
-      <path class="PRT" stroke="#fff" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      <path class="PRT" name="Portugal" stroke="#fff" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
             fill="#333" fill-opacity="1" fill-rule="evenodd"
             d="M565 801L575 801L577 799L583 799L584 804L587 805L579 814L581 824L578 826L579 832L572 834L578 842L574 851L577 855L579 855L573 862L574 870L569 872L556 872L558 866L557 851L559 852L558 850L553 852L553 848L555 848L556 843L558 842L553 848L551 848L551 838L553 837L556 831L559 819L560 813L557 802L558 799L564 796L565 801z"></path>
     </g>
   </svg>
+
+  @if (tooltip.visible) {
+    <div
+      class="tooltip"
+      [style.left.px]="tooltip.x"
+      [style.top.px]="tooltip.y"
+    >
+      {{ tooltip.text }}
+    </div>
+  }
+
 
 </div>

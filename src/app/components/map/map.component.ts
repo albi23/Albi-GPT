@@ -22,6 +22,13 @@ import {animate, style, transition, trigger} from '@angular/animations';
 })
 export class MapComponent extends Renderable {
 
+  tooltip = {
+    visible: false,
+    text: '',
+    x: 0,
+    y: 0,
+  };
+
   constructor(private cdr: ChangeDetectorRef) {
     super();
   }
@@ -31,4 +38,28 @@ export class MapComponent extends Renderable {
     Renderable.scrollToBottom();
     Renderable.actionAfterDelay(2000, () => evt.emit(true));
   }
+
+  onMouseMove(event: MouseEvent) {
+    const target = event.target as SVGPathElement;
+
+    if (target?.tagName !== 'path') {
+      this.tooltip.visible = false;
+      return;
+    }
+
+    const country = target.getAttribute('name');
+    if (!country) {
+      this.tooltip.visible = false;
+      return;
+    }
+
+    this.tooltip.visible = true;
+    this.tooltip.text = country;
+    this.tooltip.x = event.clientX + 12;
+    this.tooltip.y = event.clientY + 12;
+  }
+
+  onMouseLeave() {
+    this.tooltip.visible = false;
+    }
 }

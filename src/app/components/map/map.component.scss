@@ -2,3 +2,21 @@ path.POL {
   fill: #ff0099;
   stroke-width: 2
 }
+
+.tooltip {
+  position: fixed;
+  pointer-events: none;
+  background: rgba(0, 0, 0, 0.85);
+  color: white;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 13px;
+  white-space: nowrap;
+  z-index: 1000;
+}
+
+
+path[name]:hover {
+  fill: #00ccff;
+  stroke-width: 2
+}
