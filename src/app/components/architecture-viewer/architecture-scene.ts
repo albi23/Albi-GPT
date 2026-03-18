@@ -1,27 +1,8 @@
 import * as THREE from 'three';
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls.js';
 import {CSS2DObject, CSS2DRenderer} from 'three/examples/jsm/renderers/CSS2DRenderer.js';
-
-/** Describes a single architecture node (service, database, broker, etc.) */
-export interface ArchNode {
-  name: string;
-  type: 'client' | 'gateway' | 'loadbalancer' | 'pod' | 'kafka' | 'database' | 'cache' | 'monitoring';
-  position: THREE.Vector3;
-  color: number;
-  mesh?: THREE.Mesh;
-  label?: CSS2DObject;
-}
-
-/** Describes a data-flow connection between two nodes */
-export interface FlowPath {
-  from: string;
-  to: string;
-  color: number;
-  speed: number;
-  particles: THREE.Mesh[];
-  curve: THREE.CatmullRomCurve3;
-  progresses: number[];
-}
+import {ArchNode} from './model/dialogarch-node';
+import {FlowPath} from './model/flow-path';
 
 export class ArchitectureScene {
   private scene!: THREE.Scene;
@@ -143,7 +124,7 @@ export class ArchitectureScene {
     this.addNode({name: 'Elasticsearch', type: 'database', position: new THREE.Vector3(10, 0, -14), color: 0xfdd835});
 
     // --- Infrastructure / Monitoring (side) ---
-    this.addNode({name: 'Prometheus', type: 'monitoring', position: new THREE.Vector3(-16, 0, -8), color: 0xe57373});
+    this.addNode({name: 'Victoria Metrics', type: 'monitoring', position: new THREE.Vector3(-16, 0, -8), color: 0xe57373});
 
     // Kubernetes boundary wireframe
     this.addKubernetesBoundary();
@@ -314,8 +295,8 @@ export class ArchitectureScene {
     this.addFlow('Payment Service', 'Elasticsearch', 0xfdd835, 0.45);
 
     // Monitoring connections
-    this.addFlow('Prometheus', 'Kafka Broker 1', 0xe57373, 0.3);
-    this.addFlow('Prometheus', 'Order Service', 0xe57373, 0.25);
+    this.addFlow('Victoria Metrics', 'Kafka Broker 1', 0xe57373, 0.3);
+    this.addFlow('Victoria Metrics', 'Order Service', 0xe57373, 0.25);
   }
 
   private addFlow(fromName: string, toName: string, color: number, speed: number): void {
@@ -370,7 +351,6 @@ export class ArchitectureScene {
     const delta = this.clock.getDelta();
     const elapsed = this.clock.getElapsedTime();
 
-    // Update controls
     this.controls.update();
 
     // Animate particles along flow paths

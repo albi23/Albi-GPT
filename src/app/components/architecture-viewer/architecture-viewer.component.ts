@@ -102,24 +102,24 @@ export class ArchitectureViewerComponent extends Renderable implements AfterView
 
   private initScene(): void {
     const container = this.sceneContainer.nativeElement;
-    const width = Math.max(this.PREFERRED_WITH, container.offsetWidth * this.MAX_WIDTH_FACTOR);
-    const height = Math.min(this.PREFERRED_HEIGHT, window.innerHeight * this.MAX_HEIGHT_FACTOR);
-
-    container.style.width = width + 'px';
-    container.style.height = height + 'px';
-
+    const {width, height} = this.calculateNewDimension();
     this.archScene = new ArchitectureScene(container, width, height);
     Renderable.scrollToBottomAfterDelay(200);
   }
 
   private onResize(): void {
     if (!this.archScene || !this.sceneContainer) return;
+    const {width, height} = this.calculateNewDimension();
+    this.archScene.resize(width, height);
+  }
+
+ private calculateNewDimension() {
     const container = this.sceneContainer.nativeElement;
     const width = Math.max(this.PREFERRED_WITH, container.offsetWidth * this.MAX_WIDTH_FACTOR);
     const height = Math.min(this.PREFERRED_HEIGHT, window.innerHeight * this.MAX_HEIGHT_FACTOR);
     container.style.width = width + 'px';
     container.style.height = height + 'px';
-    this.archScene.resize(width, height);
+    return {width, height};
   }
 
   private startInactivityDetection(): void {
