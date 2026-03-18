@@ -8,6 +8,7 @@ import {PUNCTUATION_SPACE} from '../constans/litelar.constans';
 import {UiSkillsComponent} from '../components/ui-skills/ui-skills.component';
 import {BackendSkillsComponent} from '../components/backend-skills/backend-skills.component';
 import {PortraitComponent} from '../components/portrait/portrait.component';
+import {ArchitectureViewerComponent} from '../components/architecture-viewer/architecture-viewer.component';
 
 @Injectable()
 export class DialogProviderService {
@@ -95,6 +96,13 @@ export class DialogProviderService {
     ),
     new DialogElem(
       this.yieldNextId(), //12
+      'Have you ever designed the architecture of a large-scale distributed system?',
+      'Sure! Here is an interactive 3D visualization of a microservices architecture similar to what you\'d see at InPost, Netflix, or Uber.\n' +
+      'It features Java pods, Kafka event streaming, load balancing, caching, and database layers — all running inside a Kubernetes cluster.',
+      ArchitectureViewerComponent
+    ),
+    new DialogElem(
+      this.yieldNextId(), //13
       'Can you show yourself?',
       'That\'s me.. ;)',
       PortraitComponent
